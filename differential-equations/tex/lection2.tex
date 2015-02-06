@@ -1,5 +1,22 @@
 \documentclass[document.tex]{subfiles}
 
 \begin{document}
-
+\section*{Лекция 2. Интегрирование некоторых ОДУ первого порядка}
+\begin{Definition}
+Пусть $n \in \mathbb{N}, k \in \mathbb{Z}$. Функция $F : \mathbb{R}^n \mapsto \mathbb{R}$ называется k-однородной (или однородной функцией степени k), если: $\forall \lambda \in \mathbb{R} \setminus \{0\}, v \in \mathbb{R}^n: F(\lambda v) = \lambda^k F(v)$
+\end{Definition}
+\begin{Definition}
+\label{homogen_diff_eq_def1}
+Однородным дифференциальным уравнением называется дифференциальное уравнение следующего вида:
+$$y' = f(\frac{y}{x})$$
+\end{Definition}
+\begin{Definition}
+\label{homogen_diff_eq_def2}
+Однородным дифференциальным уравнение называется дифференциальное уравнение следующего вида:
+$$P(x, y)dx + Q(x, y)dy = 0$$,
+где $P$ и $Q$ -- однородные функции одного и того же порядка.
+\end{Definition}
+\begin{Statement}
+Определения \ref{homogen_diff_eq_def1} и \ref{homogen_diff_eq_def2} эквивалентны.
+\end{Statement}
 \end{document}
