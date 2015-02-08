@@ -1,13 +1,17 @@
 \documentclass[document.tex]{subfiles}
 
 \begin{document}
-\section*{Лекция 1. Основные понятия и методы решения некоторых уравнений первого порядка}
+\section*{Лекция 1. Основные понятия теории ОДУ. Методы решения некоторых уравнений первого порядка}
 Рассмотрим функцию $y:\mathbb{R}\mapsto\mathbb{C}$. Будем обозначать $\frac{dy}{dx}$ как $y'$,...,$\frac{d^ny}{dx^n}$ как $y^{(n)}$.
 \begin{definition}
-Уравнение вида $F(x,y,y',...,y^{(n)})=0$  называется обыкновенным дифференциальным уравнением (ОДУ) порядка n.
+Уравнение вида
+\begin{equation}
+F(x,y,y',...,y^{(n)})=0 
+\label{ode}
+\end{equation}  называется обыкновенным дифференциальным уравнением (ОДУ) порядка n.
 \end{definition}
 \begin{definition}
-Рассмотрим промежуток $I \subset \mathbb{R}$. Функция $\varphi(x)$, определеннная на $I$, называется решением ОДУ порядка n на $I$, если
+Рассмотрим промежуток $I \subset \mathbb{R}$. Функция $\varphi(x)$, определенная на $I$, называется решением ОДУ порядка n на $I$, если
 
 
 а) $\varphi(x)$ определена и непрерывна  на $I$ со всеми своими производными до порядка n.
@@ -15,4 +19,42 @@
 
 б) $F(x,\varphi(x),\varphi'(x),...,\varphi^{(n)}(x))\equiv0$ на I.
 \end{definition}
+\begin{definition}
+График функции $y=\varphi(x)$ называется интегральной кривой уравнения \ref{ode}.
+\end{definition}
+Если ОДУ первого порядка имеет вид 
+\begin{equation}
+y'=f(x,y), \label{ode1}
+\end{equation}то оно называется разрешенным относительно производной.
+\begin{definition}
+Рассмотрим уравнение \ref{ode1}, где $f(x,y)$ определена на некоторой области $G \subset \mathbb{R}$. Изоклиной называется ГМТ таких, что $f(x,y)=c$, где $c \in \mathbb{R}$.
+\end{definition}
+\begin{definition}
+Функция $\varphi(x,c)$, где $c \in \mathbb{R}$ - параметр, называется общим решением ОДУ первого порядка, если:
+
+а)$\forall c\ \varphi(x,c)$ - решение этого ОДУ.
+
+б)любое решение этого ОДУ представимо в виде $\varphi(x,c)$.
+\end{definition}
+\begin{definition}
+Уравнением в дифференциалах называется 
+\begin{equation}
+M(x,y)dx\ +\ N(x,y)dy=0, \label{odedif}
+\end{equation}
+\end{definition}
+где $M^2(x,y)+N^2(x,y)\neq0$ в некоторой области $G$.
+\begin{definition}
+Задача Коши для уравнений \ref{ode1} и \ref{odedif}(если задана точка $(x_0,y_0)\in G$) состоит в нахождении решения, при котором интегральная кривая проходит через $(x_0,y_0)$.
+\end{definition}
+\begin{theorem}
+Пусть в области $G$ определены $f(x,y)$ и $\frac{\partial f}{\partial y} (x,y)$. Пусть $(x_0,y_0)\in G$. Тогда
+$\exists!$ решение уравнения \ref{ode1},такое,что $y(x_0)=y_0$ на любом подмножестве $G$.
+\end{theorem}
+\begin{definition}
+Уравнением с разделяющимися переменными называется уравнение вида $y'=f(x)g(y)$ или вида $f_1(x)g_1(y)dx+f_2(x)g_2(y)dy=0$.
+\end{definition}
+Алгоритм решения:
+Случай $g(y) = 0$ понятен и так.Рассмотрим случай, когда $g(y)\neq0$.
+$\frac{y'}{g(y)}=f(x) \Rightarrow \int \frac{y'}{g(y)}dx=\int f(x)dx \Rightarrow \int \frac{dy}{g(y)}=\int f(x)dx \Rightarrow H(y)=F(x)+C \Rightarrow y=H^{-1}(F(x)+C)$
+Обратная функция существует,так как в этом случае g знакопостоянна,а значит H монотонна.
 \end{document}
