@@ -103,4 +103,17 @@ $$z' + y_0' + a(x)(z+y_0)^2 + b(x)(z+y_0) = c(x)$$
 $$z' + y_0' + a(x)z^2 + 2a(x)zy_0 + a(x)y_0^2 + b(x)z + b(x)y_0 = c(x)$$
 $$z' + (2a(x)y_0 + b(x))z + a(x)z^2 = 0$$
 \end{Proof}
+\begin{Definition}
+Уравнения вида $P(x, y)dx + Q(x, y)dy = 0$ называются уравнением в полных дифференциалах, если в рассматриваемой области $D$: $\exists u(x, y): du = Pdx + Qdy$. Тогда это уравнение также можно переписать в виде: $u(x, y) = const$.
+\end{Definition}
+\begin{Theorem}
+Пусть $G$ -- область, функции $P$, $Q$, $\frac{\partial P}{\partial y}$, $\frac{\partial Q}{\partial x}$ определены и непрерывны на $G$. Тогда $\frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x} \Leftrightarrow \exists u : du = Pdx + Qdy$
+\end{Theorem}
+\begin{Proof}
+Пусть в условиях теоремы $\exists u : du = Pdx+Qdy$. Тогда $P = \frac{\partial u}{\partial x},
+Q = \frac{\partial u}{\partial y}$. Но тогда $\frac{\partial P}{\partial y} = \frac{\partial^2 u}{\partial y \partial x}, \frac{\partial Q}{\partial x} = \frac{\partial ^2 u}{\partial x \partial y}$. Поскольку все вышеперечисленные функции непрерывны, то в силу теоремы о смешанных производных, имеем: $\frac{\partial P}{\partial y} = \frac{\partial^2 u}{\partial y \partial x} = \frac{\partial Q}{\partial x} = \frac{\partial ^2 u}{\partial x \partial y}$.
+
+Пусть наоборот, в условиях теоремы выполнено $\frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x}$.
+TO BE CONTINUED...
+\end{Proof}
 \end{document}
