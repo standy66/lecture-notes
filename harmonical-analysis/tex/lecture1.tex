@@ -1,0 +1,69 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+\section{Абсолютно интегрируемые функции}
+\begin{definition}
+Функция $f: [a, b] \mapsto \mathbb{R}$ называется ступенчатой, если $\exists \{c_i\}_{i=0}^n,
+a = c_0 < c_1 < \ldots < c_n = b: \forall i \in \{1, \ldots, n\}: f\text{ -- постоянная на }(c_{i-1}, c_i)$.
+\end{definition}
+
+\begin{theorem}
+Пусть $f : [a, b] \mapsto \mathbb{R}$ интегрируема по Риману. Тогда $\forall \varepsilon > 0: \exists h(x)\text{ -- ступенчатая} : \int_a^b|f(x)-h(x)|dx < \varepsilon$
+\end{theorem}
+\begin{Proof}
+Пусть $\tau = \{c_i\}_{i=0}^n$ -- некоторое разбиение отрезка $[a, b]$, т.е. $a = c_0 < c_1 < \ldots < c_n = b$. Пусть $\xi_i \in (c_{i - 1}, c_i)$. Запишем сумму Римана для данного разбиения:
+$$\sum_{i=1}^n f(\xi_i)(c_i - c_{i-1})$$. Рассмотрим ступенчатую функцию
+ $$h(x) = \begin{cases}
+ 	f(\xi_i),\text{ if } x \in (c_{i-1}, c_i),\\
+ 	0, \text{ elsewhere}.
+\end{cases}$$
+Рассмотрим интеграл:
+$$\int_a^b|f(x)-h(x)|dx = \sum_{i=1}^n\int_{c_{i-1}}^{c_i}|f(x) - f(\xi_i)|dx \leq$$
+$$\leq \sum_{i=1}^n\omega_i(f)(c_i - c_{i-1})$$,
+где $\omega_i(f)$ -- это колебание функции $f$ на отрезке $[c_{i-1}, c_i]$. По критерию интегрируемости последняя сумма меньше $\varepsilon$ для любого такого $\varepsilon$ для всех достаточно мелких разбиений.
+\end{Proof}
+
+\begin{definition}
+Пусть функция $f: (a, b) \mapsto \mathbb{R}$, где $-\infty \leq a < b \leq +\infty$. Такая функция называется абсолютно интегрируемой, если:
+\begin{enumerate}
+\item $\exists \{c_i\}_{i=0}^n, a = c_0 < c_1 < \ldots < c_n = b:$ f интегрируема на любом отрезке $[\alpha, \beta] \subset (a, b) \setminus \{c_i\}$
+\item $|f|$ интегрируема в несобственном смысле на $(a, b)$
+\end{enumerate}
+\end{definition}
+
+\begin{definition}
+Функция $f: \mathbb{R} \mapsto \mathbb{R}$ называется финитной, если она равна нулю вне некоторого отрезка, т.е. $\exists [a, b] : \forall x \not \in [a, b] : f(x) = 0$.
+\end{definition}
+
+\begin{definition}
+Функция $f : \mathbb{R} \mapsto \mathbb{R}$ называется финитно-ступенчатой, если она финитная и ступенчатая.
+\end{definition}
+
+\begin{theorem}
+Пусть функция $f : [a, b] \mapsto \mathbb{R}$ -- абсолютно интегрируема. Тогда $\forall \varepsilon > 0: \exists h(x)\text{ -- финитно-ступенчатая} : \int_a^b|f(x)-h(x)|dx < \varepsilon$
+\end{theorem}
+\begin{proof}
+Пусть $\varepsilon > 0$.
+Можно считать, что $a = -\infty$, $b = +\infty$, иначе доопределим $f$ на $\mathbb{R} \setminus [a, b]$ нулем.
+Поскольку $f$ -- абсолютно интегрируема, то:
+
+\begin{enumerate}
+\item $\exists \{c_i\}_{i=0}^n, a = c_0 < c_1 < \ldots < c_n = b:$ f интегрируема на любом отрезке $[\alpha, \beta] \subset (a, b) \setminus \{c_i\}$
+\item $|f|$ интегрируема в несобственном смысле на $(a, b)$
+\end{enumerate}
+$$\exists \{a_i\}_{i=1}^n, \{b_i\}_{i=1}^n, -\infty < a_1 < b_1 < c_1 < a_2 < b_2 < c_2 < \ldots < a_n < b_n < +\infty:$$
+$$\int_{-\infty}^{a_1}|f(x)|dx + \int_{b_1}^{a_2}|f(x)|dx + \ldots + \int_{b_n}^{+\infty}|f(x)|dx < \varepsilon$$, т.к. $|f|$ интегрируем на $\mathbb{R}$ в несобственном смысле. Пусть
+$$f_{\varepsilon}(x) = \begin{cases}
+f(x), x \in \cup [a_i, b_i], \\
+0, elsewhere.
+\end{cases}$$
+Тогда $$\int_{-\infty}^{+\infty}|f(x) - f_{\varepsilon}(x)|dx < \varepsilon$$.
+По предыдущей теореме существует $h_{\varepsilon}(x):[a_1, b_n] \mapsto \mathbb{R}$ -- ступенчатая функция: $\int_{a_1}^{b_n}|h_{\varepsilon}(x) - f_{\varepsilon}(x)|dx < \varepsilon$. Доопределим $h_{\varepsilon}(x)$ нулем вне отрезка $[a_1, b_n]$. Тогда $h$ -- финитно-ступенчатая. Кроме того:
+$$\int_{-\infty}^{+\infty}|h_{\varepsilon}(x) - f_{\varepsilon}(x)|dx < \varepsilon$$
+Тогда:
+$$\int_{-\infty}^{+\infty}|h_{\varepsilon}(x) - f(x)|dx < \int_{-\infty}^{+\infty}(|h_{\varepsilon}(x) - f_{\varepsilon}(x)| + |f_{\varepsilon}(x) - f(x)|)dx < 2\varepsilon$$
+\end{proof}
+
+
+
+\end{document}
