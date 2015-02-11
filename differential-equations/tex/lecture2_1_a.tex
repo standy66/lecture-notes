@@ -1,0 +1,109 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+\section*{Лекция X. Теорема о существовании и единственности решения задачи Коши}
+\begin{definition}
+Назовем нормальной системой дифференциальных уравнений порядка m следующую систему:
+$$y_1'(x) = f_1(x, y_1, \ldots, y_n)$$
+...
+$$y_n'(x) = f_n(x, y_1, \ldots, y_n)$$
+Причем функции $f_i$ непрерывны в некоторой области $G \subset \mathbb{R}^{n+1}$. Пусть также $y_1(x_0) = y_1^0, \ldots, y_n(x_0) = y_n^0$.
+\end{definition}
+
+\begin{definition}
+Пусть $y = \varphi(x)$ определена на некотором промежутке $I \subset \mathbb{R}$, обладает следующими свойствами:
+\begin{enumerate}
+\item Она непрерывно дифференцируема.
+\item $(x_0, \varphi(x_0)) \in G$
+\item $\forall x \in I: \varphi'(x) = f(x, y)$
+\end{enumerate}
+Тогда она является решением системой диф. урний порядка m.
+\end{definition}
+
+\begin{Example}
+Рассмотрим уравнение n-ного порядка:
+$y^{(n)} = f(x, y, y', \ldots, y^{(n-1)})$, причем f - непрерывна по всем аргументам.
+Если также добавить условие $y(x_0) = y_1^{(0)}, \ldots, y(x_0)^{(n-1)} = y_n^{(0)}$, то поставленная задача называется задачей Коши.
+\end{Example}
+
+\begin{Remark}
+От первой задачи Коши можно перейти ко второй, и наоборот, если обозначить:
+$$y_1 = y$$
+...
+$$y_n = y^{(n-1)}$$
+\end{Remark}
+
+\begin{Remark}
+Поскольку решение задачи Коши для системы сводится к решению задачи Коши для уравнения n-ного порядка, в дальнейшем будем рассматривать решение системы.
+\end{Remark}
+
+\begin{Definition}
+Функция f(x, y) определенная в области $G$ называется удовлетворяющей условию Липшица относительно y равномерно по x, если:
+$$\exists L > 0 : \forall (x, y_1), (x, y_2): |f(x, y_1) - f(x, y_2)| \leq L |y_1 - y_2|$$
+\end{Definition}
+
+\begin{Remark}
+Условию Липшица удовлетворяют непрерывно дифференцируемые функции, |x|, дифференцируемые с ограниченой производной, но не все дифференцируемые
+\end{Remark}
+\begin{Lemma}
+Пусть выполнены следующие условия:
+\begin{enumerate}
+\item Область $G$ выпукла по переменной y (т.е. ограничение на переменную y выпукло).
+\item Функция f(x, y) непрерывна в области G.
+\item Все частные производные ($\frac{\partial_i f}{\partial_j y}$ непрерывны в G).
+\item $\exists k > 0: \forall (x, y) \in G : \frac{\partial_i f}{\partial_j y} \leq k$
+
+Тогда функция f(x, y) удовлетворяет в области G условию Липшица.
+\end{enumerate}
+\end{Lemma}
+\begin{Proof}
+Рассмотрим $1 \leq i \leq n$, рассмотрим 
+$$|f_i(x, y_1) - f_i(x, y_2)| = |\int_0^1 \frac{d}{d \theta}(f_i(x, y_2 + \theta(y_1 - y_2))d \theta|$$
+$$ = |\int_0^1 (grad f_i, y_2 - y_1)d\theta| \leq k |y_2 - y_1| n$$
+Для f:
+$$|f(x, y_2) - f(x, y_1)| \leq n^{3/2} k |y_1 - y_2|$$
+\end{Proof}
+
+\begin{Lemma}[Гронуолла]
+Рассмотрим функцию $\varphi(x)$ определенную на интервале $I \subset \mathbb{R}$, $\varphi(x) \geq 0$ на I, непрерывна на I, и:
+$$\exists A \geq 0, B \geq 0 : \forall x_0, x \in I: \varphi(x) \leq A+B|\int_{x_0}^x \varphi(t) dt|$$.
+Тогда: $\forall x \in I : \varphi(x) \leq Ae^{B|x - x_0|}$.
+\end{Lemma}
+\begin{Proof}
+Пусть $x > x_0$, пусть $F(x) = \int_{x_0}^x \varphi(\tau) d\tau$. Тогда $F(x_0) = 0$. Тогда по условию: $0 \leq F'(x) \leq A + BF(x)$. Домножим это нераенство на $e^{-B(x - x_0)}$:
+$$F'(x)e^{-B(x - x_0)} \leq Ae^{-B(x - x_0)} + BF(x)e^{-B(x - x_0)}$$
+$$F'(x)e^{-B(x-x_0)} - BF(x)e^{-B(x - x_0)} \leq Ae^{-B(x - x_0)}$$
+$$(F(x)e^{-B(x-x_0)})' \leq Ae^{-B(x - x_0)}$$.
+Проинтегрируем это неравенство на промежутке $[x_0, x]$.
+$$F(x)e^{-B(x-x_0)} - F(x_0)e^{-B(x_0-x_0)} \leq \frac{Ae^{-B(x - x_0)}}{-B} from x_0 to x$$
+$$F(x)e^{-B(x-x_0)} \leq -\frac{A}{B}(e^{-B(x - x_0)} - 1)$$
+Умножим обе части уравнения на $e^{B(x - x_0)}$:
+$$F(x) \leq -\frac{A}{B}(1 - e^{B(x - x_0)})$$.
+Подставив эту оценку в $\varphi(x) \leq A+B|\int_{x_0}^x \varphi(t) dt|$ получаем то, что нужно.
+\end{Proof}
+
+Рассмотрим систему уравнений:
+$$y(x) = y_0 + \int_{x_0}^x f(\tau, y(\tau))d\tau$$
+$f(x, y)$ непрерывна на области $G$, $(x_0, y_0) \in G$.
+
+\begin{definition}
+Вектор функция $y = \varphi(x)$ называется решением системы уравнений, данной выше, на промежутке $I$, если:
+\begin{enumerate}
+\item y непрерывна на I
+\item Точка $(x_0, \varphi(x_0)) \in G$
+\item $\varphi(x) \equiv y_0 + \int_{x_0}^x f(\tau, y(\tau))d\tau$ на I.
+\end{enumerate}
+\end{definition}
+
+\begin{Lemma}[лемма об эквивалентности]
+Ветор функция $\varphi(x)$ является решением задачи Коши (1), (2) тогда и только тогда, когда $y = \varphi(x)$ является решением интегральной системы уравнений (5)
+\end{Lemma}
+\begin{Proof}
+$\Leftarrow$ Проинтегрируем тождество $\varphi'(x) \equiv f(x, \varphi(x))$. Учитывая начальные условия $y(x_0) = y_0$. Получаем, что $y(x) = y_0 + \int_{x_0}^x f(\tau, y(\tau)) d\tau$.
+
+$\Rightarrow$ Продифференцируем 
+$$y(x) = y_0 + \int_{x_0}^x f(\tau, y(\tau))d\tau$$
+и получим, что нужно.
+\end{Proof}
+
+\end{document}
