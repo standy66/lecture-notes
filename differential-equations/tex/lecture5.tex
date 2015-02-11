@@ -1,0 +1,52 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+
+\begin{Lemma}[принцип суперпозиции]
+Пусть $y_1(x), y_2(x)$ -- решения ЛДУ с постоянными коэффициентами $L(D)y = 0$. Тода
+$\forall \alpha, \beta \in \mathbb{C}: L(D)(\alpha y_1 + \beta y_2) = 0$.
+\end{Lemma}
+\begin{Proof}
+В самом деле, $L(D)(\alpha y_1 + \beta y_2) = \alpha L(D) y_1 + \beta L(D) y_2$ в силу линейности. А последнее выражение равно нулю в силу того, что $y_1, y_2$ -- решения уравнения $L(D)y = 0$.
+\end{Proof}
+\begin{Theorem}[о структуре решения ЛДУ]
+Верны следующие утверждения:
+\begin{enumerate}
+\item Если $y_1, y_2$ -- решения уравнения $L(D)y = f(x)$, то $y_1 - y_2$ -- решение уравнения $L(D)y = 0$.
+\item Любое решение $y$ уравнения $L(D)y = f(x)$ представимо в виде $y = y_0 + y_h$, где $y_0$ -- заранее фиксированное частное решение уравнения $L(D)y = f(x)$, а $y_h$ -- какое-то решение однородного уравнения $L(D)y = 0$
+\end{enumerate}
+\end{Theorem}
+\begin{Proof}
+Докажем сначала пункт 1. Пусть $L(D)y_1 = f(x)$, $L(D)y_2 = f(x)$. Вычитая первое уравнение из второго, получаем: $L(D)y_1 - L(D)y_2 = 0$. В силу линейности оператора $L(D)$: $L(D)(y_1 - y_2) = 0$.
+
+Теперь докажем пункт 2. Обозначим $y_h = y - y_0$, где $y_0$ -- заранее фиксированное решение уравнения $L(D)y = f(x)$, а $y$ -- какое-то решение уравнения $L(D)y = f(x)$. Тогда в силу пункта 1, $y_h$ -- решение однородного уравнения $L(D)y = 0$. Получили, что $y = y_0 + y+h$.
+\end{Proof}
+\begin{Definition}
+Многочлен $L(\lambda) = \lambda^n + a_{n-1} \lambda^{n - 1} + \ldots + a_0$ назовем характерестическим многочленом ЛДУ $L(D) = 0$. Уравнение $L(\lambda) = 0$ назовем характерестическим уравнением.
+\end{Definition}
+
+\begin{Remark}
+Над $\mathbb{C}$ характерестический многочлен раскладывается в произведение одночленов: $L(\lambda) = (\lambda - \lambda_1)\ldots(\lambda - \lambda_n)$. В дальнейшем будем обозначать через $\lambda_1, \ldots, \lambda_n$ корни характерестического уравнения.
+\end{Remark}
+
+\begin{Theorem}[об общем решении однородного ЛДУ без кратных корней]
+Пусть харктерестическое уравнение $L(\lambda) = 0$ не имеет кратных корней. Тогда верны следующие утверждения:
+\begin{enumerate}
+\item $\forall C_1, \ldots, C_n \in \mathbb{C}: \displaystyle \sum_{i = 1}^n C_i e^{\lambda_i x}$ -- решение.
+\item $\forall y(x) \text{ -- решения} : \exists C_1, \ldots, C_n \in \mathbb{C}: y(x) = \displaystyle \sum_{i = 1}^n C_i e^{\lambda_i x}$.
+\end{enumerate}
+\end{Theorem}
+
+\begin{Proof}
+Для пункта 1 достаточно показать, что $e^{\lambda_i x}$ является решением $L(D)y = 0$. Так как $L(\lambda) = (\lambda - \lambda_1)\ldots(\lambda - \lambda_n)$, то $L(D) = (\frac{d}{dx} - \lambda_1)\ldots(\frac{d}{dx} - \lambda_n)$. Рассмотрим 
+$$L(D)e^{\lambda_i x} = (\frac{d}{dx} - \lambda_1)\ldots(\frac{d}{dx} - \lambda_n) e^{\lambda_i x} = (\frac{d}{dx} - \lambda_1)\ldots(\frac{d}{dx} - \lambda_{n-1})(\frac{d}{dx}e^{\lambda_i x} - \lambda_n e^{\lambda_i x})$$
+$$ = (\frac{d}{dx} - \lambda_1)\ldots(\frac{d}{dx} - \lambda_{n-1})(\lambda_i - \lambda_n)e^{\lambda_i x} = (\lambda_i - \lambda_1)\ldots(\lambda_i - \lambda_n)e^{\lambda_i x} = 0$$
+
+Для доказательства пункта 2 проведем индукцию по $n$. Для $n = 1$ это верно, т.к. в случае $n = 1$, $L(D) = 0$ -- это просто ЛДУ первой степени вида $y' = \lambda y$. Докажем переход от $n - 1$ к $n$. Обозначим $L_{n-1}(D) = (\frac{d}{dx} - \lambda_1)\ldots(\frac{d}{dx} - \lambda_{n-1})$, $z(x) = y'(x) - \lambda_n y$. Тогда $L(D)y = 0$ эквивалентно уравнению $L_{n-1}(D)z = 0$. Последнее уравнению является ЛДУ с постоянными коэффициентами степени $n-1$. Для него верно, что $\exists \alpha_1, \ldots \alpha_{n-1} \in \mathbb{C}: z(x) = \displaystyle \sum_{i = 1}^{n-1} \alpha_i e^{\lambda_i x}$. Если подставить в это выражение $z(x)$, то мы получим неоднородное ЛДУ первой степени:
+$$y' - \lambda_n y = \sum_{i = 1}^{n-1} \alpha_i e^{\lambda_i x}$$
+Общим решением однородного уравнения $y' - \lambda_n y = 0$ является семейство функций $Ce^{\lambda^n x}$. Попытаемся найти частное решение неоднородного ЛДУ первой степени. Утверждается, что одно из решений, это:
+$$e^{lambda_n x} \sum_{i = 1}^{n - 1} \frac{\alpha_i}{\lambda_i - \lambda_n}
+
+\end{Proof}
+
+\end{document}
