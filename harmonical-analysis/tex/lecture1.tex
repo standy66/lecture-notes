@@ -63,7 +63,30 @@ $$\int_{-\infty}^{+\infty}|h_{\varepsilon}(x) - f_{\varepsilon}(x)|dx < \varepsi
 Тогда:
 $$\int_{-\infty}^{+\infty}|h_{\varepsilon}(x) - f(x)|dx < \int_{-\infty}^{+\infty}(|h_{\varepsilon}(x) - f_{\varepsilon}(x)| + |f_{\varepsilon}(x) - f(x)|)dx < 2\varepsilon$$
 \end{proof}
+\begin{theorem}
+Пусть $f: (a, b) \mapsto \mathbb{R}$ абсолютно интегрируема. Доопределим её на $\mathbb{R}$ нулем. Тогда $$\int_{-\infty}^{+\infty} |f(x + \alpha) - f(x)|dx \rightarrow 0, \text{ при } \alpha \rightarrow 0$$
+\end{theorem}
+\begin{proof}
+Этот интеграл существует, т.к. его можно оценить как $\int_{-\infty}^{+\infty}|f(x+\alpha)|dx + \int_{-\infty}^{+\infty}|f(x)|dx$ (см. предыдущее доказательство).
 
+Докажем эту теорему для произвольной финитно-ступенчатой функции $h: \mathbb{R} \mapsto \mathbb{R}$. Поскольку $\alpha \rightarrow 0$, мы можем рассматривать лишь такие $\alpha$, что $$|\alpha| < \frac{\min_i (c_i - c_{i-1})}{2}$$. Пусть $M = \sup |h|$. Тогда 
+$$\int_{-\infty}^{+\infty} |h(x + \alpha) - h(x)|dx < 2M(n+1)|\alpha|$$. Пусть $h(x)$ -- финитно ступенчатая: $\int_{-\infty}^{+\infty}|f(x) - h(x)|dx < \varepsilon$. Тогда:
+$\int |f(x+\alpha) - f(x)|dx \leq \int|f(x+\alpha)-h(x+\alpha)|dx + \int|h(x+\alpha)-h(x)|dx + \int|h(x)-f(x)|dx \leq 3\varepsilon$.
+\end{proof}
 
+\begin{Lemma}[Римана об осцилляции]
+Пусть $f : (a, b) \mapsto \mathbb{R}$ -- абсолютно интегрируемая функция. Тогда 
+$$\lim_{\lambda \rightarrow \infty} \int f(x)\sin (\lambda x)dx = \lim_{\lambda \rightarrow \infty} \int f(x)\cos (\lambda x)dx = 0$$
+\end{Lemma}
+\begin{Proof}
+Доопределим $f$ нулем на $\mathbb{R}$. Рассмотрим:
+$$I(\lambda) = \int_{-\infty}^{+\infty}f(x)\sin(\lambda x)dx$$
+Этот интеграл существует по признаку Дирихле. Сделаем замену $x = t + \frac{\pi}{\lambda}$.
+Тогда:
+$$I(\lambda) = -\int_{-\infty}^{+\infty}f(t + \frac{\pi}{\lambda})\sin(\lambda t)dt$$.
+Сложив и поделив пополам, получаем, что:
+$$I(\lambda) = \frac{1}{2} \int_{-\infty}^{+\infty}(f(x) - f(x+\frac{\pi}{\lambda})\sin(\lambda x)dx$$
+Применяя теорему, которую мы недавно доказали, получаем, что $$I(\lambda) \rightarrow 0$$.
+\end{Proof}
 
 \end{document}
