@@ -1,0 +1,172 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+nograhol@gmail.com
+
+Курс состоит из 3 частей:
+\begin{enumerate}
+\item Теория делимости. Обобщение ОТА (основная теорема арифметики).
+\item Расширения полей. Основная теорема алгебры. Конечные поля. Коды БЧХ.
+\item Как из $\mathbb{Q}$ перейти в $\mathbb{R}$. $\mathbb{Q}_p$.
+\end{enumerate}
+
+\section{Базовые определения.}
+
+\begin{definition}
+Кольцо - это тройка $(K, +, \cdot)$. Причем:
+\begin{enumerate}
+\item $(K, +)$ -- абелева группа
+\item $\forall a, b, c \in K: (a + b) \cdot c = a \cdot c + b \cdot c$
+\item $\forall a, b, c \in K: c \cdot (a + b) = c \cdot a + c \cdot b$
+\end{enumerate}
+\end{definition}
+
+\begin{definition}
+Свойство $\forall a, b, c: (ab)c = a(bc)$ называют ассоциативностью.
+\end{definition}
+
+\begin{definition}
+Свойство $\exists 1 : \forall a : a \cdot 1 = 1 \cdot a = a$ называют существованием нейтрального элемента
+\end{definition}
+
+\begin{definition}
+Свойство $\forall a, b: ab = ba$ называют коммутативностью.
+\end{definition}
+
+\begin{definition}
+Свойство $\forall a \neq 0 : \exists b : ab = ba = 1$ называют существованием обратного элемента.
+\end{definition}
+
+\begin{definition}
+Ассоциативное кольцо -- это такое кольцо, что для умножения выполнена ассоциативность.
+\end{definition}
+
+\begin{definition}
+Кольцо с единицей -- это такое кольцо, где есть нейтральный элемент относительно умножения.
+\end{definition}
+
+\begin{definition}
+Коммутативное кольцо -- это такое кольцо, что для умножения выполнена коммутативность и (внезапно) ассоциативность и существование нейтрального элемента.
+\end{definition}
+
+\begin{remark}
+Буквой $K$ будем обозначать коммутативное кольцо (т.е. коммутативное с единицей и ассоциативностью).
+\end{remark}
+
+\begin{definition}
+Кольцо с обратными -- это такое кольцо, что умножения обратимо.
+\end{definition}
+
+\begin{example}
+~\begin{enumerate}
+\item $\mathbb{Z}$ является коммутативным кольцом с единицей и ассоциативностью
+\item $\{0\}$ -- тривиальное кольцо
+\item $2\mathbb{Z}$ -- кольцо без единицы, но ассоциативное и коммутативное.
+\item $\mathbb{R}^{n \times n}$ -- ассоциативная кольцо с единицей, но не коммутативное
+\end{enumerate}
+\begin{example}
+Более интересный пример:
+Множество матриц со сложением и операцией $[\cdot, \cdot]$:
+$[A, B] = AB - BA$.
+Ассоциативность не выполнена. Но выполнено:
+\begin{enumerate}
+\item $[[A, B], C] + [[B, C], A] + [[C, A], B] = 0$
+\item $[A, B] = -[B, A]$
+\end{enumerate}
+\end{example}
+\end{example}
+
+\begin{definition}
+Пусть $K$ -- коммутативное кольцо. Тогда $a \neq 0$ называется делителем нуля, если:
+$\exists b \neq 0 : ab = 0$.
+\end{definition}
+
+\begin{definition}
+Коммутативное кольцо без делителей нуля называется областью целостности.
+\end{definition}
+
+\begin{exercise}
+$a \cdot 0 = 0$
+\end{exercise}
+
+\begin{definition}
+$F$ -- поле, если:
+\begin{enumerate}
+\item $F$ -- ассоциативное коммутативное кольцо с единицей
+\item $1 \neq 0$
+\item Любой элемент обратим относительно сложения.
+\end{enumerate}
+\end{definition}
+
+\begin{statement}
+В поле нет делителей нуля.
+\end{statement}
+\begin{proof}
+Пусть $a$ -- делитель нуля, т.е. $\exists b \neq 0 : ab = 0$. Но у $a$ есть обратный элемент относительно умножения $a^{-1}$. Умножив слева на $a^{-1}$, придем к противоречию.
+\end{proof}
+
+\begin{definition}
+Гауссовы числа ($\mathbb{Z}[i]$) -- это комплексные числа с целой мнимой и действительной частью.
+\end{definition}
+
+\begin{statement}
+Гауссовы числа -- это область целостности
+\end{statement}
+\begin{proof}
+Замкнутость относительно операций проверяется тривиальным образом. Коммутативность, дистрибутивность и ассоциативность следует из соответствующих свойств для $\mathbb{C}$. $0 + 0i$ -- нейтральный элемент относительно сложения, а $1 + 0i$ -- нейтральный элемент относительно умножения, проверяется тривиальным образом. А делителей нуля в гауссовых числах нет, потому что их нет в комплексных числах ($\mathbb{C}$ -- это поле).
+\end{proof}
+
+\begin{definition}
+Говорят, что $a|b$ ($a$ делит $b$), если $\exists c : ac = b$.
+\end{definition}
+
+\begin{statement}
+Свойства делимости:
+\begin{enumerate}
+\item $a|b, b|c \Leftarrow a|c$
+\item $a|b, a|c \Leftarrow a|(b+c)$
+\item $a|1 \Leftrightarrow \exists b: ab = 1 \Leftrightarrow a \text{ -- обратимый элемент }$
+\end{enumerate}
+\end{statement}
+
+\begin{remark}
+В случае, когда $a|1$, любой элемент поля делится на $a$:
+
+$x = 1 \cdot x = a \cdot a^{-1} \cdot x$
+\end{remark}
+
+\begin{definition}
+$K^*$ (множество обратимых элементов K) -- мультипликативная группа кольца.
+\end{definition}
+
+\begin{definition}
+Будем называть два элемента $a$ и $b$ ассоциированными, если $a = rb, r \in K^*$.
+\end{definition}
+
+\begin{exercise}
+Ассоциированность -- это отношение эквивалентности.
+\end{exercise}
+
+\begin{remark}
+План доказательства ОТА:
+\begin{enumerate}
+\item Докажем, что любое число раскладывается на произведение простых.
+\item Докажем лемму Евклида.
+\item Докажем единственность разложения на простые с помощью леммы Евклида.
+\end{enumerate}
+\end{remark}
+
+\begin{definition}
+Элемент $x \neq 0$ кольца $K$ называется неприводимым или неразложимым, если:
+\begin{enumerate}
+\item $x \not \in K^*$
+\item $x = ab \Rightarrow \exists a^{-1} \vee \exists b^{-1}$
+\end{enumerate}
+\end{definition}
+
+\begin{definition}
+Элемент $0 \neq x \not \in K^*$ кольца $K$ называется простым, если:
+$x|ab \Rightarrow x|a \vee x|b$
+\end{definition}
+
+\end{document}
