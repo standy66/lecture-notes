@@ -10,7 +10,7 @@ a = c_0 < c_1 < \ldots < c_n = b: \forall i \in \{1, \ldots, n\}: f\text{ -- п�
 \begin{theorem}
 Пусть $f : [a, b] \mapsto \mathbb{R}$ интегрируема по Риману. Тогда $\forall \varepsilon > 0: \exists h(x)\text{ -- ступенчатая} : \int_a^b|f(x)-h(x)|dx < \varepsilon$
 \end{theorem}
-\begin{Proof}
+\begin{proof}
 Пусть $\tau = \{c_i\}_{i=0}^n$ -- некоторое разбиение отрезка $[a, b]$, т.е. $a = c_0 < c_1 < \ldots < c_n = b$. Пусть $\xi_i \in (c_{i - 1}, c_i)$. Запишем сумму Римана для данного разбиения:
 $$\sum_{i=1}^n f(\xi_i)(c_i - c_{i-1})$$. Рассмотрим ступенчатую функцию
  $$h(x) = \begin{cases}
@@ -21,7 +21,7 @@ $$\sum_{i=1}^n f(\xi_i)(c_i - c_{i-1})$$. Рассмотрим ступенча�
 $$\int_a^b|f(x)-h(x)|dx = \sum_{i=1}^n\int_{c_{i-1}}^{c_i}|f(x) - f(\xi_i)|dx \leq$$
 $$\leq \sum_{i=1}^n\omega_i(f)(c_i - c_{i-1})$$,
 где $\omega_i(f)$ -- это колебание функции $f$ на отрезке $[c_{i-1}, c_i]$. По критерию интегрируемости последняя сумма меньше $\varepsilon$ для любого такого $\varepsilon$ для всех достаточно мелких разбиений.
-\end{Proof}
+\end{proof}
 
 \begin{definition}
 Пусть функция $f: (a, b) \mapsto \mathbb{R}$, где $-\infty \leq a < b \leq +\infty$. Такая функция называется абсолютно интегрируемой, если:
@@ -74,11 +74,11 @@ $$\int_{-\infty}^{+\infty} |h(x + \alpha) - h(x)|dx < 2M(n+1)|\alpha|$$. Пус�
 $\int |f(x+\alpha) - f(x)|dx \leq \int|f(x+\alpha)-h(x+\alpha)|dx + \int|h(x+\alpha)-h(x)|dx + \int|h(x)-f(x)|dx \leq 3\varepsilon$.
 \end{proof}
 
-\begin{Lemma}[Римана об осцилляции]
+\begin{lemma}[Римана об осцилляции]
 Пусть $f : (a, b) \mapsto \mathbb{R}$ -- абсолютно интегрируемая функция. Тогда 
 $$\lim_{\lambda \rightarrow \infty} \int f(x)\sin (\lambda x)dx = \lim_{\lambda \rightarrow \infty} \int f(x)\cos (\lambda x)dx = 0$$
-\end{Lemma}
-\begin{Proof}
+\end{lemma}
+\begin{proof}
 Доопределим $f$ нулем на $\mathbb{R}$. Рассмотрим:
 $$I(\lambda) = \int_{-\infty}^{+\infty}f(x)\sin(\lambda x)dx$$
 Этот интеграл существует, так как $f$ абсолютно интегрируема. Сделаем замену $x = t + \frac{\pi}{\lambda}$.
@@ -87,6 +87,6 @@ $$I(\lambda) = -\int_{-\infty}^{+\infty}f(t + \frac{\pi}{\lambda})\sin(\lambda t
 Сложив и поделив пополам, получаем, что:
 $$I(\lambda) = \frac{1}{2} \int_{-\infty}^{+\infty}(f(x) - f(x+\frac{\pi}{\lambda})\sin(\lambda x)dx$$
 Применяя теорему, которую мы недавно доказали, получаем, что $$I(\lambda) \rightarrow 0$$.
-\end{Proof}
+\end{proof}
 
 \end{document}

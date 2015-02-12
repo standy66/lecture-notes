@@ -1,28 +1,28 @@
 \documentclass[document.tex]{subfiles}
 
 \begin{document}
-\section*{Лекция 2. Интегрирование некоторых ОДУ первого порядка}
-\begin{Definition}
+\section{Интегрирование некоторых ОДУ первого порядка}
+\begin{definition}
 Пусть $n \in \mathbb{N}, k \in \mathbb{Z}$. Функция $F : \mathbb{R}^n \mapsto \mathbb{R}$ называется однородной функцией степени (порядка) k, если: $\forall \lambda \in \mathbb{R} \setminus \{0\}, v \in \mathbb{R}^n: F(\lambda v) = \lambda^k F(v)$
-\end{Definition}
-\begin{Definition}
+\end{definition}
+\begin{definition}
 \label{homogen_diff_eq_def1}
 ОДУ первого порядка $y' = f(x, y)$ называется однородным, если $f$ -- однородная функция нулевого порядка.
-\end{Definition}
+\end{definition}
 
-\begin{Definition}
+\begin{definition}
 \label{homogen_diff_eq_def2}
 Уравнение в дифференциалах $P(x, y)dx + Q(x, y)dy = 0$ называется однородным, если $P$ и $Q$ -- однородные функции одного и того же порядка.
-\end{Definition}
-\begin{Statement}
+\end{definition}
+\begin{statement}
 Определения \ref{homogen_diff_eq_def1} и \ref{homogen_diff_eq_def2} эквивалентны.
-\end{Statement}
-\begin{Proof}
+\end{statement}
+\begin{proof}
 Пусть, скажем, дано уравнение $y' = f(x, y)$, причем f - однородная функция порядка 0. Тогда это уравнение эквивалентно уравнению $1 \cdot dy = f(x, y)dx$, причем $1$ и $f(x, y)$ -- функции порядка 0.
 
 Наоборот, если дано уравнение $P(x, y)dx + Q(x, y)dy = 0$, где $P$ и $Q$ -- однородные функции одного и того же порядка, то такое уравнение эквивалентно уравнению $y' = -\frac{P(x, y)}{Q(x, y)}$, причем $-\frac{P(x, y)}{Q(x, y)}$ -- однородная функция порядка 0.
-\end{Proof}
-\begin{Remark}
+\end{proof}
+\begin{remark}
 Приведем алгоритм решения уравнения $P(x, y)dx + Q(x, y)dy = 0$, где $P$ и $Q$ -- однородные функции степени $n$.
 
 Перенесем $Q(x, y)dy$ в правую часть:
@@ -37,17 +37,17 @@ $$\frac{dx}{x} = -\frac{Q(1, z)dz}{P(1, z)+zQ(1, z)}$$
 $$ln|x| + C = -\int^{z}_{z_0}\frac{Q(1, t)dt}{P(1, t)+tQ(1, t)}$$
 $$x = Cexp\left[-\int^{z}_{z_0}\frac{Q(1, t)dt}{P(1, t)+tQ(1, t)}\right]$$
 
-\end{Remark}
-\begin{Remark}
+\end{remark}
+\begin{remark}
 Приведем теперь алгоритм решения уравнения $y' = f(x, y)$, где $f(x, y)$ -- однородная функция нулевого порядка. Опять же рассмотрим замену $y = xz$. Тогда $y' = z'x + z$, $f(x, y) = f(x, zx) = x^0f(1, z)$. Перепишем уравнение в виде:
 $$z'x+z = f(1, z)$$
 $$\frac{dz}{f(1,z)-z} = \frac{dx}{x}$$
 Если $f(1, z) - z = 0$ в точках $z_1, \ldots, z_k$, то получили решения вида $y = z_1x, \ldots, y = z_kx$. Общее решения получаем, проинтегрировав последнее уравнение.
-\end{Remark}
-\begin{Statement}
+\end{remark}
+\begin{statement}
 Уравнение $y' = f(\frac{a_1x+b_1y+c_1}{a_2x+b_2y+c_2})$ сводится к однородному в случае, когда прямые $a_1x+b_1y+c_1 = 0$ и $a_2x+b_2y+c_2 = 0$ пересекаются.
-\end{Statement}
-\begin{Proof}
+\end{statement}
+\begin{proof}
 Пусть $(x_0, y_0)$ -- точка пересечения.
 Рассмотрим замену коордиант:
 $$\begin{cases}
@@ -58,16 +58,16 @@ $$\begin{cases}
 $$\eta' = f(\frac{a_1x+b_1y+c_1 - (a_1x_0 + b_1y_0 + c_1)}{a_2x+b_2y+c_2 - (a_2x_0 + b_2y_0 + c_2)})$$
 $$\eta' = f(\frac{a_1\xi+b_1\eta}{a_2\xi+b_2\eta}) = f(\frac{a_1+b_1\frac{\eta}{\xi}}{a_2+b_2\frac{\eta}{\xi}})$$
 Но $f(\frac{a_1+b_1\frac{\eta}{\xi}}{a_2+b_2\frac{\eta}{\xi}})$ -- однородная функция степени 0. Значит, мы свели исходное уравнение к однородному.
-\end{Proof}
-\begin{Example}
+\end{proof}
+\begin{example}
 $2x^2y' = y^3 + xy$
-\end{Example}
-\begin{Definition}
+\end{example}
+\begin{definition}
 Уравнение вида $y' + a(x)y = b(x)$, где $a(x)$ и $b(x)$ - функции, непрерывные на некотором промежутке $I$, называется линейным уравнение первого порядка.
 
 Если $b(x) \equiv 0$, то уравнение называется однородным, иначе -- неоднородным.
-\end{Definition}
-\begin{Remark}
+\end{definition}
+\begin{remark}
 Решим сначала однородное уравнение $y' + a(x)y = 0$. Это уравнение является уравнением с разделяющимися переменными. Перенеся все c игреком вправо, а все с иксом -- влево, получаем:
 $$\frac{dy}{y} = -a(x)dx$$
 $$y = Cexp\left[-\int^{y}_{y_0}a(t)dt\right]$$
@@ -77,43 +77,43 @@ $$C'(x)exp\left[-\int^{y}_{y_0}a(t)dt\right] = b(x)$$
 $$C(x) = \int_{x_0}^{x}b(\tau)exp\left[-\int^{\tau}_{\tau_0}a(t)dt\right]d\tau + const$$
 Если теперь подставить $C(x)$ в формулу для $y(x)$, получим:
 $$y(x) = \left( \int_{x_0}^{x}b(\tau)exp\left[-\int^{\tau}_{\tau_0}a(t)dt\right]d\tau + const\right)exp\left[-\int^{y}_{y_0}a(t)dt\right]$$
-\end{Remark}
-\begin{Example}
+\end{remark}
+\begin{example}
 $y' - y = x$
-\end{Example}
-\begin{Definition}[Уравнение Бернулли]
+\end{example}
+\begin{definition}[Уравнение Бернулли]
 Уравнение $y' = a(x)y = b(x)y^m$, где $m \neq 1, m > 0$ называется уравнением Бернулли.
-\end{Definition}
-\begin{Statement}
+\end{definition}
+\begin{statement}
 Уравнение Бернулли сводится к линейному уравнение первой степени
-\end{Statement}
-\begin{Proof}
+\end{statement}
+\begin{proof}
 Заметим, что $y = 0$ является решением. Поделив уравнение Бернулли на $y^m$ и сделав замену $z = y^{1-m}$, получаем уравнение:
 $$\frac{z'}{1-m} + a(x)z = b(x)$$
-\end{Proof}
-\begin{Definition}[Уравнение Рикатти]
+\end{proof}
+\begin{definition}[Уравнение Рикатти]
 Уравнение $y' + a(x)y^2 + b(x)y = c(x)$ называют уравнение Рикатти.
-\end{Definition}
-\begin{Statement}
+\end{definition}
+\begin{statement}
 Если известно $y_0(x)$ -- частное решение уравнения Рикатти, то оно сводится к уравнению Бернулли с m = 2
-\end{Statement}
-\begin{Proof}
+\end{statement}
+\begin{proof}
 Сделаем замену $z = y - y_0$:
 $$z' + y_0' + a(x)(z+y_0)^2 + b(x)(z+y_0) = c(x)$$
 $$z' + y_0' + a(x)z^2 + 2a(x)zy_0 + a(x)y_0^2 + b(x)z + b(x)y_0 = c(x)$$
 $$z' + (2a(x)y_0 + b(x))z + a(x)z^2 = 0$$
-\end{Proof}
-\begin{Definition}
+\end{proof}
+\begin{definition}
 Уравнения вида $P(x, y)dx + Q(x, y)dy = 0$ называются уравнением в полных дифференциалах, если в рассматриваемой области $D$: $\exists u(x, y): du = Pdx + Qdy$. Тогда это уравнение также можно переписать в виде: $u(x, y) = const$.
-\end{Definition}
-\begin{Theorem}
+\end{definition}
+\begin{theorem}
 Пусть $G$ -- область, функции $P$, $Q$, $\frac{\partial P}{\partial y}$, $\frac{\partial Q}{\partial x}$ определены и непрерывны на $G$. Тогда $\frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x} \Leftrightarrow \exists u : du = Pdx + Qdy$
-\end{Theorem}
-\begin{Proof}
+\end{theorem}
+\begin{proof}
 Пусть в условиях теоремы $\exists u : du = Pdx+Qdy$. Тогда $P = \frac{\partial u}{\partial x},
 Q = \frac{\partial u}{\partial y}$. Но тогда $\frac{\partial P}{\partial y} = \frac{\partial^2 u}{\partial y \partial x}, \frac{\partial Q}{\partial x} = \frac{\partial ^2 u}{\partial x \partial y}$. Поскольку все вышеперечисленные функции непрерывны, то в силу теоремы о смешанных производных, имеем: $\frac{\partial P}{\partial y} = \frac{\partial^2 u}{\partial y \partial x} = \frac{\partial Q}{\partial x} = \frac{\partial ^2 u}{\partial x \partial y}$.
 
 Пусть наоборот, в условиях теоремы выполнено $\frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x}$.
 TO BE CONTINUED...
-\end{Proof}
+\end{proof}
 \end{document}
