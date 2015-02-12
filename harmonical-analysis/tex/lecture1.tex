@@ -70,7 +70,7 @@ $$\int_{-\infty}^{+\infty}|h_{\varepsilon}(x) - f(x)|dx < \int_{-\infty}^{+\inft
 Этот интеграл существует, т.к. его можно оценить как $\int_{-\infty}^{+\infty}|f(x+\alpha)|dx + \int_{-\infty}^{+\infty}|f(x)|dx$ (см. предыдущее доказательство).
 
 Докажем эту теорему для произвольной финитно-ступенчатой функции $h: \mathbb{R} \mapsto \mathbb{R}$. Поскольку $\alpha \rightarrow 0$, мы можем рассматривать лишь такие $\alpha$, что $$|\alpha| < \frac{\min_i (c_i - c_{i-1})}{2}$$. Пусть $M = \sup |h|$. Тогда 
-$$\int_{-\infty}^{+\infty} |h(x + \alpha) - h(x)|dx < 2M(n+1)|\alpha|$$. Пусть $h(x)$ -- финитно ступенчатая: $\int_{-\infty}^{+\infty}|f(x) - h(x)|dx < \varepsilon$. Тогда:
+$$\int_{-\infty}^{+\infty} |h(x + \alpha) - h(x)|dx < 2M(n+1)|\alpha|$$. Пусть $h(x)$ -- финитно-ступенчатая: $\int_{-\infty}^{+\infty}|f(x) - h(x)|dx < \varepsilon$. Тогда:
 $\int |f(x+\alpha) - f(x)|dx \leq \int|f(x+\alpha)-h(x+\alpha)|dx + \int|h(x+\alpha)-h(x)|dx + \int|h(x)-f(x)|dx \leq 3\varepsilon$.
 \end{proof}
 
@@ -81,7 +81,7 @@ $$\lim_{\lambda \rightarrow \infty} \int f(x)\sin (\lambda x)dx = \lim_{\lambda 
 \begin{Proof}
 Доопределим $f$ нулем на $\mathbb{R}$. Рассмотрим:
 $$I(\lambda) = \int_{-\infty}^{+\infty}f(x)\sin(\lambda x)dx$$
-Этот интеграл существует по признаку Дирихле. Сделаем замену $x = t + \frac{\pi}{\lambda}$.
+Этот интеграл существует, так как $f$ абсолютно интегрируема. Сделаем замену $x = t + \frac{\pi}{\lambda}$.
 Тогда:
 $$I(\lambda) = -\int_{-\infty}^{+\infty}f(t + \frac{\pi}{\lambda})\sin(\lambda t)dt$$.
 Сложив и поделив пополам, получаем, что:
