@@ -1,0 +1,69 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+\section{Факториальные кольца.}
+\begin{definition}
+	Область целостности $K$ называется факториальным кольцом, если:
+	\begin{enumerate}
+		\item $\forall x \neq 0: \exists u \in K^*, p_1, \ldots, p_k \text{ -- неприводимые} : x = up_1p_2 \ldots p_k$
+		\item Если существует два разложения, то они равны по подулю перестановки и ассоциируемости
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}
+	Чтобы доказать, что область целостности является факториальным, нужно выполнить 3 шага:
+	\begin{enumerate}
+		\item $\exists$ разложение
+		\item Доказываем, что каждый неразложимый элемент -- простой
+		\item Доказываем единственность разложения
+	\end{enumerate}
+\end{remark}
+
+\begin{statement}
+	Простой элемент неразложим.
+\end{statement}
+
+\begin{proof}
+	Пусть $x = ab$ -- простой. Тогда $a|x, b|x$. Кроме того $x | ab$. Если $x|a$, то $x \approx a$. А значит, $b \in K^*$. Если же $x \approx b$, то проводим аналогичное доказательство. 
+\end{proof}
+
+\begin{remark}
+	Обратное верно не всегда.
+\end{remark}
+
+\begin{statement}
+	Если для кольца мы уже доказали п.1 и п.2, то единственность разложения будет из этого следовать.
+\end{statement}
+
+\begin{proof}
+	Мы хотим доказать единственность. Пусть $x = up_1 \ldots p_k, x = vq_1 \ldots q_l$, где $u, v \in K^*$. Возьмем какое-нибудь $p_i$, если $\exists q_j: q_j \approx p_i$, то их сократим, и так далее, пока можем. Получили, что какое-нибудь $p_i | w q_{j_1} q_{j_2} \ldots q_{j_s}$. Поскольку $p_i$ простое, то получим, что $p_i | q_j$. Тогда $p_i u = q_j$, но така как $q_j$ неразложим, получаем, что $u \in K^*$. А значит, $p_i \approx q_j$. Противоречие
+\end{proof}
+
+\begin{definition}
+	Область целостности K называется Евклидовым кольцом, если: $\exists ||x|| : K \setminus \{0\} \mapsto \mathbb{N}_0$ -- норма, для которой выполнено:
+	\begin{enumerate}
+		\item $\forall a, b \neq 0: ||ab|| \geq ||a||$
+		\item $\forall a, b \neq 0: \exists q, r \in K : a = bq+r \Rightarrow (r = 0 \vee ||r|| < ||b||)$
+	\end{enumerate}
+\end{definition}
+
+\begin{statement}
+	Свойство 1 лишнее.
+\end{statement}
+
+\begin{proof}
+	Положим
+	$$N(a) = \min_{b \neq 0, b \in K} ||ab||$$
+	Заметим, что свойство 1 выполнено. Докажем, что свойство 2 выполнено: пусть $0 \neq a, b \in K$. $N(b) = ||bc||$. Разделим $a$ на $bc$ с остатком. $a = q(bc) + r$. Если $r \neq 0$, то $N(r) \leq |r| < ||bc|| = N(b)$
+	
+\end{proof}
+
+\begin{example}
+	~\begin{enumerate}
+		\item $\mathbb{Z}$
+		\item $K[x_1, \ldots, x_n]$, где $K$ -- поле, $||P|| = deg P$
+		\item $\mathbb{Z}[i]$
+	\end{enumerate}
+\end{example}
+
+\end{document}

@@ -1,0 +1,98 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+\section{Абсолютно интегрируемые функции}
+\begin{definition}
+	Функциональный ряд 
+	\begin{equation}
+		\label{eq:fourier}
+		\sum_{i=0}^{\infty} a_k \cos(kx) + b_k \sin(kx)
+	\end{equation} называется тригонометрическим рядом. $a_k, b_k$ -- коэффициенты ряда.
+	Система $\{\frac{1}{2}, \sin x, \cos x, \sin 2x, \cos 2x, \ldots\}$ называется тригонометрической системой
+\end{definition}
+
+\begin{statement}
+	Тригонометрическая система является ортогональной со скалярным произведением $[f, g] = \int_{-\pi}^{\pi}f(x)g(x)dx$
+\end{statement}
+\begin{proof}
+	Доказательство: интегрируем по частям 2 раза.
+\end{proof}
+
+\begin{definition}
+	Пусть функция $f$ является $2 \pi$ периодической и абсолютно интегрируемой на $[-\pi, \pi]$. Тогда ряд \ref{eq:fourier} называется
+	тригонометрическим рядом Фурье, где $$b_k = \frac{1}{\pi}\int_{-\pi}^{\pi}f(x) \sin kx dx$$, 
+	$$a_k = \frac{1}{\pi}\int_{-\pi}^{\pi}f(x) \cos kx dx$$.
+	Обозначаем $f tilda \text{\ref{eq:fourier}}$.
+\end{definition}
+
+\begin{statement}
+	Пусть $$T(x) = \frac{\alpha_0}{2} + \sum_{i=0}^{\infty} \alpha_k \cos kx + \beta_k \sin kx$$ сходится равномерно на $\mathbb{R}$. Тогда ряд Фурье для $T(x)$ -- это сам $T(x)$.
+\end{statement}
+\begin{proof}
+	Обозначим за $T_n(x)$ сумму первых $n$ членов ряда.
+	Фиксируем $\alpha > 0$. Так как ряд $T(x)$ сходится равномерно, то $\exists n > k: |T(x) - T_n(x)| < \varepsilon$.
+
+	$$\pi a_k = \int_{-\pi}^{\pi} T(x)\cos kx dx = \int_{-\pi}^{\pi} (T_n(x) + (T(x) - T_n(x))) \cos kx dx = $$
+	$$= \int_{-\pi}^{\pi} T_n(x) \cos kx dx + \int_{-\pi}^{\pi} (T(x) - T_n(x)) \cos kx dx$$
+	Тогда $$\pi |a_k - \alpha_k| = |\int_{-\pi}^{\pi}(T(x) - T_n(x)) \cos kx dx| \leq 2 \pi^2 \varepsilon$$
+\end{proof}
+\begin{corollary}
+	Если $f$ -- абсоллютно интегрируемая и $2 \pi$ периодическая, то $a_k \rightarrow 0, b_k \rightarrow 0$ при $n \rightarrow \infty$.
+\end{corollary}
+
+\begin{definition}
+	$$S_n(f)(x) = \frac{a_0}{2} + \sum_{k = 1}^n a_k \cos kx + b_k \sin kx$$
+\end{definition}
+
+\begin{definition}
+	$D_n(x) = \frac{1}{2} + \sum_{k=1}^n \cos kx$ -- ядро Дирихле.
+\end{definition}
+
+\begin{remark}
+	Умножим и поделим ядро Дирихле на $\sin x/2$. Получаем:
+	$$\sin \frac{x}{2} D_n(x) = \sum_{k = 1}^n \frac{\sin(k + \frac{1}{2})x + \sin (k - \frac{1}{2})x}{2} 
+	= \frac{\sin(n+\frac{1}{2})x}{2}$$
+	Можно считать, что $$D_n(x) = \frac{\sin(n+\frac{1}{2})x}{2 \sin \frac{x}{2}}$$
+\end{remark}
+
+\begin{remark}
+	$$\frac{1}{\pi} \int_{-\pi}^{\pi} D_n(x) dx = 1$$.
+\end{remark}
+
+\begin{remark}
+	Подставим в формулу для $S_n(f)(x)$ коэфициенты $a_k$ и $b_k$. После использования формулы косинуса разности, получаем:
+	$$S_n(f)(x) = \frac{1}{\pi} \int_{-\pi}^{\pi} D_n(x - t) f(t) dt = 
+	\frac{1}{\pi} \left(\int_0^{\delta} + \int_{\delta}^{\pi} \right) D_n(x) (f(x+t) + f(x-t))dt$$.
+\end{remark}
+
+\begin{theorem}
+	Пусть $f$ -- $2\pi$ периодическая, абсолютно интегрируемая на $[-\pi, \pi]$ функция. Тогда частичные суммы $S_n(f)(x)$ сходятся в точке
+	$x_0$ тогда и только тогда, когда сходится интеграл $$\int_0^{\delta} D_n(x) (f(x+t) + f(x-t))dx$$. Причем если они сходятся, то к одному
+	и тому же числу.
+\end{theorem}
+
+\begin{corollary}[принцип локализации]
+	Сходимость ряда Фурье в точке и величина предела зависят только от значений функции в сколь угодно малой окрестности этой точки.
+\end{corollary}
+
+\begin{definition}
+	Пусть $x_0$ -- точка разрыва первого рода. Определим
+	$$f'_+(x_0) = \lim_{x \rightarrow x_0+0} \frac{f(x) - f(x_0+0)}{x-x_0}$$ 
+	$$f'_-(x_0) = \lim_{x \rightarrow x_0-0} \frac{f(x) - f(x_0-0)}{x-x_0}$$
+\end{definition}
+
+\begin{definition}
+	Точка $x_0$ называется почти регулярной точкой функции $f$, если $\exists f(x_0+0), f(x_0-0), f'_+(x_0), f'_-(x_0)$
+\end{definition}
+
+\begin{definition}
+	Точка $x_0$ называется регулярной, если она является почти регулярной, и дополнительно $$f(x_0) = \frac{f(x_0+0) + f(x_0 -0)}{2}$$
+\end{definition}
+
+\begin{theorem}
+	Пусть $f$ -- абсолютно иниегрируемая на $[-\pi, \pi]$, $2\pi$ периодическая функция. $x_0$ её почти регулярная точка. Тогда
+	$S_n(f)(x) \rightarrow \frac{f(x_0+0)+f(x_0-0)}{2}$
+\end{theorem}
+
+\end{document}
+
