@@ -9,6 +9,7 @@
 \usepackage{amsfonts}
 \usepackage{enumitem}
 \usepackage{amsthm}
+\usepackage{amsmath}
 
 \newtheoremstyle{break}		%name
   {}							%Space above, empty = `usual value'
@@ -48,7 +49,42 @@
 \newcommand{\cp}[0]{\ensuremath{\stackrel{P}{\rightarrow}}}
 \newcommand{\clp}[0]{\ensuremath{\stackrel{L_p}{\rightarrow}}}
 \newcommand{\cd}[0]{\ensuremath{\stackrel{d}{\rightarrow}}}
+\newcommand{\cw}[0]{\ensuremath{\stackrel{w}{\rightarrow}}}
 
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\newcommand{\customtitle}[3]{
+	\begin{titlepage}
+	\begin{center}
+	~\\[1.5cm]
+	\textsc{\Large Конспект по курсу}\\[0.5cm]
+
+	\HRule \\[0.4cm]
+	{ \huge \bfseries #1 \\[0.4cm] }
+
+	\HRule \\[1.5cm]
+
+	\noindent
+	\begin{minipage}[t]{0.4\textwidth}
+	\begin{flushleft} \large
+	\emph{Contributors:}\\
+	#2
+	\end{flushleft}
+	\end{minipage}
+	\begin{minipage}[t]{0.4\textwidth}
+	\begin{flushright} \large
+	\emph{Лектор:} \\
+	#3
+	\end{flushright}
+	\end{minipage}
+	\vfill
+
+	{МФТИ}\\[0.5cm]
+	{Последнее обновление: \today}
+
+	\end{center}
+	\end{titlepage}
+}
 
 
 

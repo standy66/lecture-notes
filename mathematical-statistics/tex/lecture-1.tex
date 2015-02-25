@@ -48,9 +48,9 @@
 		\item $\xi_n$ сходится к $\xi$ почти наверное (обозначение: $\xi_n \cae \xi$), если :
 			$$P(\{\omega : \lim_{n \rightarrow \infty} \xi_n(\omega) = \xi(\omega)\}) = 1$$
 		\item $\xi_n$ сходится к $\xi$ по вероятности (обозначение $\xi_n \cp \xi$), если:
-			$$\forall \varepsilon > 0 : \lim_{n \rightarrow \infty} P(\{\omega : \|\xi_n(\omega) - \xi(\omega)\| > \varepsilon) = 0$$
-		\item $\xi_n$ сходится к $\xi$ по распределению (обозначение $\xi_n \cd \xi$), если:
-			$$\forall f \text{ -- ограниченной непрерывной функции $\mathbb{R} \mapsto \mathbb{R}$} : \lim_{n \rightarrow \infty}Ef(\xi_n) = Ef(\xi)$$
+			$$\forall \varepsilon > 0 : \lim_{n \rightarrow \infty} P(\{\omega : \|\xi_n(\omega) - \xi(\omega)\| > \varepsilon\}) = 0$$
+		\item $\xi_n$ сходитiся к $\xi$ по распределению (обозначение $\xi_n \cd \xi$), если:
+			$$\forall f \text{ -- ограниченной непрерывной функции $\mathbb{R}^m \mapsto \mathbb{R}$} : \lim_{n \rightarrow \infty}Ef(\xi_n) = Ef(\xi)$$
 	\end{itemize}
 \end{definition}
 
@@ -66,6 +66,24 @@
 	Для сходимости по распределению это утверждение не верно
 \end{remark}
 
+\begin{definition}
+	Функции распределения $F_{\xi_n}$ называются слабо сходящимися к $F_{\xi}$ (обозначение: $F_{\xi_n} \cw F_{\xi}$), если:
+	$$\forall f \text{ -- ограниченной непрерывной функции $\mathbb{R} \mapsto \mathbb{R}$} : \int_{\Omega}f(x)dF_{\xi_n} \rightarrow \int_{\Omega}f(x)dF_{\xi}$$
+\end{definition}
+
+\begin{theorem}[Александрова]
+	Пусть $\xi, \xi_1, \xi_2, \dots$ -- случайные величины. Тогда следующие утверждения эквивалентны:
+	\begin{enumerate}
+		\item $\xi_n \cd \xi$
+		\item $F_{\xi_n} \cw F_{\xi}$
+		\item $\forall x \text{ -- точка непрерывности $F_{\xi}$} : \lim_{n \rightarrow \infty} F_{\xi_n}(x) = F_{\xi}(x)$
+	\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[многомерный случай, более слабая]
+	Пусть $\xi, \xi_1, \xi_2, \dots$ -- случайные векторы из $\mathbb{R}^m$. Пусть $F_{\xi}$ непрерывна. Тогда $\xi_n \cd \xi \Leftrightarrow \forall x \in \mathbb{R}^m : \lim_{n \rightarrow \infty}F_{\xi_n}(x) = F_{\xi}(x)$
+\end{theorem}
+
 \subsection{Предельные теоремы}
 
 \begin{theorem}[Закон большых чисел]
@@ -74,7 +92,7 @@
 \end{theorem}
 
 \begin{theorem}[Усиленный закон больших чисел]
-	Пусть $\xi_1, \xi_2, \dots$ -- независимые одинаково распределнные случайные величины, $E\xi_i = a$ -- конечно, $S_n = \xi_1 + \dots + \xi_n$. Тогда:
+	Пусть $\xi_1, \xi_2, \dots$ -- независимые одинаково распределнные случайные величины (или векторы), $E\xi_i = a$ -- конечно, $S_n = \xi_1 + \dots + \xi_n$. Тогда:
 	$$\frac{S_n}{n} \cae a$$
 \end{theorem}
 
@@ -83,5 +101,94 @@
 	$$\sqrt{n}\left(\frac{S_n}{n} - a\right) \cd \mathcal{N}(0, \sigma^2)$$
 \end{theorem}
 
+\begin{theorem}[Многомерная центральная предельная теорема]
+	Пусть $\xi_1, \xi_2, \dots$ -- независимые одинаково распределнные случайные векторы, $E\xi_i = a$ -- конечно, $0 < D\xi_i = \Sigma$ -- матрица ковариаций, тоже конечна, $S_n = \xi_1 + \dots + \xi_n$. Тогда:
+	$$\sqrt{n}\left(\frac{S_n}{n} - a\right) \cd \mathcal{N}(0, \Sigma)$$
+\end{theorem}
+
+\begin{statement}
+	Пусть $\xi, \xi_1, \xi_2, \dots$ -- случайные векторы. Тогда:
+	\begin{enumerate}
+		\item $\xi_n \cae \xi \Rightarrow \xi_n \cp \xi$
+		\item $\xi_n \cp \xi \Rightarrow \xi_n \cd \xi$
+	\end{enumerate}
+\end{statement}
+
+\begin{proof}
+	~\begin{enumerate}
+		\item Следует из того, что векторная сходимость эквивалентна покоординатной, а для координат верны одномерные аналоги.
+		\item Доказывается аналогично одномерному случаю.
+	\end{enumerate}
+\end{proof}
+
+\begin{lemma}[о сходящейся подпоследовательности]
+	Пусть $\xi_n \cp \xi$. Тогда $\exists \text{ подпоследовательность } \xi_{n_k}: \xi_{n_k} \cae \xi$ 
+\end{lemma}
+
+\begin{theorem}[о наследовании сходимостей]
+	Пусть $\xi, \xi_1, \xi_2, \dots$ -- случайные векторы из $\mathbb{R}^m$. Пусть также $h: \mathbb{R}^m \mapsto \mathbb{R}^s$ -- функция, непрерывная почти всюду относительно распределения $\xi$ (то есть $\exists B \in \mathcal{B}(\mathbb{R}^m), P_{\xi}(B) = 1: h \text{ непрерывна на $B$}$. Тогда:
+	\begin{enumerate}
+		\item $\xi_n \cae \xi \Rightarrow h(\xi_n) \cae h(\xi)$
+		\item $\xi_n \cp \xi \Rightarrow h(\xi_n) \cp h(\xi)$
+		\item Если дополнительно $h$ непрерывна всюду, а не почти всюду, то: $\xi_n \cd \xi \Rightarrow h(\xi_n) \cd h(\xi)$
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	~\begin{enumerate}
+		\item $1 = P(\{\omega : \xi_n(\omega) \rightarrow \xi(\omega)\}) \leq P(\{\omega : h(\xi_n)(\omega) \rightarrow h(\xi)(\omega)\})$, так как
+			$\{\omega : \xi_n(\omega) \rightarrow \xi(\omega)\} \subset \{\omega : h(\xi_n)(\omega) \rightarrow h(\xi)(\omega)\}$
+		\item Пусть не выполнено, что $h(\xi_n) \cp h(\xi)$. Тогда $\exists \varepsilon, \delta$ а так же подпоследовательность $\xi_{n_k}$: 
+			$$\forall k : P(\|h(\xi_{n_k}) - h(\xi)\| \geq \varepsilon) \geq \delta$$. Так как $\xi_{n_k} \cp \xi$, то существует подпоследовательность 
+			$\xi_{n_{k_l}}: \xi_{n_{k_l}} \cae \xi$. Тогда согласно первому пункту $h(\xi_{n_{k_l}}) \cae h(\xi)$. 
+			Но такого быть не может, т.к. $\forall k : P(\|h(\xi_{n_k}) - h(\xi)\| \geq \varepsilon) \geq \delta$
+		\item Пусть $f: \mathbb{R}^m \mapsto \mathbb{R}$ -- непрерывная ограниченная функция. Тогда $g = f \circ h$ -- тоже непрерывная ограниченная функция.
+			Так как $\xi_n \cd \xi$, то $Eg(\xi_n) \rightarrow Eg(\xi)$. А значит, $Ef(h(\xi_n)) \rightarrow Ef(h(\xi))$
+	\end{enumerate}
+\end{proof}
+\begin{lemma}[Слуцкого]
+Пусть $\xi_n \cd \xi$ -- случайные величины, а $\eta_n \cd C=const$. Тогда $\xi_n + \eta_n \cd \xi + C$ и $\xi_n \cdot \eta_n \cd \xi \cdot C$.
+\end{lemma}
+\begin{proof}
+	Пусть t -- точка непрерывности функции распределения $F_{\xi+C}$ случайной величины $\xi + C$. Докажем только для суммы, для произведения аналогично.
+	Пусть $\varepsilon > 0$ такое,что $t \pm \varepsilon$ -- тоже точки непрерывности $F_{\xi + C}$. Мы хотим показать, что $F_{\xi_n+\eta_n}(t) \rightarrow F_{\xi+C}(t)$.
+	Будем для этого пользоваться тем, что $\eta_n \cd C \Leftrightarrow \eta_n \cp C$. 
+	\begin{multline*}
+		P(\xi_n + \eta_n \leq t) = P(\xi_n + \eta_n \leq t, \eta_n \geq C - \varepsilon) + P(\xi_n + \eta_n \leq t, \eta_n < C - \varepsilon) \leq \\
+		P(\xi_n \leq t - C + \varepsilon) + P(\|\eta_n - C\| > \varepsilon) = F_{\xi_n + c}(t + \varepsilon) + P(\|\eta_n - C\| > \varepsilon)
+	\end{multline*}
+	Но $\xi_n \cd \xi \Rightarrow \xi_n + C \cd \xi + C$. Кроме того, $t + \varepsilon$ -- точка непрерывности $F_{\xi + C}$
+	\begin{multline*}
+		\limsup_{n \rightarrow \infty} F_{\xi_n + \eta_n}(t) \leq \lim_{n \rightarrow \infty} F_{\xi_n + c}(t + \varepsilon) + \lim_{n \rightarrow \infty} P(\|\eta_n - C\| > \varepsilon) = F_{\xi + C}(t + \varepsilon)
+	\end{multline*}
+	Аналогично,
+	$$1 - f_{\xi_n + \eta_n}(t) \leq P(\|\eta_n - C\| > \varepsilon) + 1 - F_{\xi_n + C}(t - \varepsilon)$$
+	Откуда
+	$$\liminf_{n \rightarrow \infty} F_{\xi_n + \eta_n}(t) \geq F_{\xi + C}(t - \varepsilon)$$
+	В силу произвольности $\varepsilon > 0$ и того факта, что $t$ -- точка непрерывности функции распределения $F_{\xi + c}$ получаем, что
+	$$\lim_n F_{\xi_n + \eta_n} = F_{\xi + C}(t)$$
+
+\end{proof}
+
+\begin{statement}[применение леммы Слуцкого]
+	Пусть $\xi_n \cd \xi$ -- случайные величины. $h(x)$ -- дифференцируема в точке $a \in \mathbb{R}$. $\{b_n > 0\}$ -- числовая последовательность, $b_n \rightarrow 0$. Тогда:
+	$$\frac{h(a + \xi_n b_n) - h(a)}{b_n} \cd h'(a) \xi$$
+\end{statement}
+
+\begin{proof}
+	По лемме Слуцкого $\xi_n b_n \cd \xi_n \cdot 0 = 0$.
+	Рассмотрим 
+	$$H(x) = \begin{cases}
+		\frac{h(x+a) - h(a)}{x}, x \not= 0 \\
+		h'(a), x = 0
+	\end{cases}$$
+	$H(x)$ непрерывна в 0 по определению, а также непрерывна на $\mathbb{R}\setminus 0$ как композиция непрерывных функций. По теореме о наследовании сходимостей
+	$H(\xi_n b_n) \cd H(0) = h'(a)$. По лемем слуцкого $\xi_n H(\xi_n b_n) \cd h'(a) \xi$
+\end{proof}
+
+\begin{theorem}[многомерный вариант]
+	Пусть $\xi_n \cd \xi$ -- случайные векторы. $h(x)$ -- дифференцируема в точке $a \in \mathbb{R}$ (то есть существует матрица частных производных, или матрица Якоби $J(h)$). $\{b_n > 0\}$ -- числовая последовательность, $b_n \rightarrow 0$. Тогда:
+	$$\frac{h(a + \xi_n b_n) - h(a)}{b_n} \cd J(h)(a) \xi$$
+\end{theorem}
 \end{document}
 
