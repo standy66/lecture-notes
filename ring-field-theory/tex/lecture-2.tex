@@ -1,7 +1,30 @@
 \documentclass[document.tex]{subfiles}
 
 \begin{document}
-\section{Факториальные кольца.}
+\section{Делимость. Факториальные кольца. Евклидовы кольца}
+
+\begin{remark}
+	План доказательства ОТА в $\mathbb{Z}$ был таков:
+	\begin{enumerate}
+		\item Докажем, что любое число раскладывается на произведение простых.
+		\item Докажем лемму Евклида.
+		\item Докажем единственность разложения на простые с помощью леммы Евклида.
+	\end{enumerate}
+\end{remark}
+
+\begin{definition}
+Элемент $x \neq 0$ кольца $K$ называется неприводимым или неразложимым, если:
+\begin{enumerate}
+\item $x \not \in K^*$
+\item $x = ab \Rightarrow \exists a^{-1} \vee \exists b^{-1}$
+\end{enumerate}
+\end{definition}
+
+\begin{definition}
+Элемент $0 \neq x \not \in K^*$ кольца $K$ называется простым, если:
+$x|ab \Rightarrow x|a \vee x|b$
+\end{definition}
+
 \begin{definition}
 	Область целостности $K$ называется факториальным кольцом, если:
 	\begin{enumerate}

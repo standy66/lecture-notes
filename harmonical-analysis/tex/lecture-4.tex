@@ -1,0 +1,92 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+\begin{theorem}[о приближении непрерывной функции тригонометрическим многочленом]
+    Если $f$ -- неперрывная $2\pi$-периодическая, то функцию с любой точностью можно приблизить тригонометрическим
+    многочленом.
+\end{theorem}
+
+\begin{proof}
+    Функция $f$ непрерывная на $[-\pi, \pi]$, а следовательно равномерно непрерывна на $[-\pi, \pi]$, т.е. $\forall
+    \varepsilon > 0: \exists \delta > 0: \forall x_1, x_2, \|x_1 - x_2\| < \delta: \|f(x_1) - f(x_2)\| < \varepsilon$.
+    Зафиксируем $\varepsilon$. Пусть
+    $\tau = \{x_i\}_{i = 0}^n$ -- некоторое разбиение отрезка $[-\pi, \pi]$ с мелкостью $|\tau| < \delta$.
+    Рассмотрим функцию $f_{\tau}$ -- непрерывная,
+    такая что $f_{\tau}(x_i) = f(x_i)$, а на интервалах $(x_{i -1 }, x_i)$ она линейна. Тогда $f_{\tau}$ -- кусочно-гладкая.
+    Следовательно ряд Фурье сходится к ней равномерно, следовательно $\forall \varepsilon > 0 : \exists n_0 :
+    \sup_{x \in [-\pi, \pi]}\|S_{n_0}(f_{\tau}, x) - f_{\tau}(x)\| < \varepsilon$. Кроме того $\sup_{x \in [-\pi, \pi]}
+    \|f(x) - f_{\tau}(x)\| < \varepsilon$. Получаем, что для нашего $\varepsilon$ существует $n_0$: $\sup_{x \in [-\pi,
+    \pi]} \|S_{n_0}(x) - f(x)\| < 2\varepsilon$
+
+\end{proof}
+
+\begin{theorem}[Вейрштрасса]
+    Пусть $f$ непрервна на $[a, b]$. Тогда $\forall \varepsilon > 0: \exists$ многочлен $P(x): \sup_{x \in [a, b]}
+    \|f(x) - P(x)\| < \varepsilon$
+\end{theorem}
+
+\begin{proof}
+    Рассмотрим функцию $g(t) = f(a + (b - a) \cdot \frac{t}{\pi})$, где $t \in [0, \pi]$. Рассмотрим функцию $g^*$ такую
+    что $g^*(t) = g(-t)$, если $t \in [-pi, 0]$ и $g^*(t) = g(t)$, если $t \in [0, \pi]$. Кроме того, продолжим $g^*$ на
+    всю числовую прямую периодическим образом.
+
+    Фиксируем $\varepsilon > 0$. По предыдущей теореме существует тригонометрический многочлен $T(x):
+    \sup_x \|T(x) - f(x)\| < \varepsilon$. Функция $T(x)$ как линейная комбинация синусов и косинусов раскладывается в
+    ряд Тейлора с бесконечным радиусом сходимости. Следовательно, частичные суммы ряда Тейлора равномерно на $[-\pi,
+    \pi]$ сходятся к $T(x)$. Значит, $\exists P(x): \sup |P(x) - T(x)| < \varepsilon$.
+    Следовательно, $\sup_x \|g^*(x) - P(x)\| < 2 \varepsilon$. Тогда $\sup_x \|f(x) - P(\frac{x - a}{b - a} \cdot
+    \pi)\| < 2 \varepsilon$
+
+\end{proof}
+
+\begin{theorem}
+    Пусть $f$ -- $2 \pi$-периодическая кусочно-гладкая функция. $f(x) = \frac{a_0}{2} + \sum_{k = 1}^{\infty} a_k \cos
+    kx + b_k \sin kx$. Тогда $f' \sim  \sum_{k = 1}^{\infty} kb_k \cos kx + ka_k \sin kx$
+\end{theorem}
+
+\begin{proof}
+    Поскольку f' -- кусочно-непрерывная, то ей можно сопоставить ряд. Пусть этот ряд -- это $\frac{\alpha_0}{2} +
+    \sum_{k = 1}^{\infty} \alpha_k \cos kx + \beta_k \sin kx$. Тогда $\alpha_0 = \int_{-\pi}^{\pi}f'(x)dx = \left.
+    \frac{1}{\pi}f(x) \right|_{-\pi}^{\pi} = 0$.
+    \begin{multline*}
+        \alpha_k = \frac{1}{\pi} \int_{-\pi}^{\pi}f'(x) \cos kx dx = \frac{1}{\pi} (f(x) \cos kx \left.
+        \right|_{-\pi}^{\pi} + k \int_{-\pi}^{\pi}f(x) \sin kx) = \\
+        \frac{1}{\pi} k \int_{-\pi}^{\pi}f(x) \sin kx dx = k
+        b_k
+    \end{multline*}
+    Аналогично для $\beta_k$.
+\end{proof}
+
+\begin{definition}
+    Пусть $f$ -- $2 \pi$-периодическая функция, причем $f^{(m - 1)}$ -- непрерывна, а $f^{(m)}$ -- кусочно непрервына.
+    Тогда $|a_k| + |b_k| = o(\frac{1}{k^m})$
+\end{definition}
+
+\begin{proof}
+    Пусть $f \sim \frac{a_0}{2} + \sum_{k = 1}^{\infty} a_K \cos kx + b_k \sin kx$. Пусть $f^{(m)} \sim \sum_{k =
+    1}^{\infty} \alpha_k \cos kx + \beta_k \sin kx$. Применяя предыдущую теорему $k$ раз, имеем $|\alpha_k| + |\beta_k|
+    = k^m(|a_K| + |b_k|)$. Но по лемме Римана об осцилляции, $|\alpha_k| + |\beta_k| = o(1)$. В итоге $|a_k| + |b_k| =
+    o(\frac{1}{k})$.
+\end{proof}
+
+\begin{theorem}
+    Пусть $f$ -- $2 \pi$ периодическая и кусочно-непрерывная на $[-\pi, \pi]$. Пусть $f \sim \frac{a_k}{2} + \sum_{k =
+    1}^{\infty} a_k \cos kx + b_k \sin kx$. Тогда $\int_{0}^{x}f(\tau)d\tau = \frac{a_0}{2}x + \sum_{k = 1}^{\infty}
+    \frac{1 - \cos kx}{k}b_k + \frac{a_k \sin kx}{k}$. При этом ряд сходится равномерно.
+\end{theorem}
+
+\begin{proof}
+    Пусть $F(x) = \int_{0}^{x}(f(t) - \frac{a_0}{2})dt$. Понятно, что она непрерывна как интеграл с переменной верхней
+    границей, кроме того, она кучосно непрерывно дифференируема и $F'(x) = f(x) - \frac{a_0}{2}$. Напишем для неё ряд
+    Фурье, который будет сходится к ней равномерно. $F(x) = \frac{A_0}{2} + \sum_{k = 1}^{\infty} A_k \cos kx + B_k \sin
+    kx$. Тогда $a_k = k B_k, b_k = -kA_k$. $A_0 = \frac{1}{\pi}\int_{-\pi}^{\pi}F(x)dx$. $F(0) = \frac{A_0}{2} + \sum_{k
+    = 1}^{\infty}A_k$. $\frac{A_0}{2} = \sum_{k = 1}^{\infty}\frac{b_k}{k}$. Тогда $\int_{0}^{x}f(t)dt =
+    \frac{a_0}{2}x + \sum_{k = 1}^{\infty}\frac{1 - \cos kx}{k}b_k + \frac{a_k}{k} \sin kx$
+\end{proof}
+
+Пусть $g(t)$ -- $T$-периодическая. Рассмотрим $f(x) = g(\frac{x}{2 \pi})$. Как выглядит её ряд Фурье мы знаем. Ну и
+понятно, что вся теория, которую мы развивали про $2 \pi$ периодические функции обобщается на произвольный период. Кроме
+того, $\cos t = \frac{e^{it} + e^{-it}}{2}, \sin t = \frac{e^{it} - e^{-it}}{2i}$. Переписав ряд Фурье в
+экспоненциальной форме, получим: $\sum_{k = -\infty}^{\infty}e^{ikx}c_k$, где $c_k = \frac{1}{2\pi}\int_{-\pi}^{\pi}f(x) e^{-ikx}dx$
+\end{document}
+

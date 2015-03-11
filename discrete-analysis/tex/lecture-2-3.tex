@@ -1,0 +1,80 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+\section{Конструктивные нижние оценки чисел Рамсея}
+
+Что значит снизу оценить число Рамсея?
+
+Оценка $R(s, s) > n \Leftrightarrow $ существует граф $G = (V, E), |V| = n$, в котором нет $K_s$ и $\overline K_s$, то
+есть $\omega(G) < s, \alpha(G) < s$.
+
+\begin{theorem}[Франкл, Уилсон, 1981]
+    $\exists \varphi: \varphi(s) \rightarrow 0$, при $s \rightarrow \infty$ причем, $\forall s: \exists G = (V, E): \omega(G) < s,
+    \alpha(G) < s, |V| \geq (e^{1/4} + \varphi(s))^{\frac{\ln^2 s}{\ln \ln s}}$
+\end{theorem}
+
+\begin{proof}
+    Пусть $p$ -- простое. Положим $m = p^3, k = p^2$. Пусть множество вершин $V = \{(x_1, \cdots, x_m) : x_i \in \{0,
+    1\}, x_1 + \cdots + x_m = k \}$. А множество ребер $E = \{ \{x, y\}: (x, y) \equiv 0 (\mod p)\}$. Отметим, что $n =
+    |V| = \binom{p^3}{p^2}$
+
+    \begin{lemma}
+        \[
+            \alpha(G) \leq \sum_{i = 0}^{p - 1} \binom{m}{i}
+        \]
+    \end{lemma}
+    \begin{proof}
+        Рассмотрим произвольное независимое множество $W = \{x_1, \cdots, x_t\}$ вершин нашего графа $G$, $\forall i, j,
+        i \neq j : (x_i, x_j) \not \equiv 0 (\mod p)$. Сопоставим каждому $x_i$ многочлен $F_{x_{i}} \in
+        \mathbb{Z}_p[y_1, \cdots, y_m]$.
+
+        Положим $F_{x_i}(y) := \prod_{j = 1}^{p - 1} (j - (x_i, y))$. $F_{x_i}'(y)$ -- многочлен $F_{x_i}$ со срезанными
+        коэфициентами в каждом одночлене. Докажем, что эти многочлены линейно независимы в $\mathbb{Z}_p$.
+
+        $ c_1 F_{x_1}' + \cdots + c_t F_{x_t}' = 0$. То есть $\forall y \in W: c_1 F_{x_1}' + \cdots + c_t F_{x_t}' = 0
+        \mod p$. Возьмем, например $y = x_1$. Тогда $c_1 F_{x_1}(x_1)' + \cdots + c_t F_{x_t}'(x_1) = F_{x_1}(x_1) +
+        \cdots + F_{x_t}(x_1)$. Причем $F_{x_1}(x_1) \equiv 0 \mod p$, а для $k \neq 1$ $F_{x_k}(x_1) \not \equiv 0 \mod
+        p$. Тогда $c_1 \equiv 0 \mod p$
+
+        Значит, все многочлены независимы. Но их не может быть больше $\sum_{i = 0}^{p - 1} \binom{m}{i}$
+    \end{proof}
+    \begin{lemma}
+        \[
+            \omega(G) \leq \sum_{i = 0}^{p} \binom{m}{i}
+        \]
+    \end{lemma}
+    \begin{proof}
+        Рассмотрим произвольное множество вершин $W = \{x_1, \cdots, x_t\}$ в графе $G$, которое образует клику. То есть
+        $\forall i, j, i \neq j: (x_i, x_j) \equiv 0 \mod p \Leftrightarrow (x_i, x_j) \in \{0, p, 2p, \cdots, p^2 - p\}$
+
+        Сопоставим каждому $x_i$ многочлен $F_{x_i} \in \mathbb{Q}[y_1, \cdots, y_m]$ по следующему правилу
+        $F_{x_i} = (x_i, x_j)( (x_i, x_j) - p) ( (x_i, x_j) - 2p) \cdots ( (x_i, x_j) - (p^2 - p) )$. Опять же срежем
+        степени всех одночленов, получим $F_{x_i}'$. Докажем их линейную независимость
+
+        $\forall y \in W: c_1F_{x1}(y) + \cdots c_tF_{x_t} = 0$
+
+        $F_{x_1}(x_1) \neq 0$, для $i > 1: F_{x_i}(x_1) = 0$ Значит, $c_1 = 0$. Аналогично для остальных $c_i$.
+        Получили, что многочлены независимы. Значит, их не больше, чем $\sum_{i = 0}^p \binom{m}{i}$
+
+    \end{proof}
+    Обозначим $s = \sum_{i = 0}^p \binom{m}{i} + 1$. Тогда из лемм следует, что $\alpha(G) < s, \omega(G) < s$. Докажем
+    что $n$ как функция от $s$ имеет вид $(e^{1/4} + o(1))^{\frac{\ln^2 s}{\ln \ln s}}$.
+
+    $n = \binom{p^3}{p^2} = \frac{p^3(p^3 - 1)\cdots (p^3 - p^2 + 1)}{(p^2)!}$ Понятно, что $p^3 - i = p^{3 (1 + o(1))}$
+    Тогда $n = \frac{p^{3p^2(1+o(1))}}{(p^2)!}$, $(p^2)! = p\sqrt{2\pi}\left(\frac{p^2}{e}\right)^{p^2} =
+    p^{2p^2(1+o(1))}$, $n = p^{p^2(1+o(1))}$, $\binom{m}{p} = \frac{p^{3p(1+o(1))}}{p^{p(1+o(1)}}$, $s \leq
+    (p+1)p^{2p(1+o(1))} + 1$, $s \geq p^{2p(1+o(1))}$, короче говря $s = p^{2p(1+o(1))}$.
+
+    $\ln s = 2p(1+o(1))\ln p$, $\ln^2 s = 4p^2(1+o(1))\ln^2 p$, $\ln \ln s = \ln 2p + \ln (1+o(1)) + \ln \ln p =
+    (1+o(1))\ln p$
+
+    $\frac{\ln^2 s}{\ln \ln s} = 4p^2\ln p (1+o(1))$, $(e^{1/4}+o(1))^{4p^2 \ln p (1+o(1))} = e^{1/4 \cdot 4 p^2 \ln p
+    (1+o(1)) (1+o(1))}$, $n = e^{p^2 \ln p (1+o(1))}$ Подбираем правильно $o(1)$ которое в нашей власти и все
+    получилось.
+    Что делать для произвольного $s$: находим максимальное простое $p: s > s_0 := \sum_{i = 0}^p \binom{m}{i} + 1$.
+    Ясно, что $R(s, s) \geq R(s_0, s_0) \geq (e^{1/4}+o(1))^{\frac{\ln^2 s_0}{\ln \ln s_0}} \sim (e^{1/4} +
+    o(1))^{\frac{\ln^2 s}{\ln \ln s}}$.
+\end{proof}
+
+\end{document}
+

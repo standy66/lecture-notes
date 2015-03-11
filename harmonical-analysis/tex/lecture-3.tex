@@ -1,0 +1,68 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+\section{Сходимость ряда Фурье.}
+\begin{theorem}
+	Если $f$ -- $2 \pi$ периодическая и абсолютно интегрируемая на $[-\pi, \pi]$. Пусть $x_0$ -- почти регулярная точка. Тогда
+	$$S_n(x_0) \rightarrow \frac{f(x_0 - 0) + f(x_0 + 0}{2}$$
+\end{theorem}
+\begin{proof}
+	$S_n(x) = \int_{0}^{\pi} D_n(t) (f(x-t) + f(x+t)) dt$, где $D_n(t) = \frac{\sin (n+\frac{1}{2}) t}{2 \sin \frac{t}{2}}$.
+	Пусть $\delta \in (0, \pi)$. Посчитаем разноcть
+	\begin{multline*}
+		S_n(t) - \frac{f(x_0 - 0) + f(x_0 + 0)}{2} = \frac{1}{\pi}\int_{0}^{\pi}D_n(t)(f(x_0 - t) + f(x_0 + t)) dt -\\
+		\frac{1}{\pi} \int_{0}^{\pi}D_n(t) (f(x_0 - 0) - f(x_0 + 0)) = \frac{1}{\pi} \int_{0}^{\pi} (f(x_0 - t) - f(x_0 - 0) + f(x_0 + t) + f(x_0 + 0))\\
+		\frac{\sin (n + 1/2)t}{\sin t/2} dt = \frac{1}{\pi} \left( \int_{0}^{\delta} + \int_{\delta}^{\pi} \right)  \frac{f(x_0 - t) + f(x_0 - 0)}{t} + \\
+		\frac{f(x_0 + t) + f(x_0 + 0)}{t} \frac{t}{2 \sin(t/2)} \sin (n + 1/2) t dt
+	\end{multline*}
+	Пусть $\varepsilon > 0$. $\exists \delta' \in (0, \delta) : |\frac{f(x_0 - t) + f(x_0 - 0)}{t}| \leq |f'_-(x_0)| + \varepsilon$. Аналогично для второй дроби. Поэтому первый интеграл не превосходит $\frac{1}{\pi} \delta (|f'_-| + |f'_+| + 2 \varepsilon)$. На интервале $(\delta, \pi)$ подынтегральная функция абсолютно интегрируема, поэтому по лемме Римана об осцилляции второй интеграл стремится к 0.
+\end{proof}
+
+\begin{remark}[Условие Гёльдера]
+	Можно потребовать, чтобы для некоторого $\alpha > 1$ было выполнено $|f(x_0 + t) - f(x_0 + 0)| \leq C \cdot t^{\alpha}$, $|f(x_0 - t) + f(x_0 - 0)| \leq C \cdot t^{\alpha}$. Это является более слабым условием по сравнению с сущетвованием односторонних производных, однако, при этом условии теорема доказывается так же.
+\end{remark}
+
+\begin{definition}
+	Функция $f$ называется кусочно-гладкой на $[a, b]$, если она непрерывна на $[a, b]$ и $\exists \text{ } a = c_0 <c_1 < \cdots < c_n = b:$ для любого отрезка $[c_{k-1}, c_k]$ функция $f$  непрерывно дифференцируема на нём
+\end{definition}
+
+\begin{definition}
+	$2 \pi$ периодическая функция называется кусочно-гладкой, если она непрерывна на $\mathbb{R}$ и кусочно-гладкая на $[-\pi, \pi]$
+\end{definition}
+
+\begin{theorem}
+	Пусть $f$ кусочно-гладкая $2 \pi$ периодическая функция. Тогда:
+	\begin{enumerate}
+		\item $S_n(f) \rightarrow f$ равномерно
+		\item $\sup_{x \in \mathbb{R}} |S_n(f, x) - f(x)| \leq C \cdot \frac{\ln n}{n}$
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	\begin{multline*}
+		S_n(f, x) - f(x) = \frac{1}{\pi} \left( \int_{0}^{\delta} + \int_{\delta}^{\pi} \right) D_n(t) (f(x+t) + f(x-t) - 2f(x))dx = \\
+		\frac{1}{\pi} \left( \int_{0}^{\delta} + \int_{\delta}^{\pi} \right) \sin ((n + 1/2)t) g_x(t) dt
+	\end{multline*}
+	Оценим с помощью теоремы Лагранжа следующую разность: $|f(x+t) + f(x-t) - 2f(x)| \leq |f(x+t) - f(x)| + |f(x - t) - f(x)| \leq 2 |t| M_1 \leq 2 \pi M_1$. Кроме того, оценим
+	$|\frac{d}{dt} g_x(t)| \leq \cdots$
+
+	Причем, $|\int_{0}^{\delta} |$
+    TO BE CONTINUED\ldots
+\end{proof}
+
+\begin{definition}
+	Функция
+	$$T_n(x) = \frac{a_0}{2} + \sum_{k = 1}^n a_k \cos kx + b_k \sin kx$$
+	называется тригонометррическим многочленом порядка $n$
+\end{definition}
+
+\begin{theorem}
+	Пусть $f$ -- непрерывная $2 \pi$ периодическая функцияю. Тогда $\forall \varepsilon > 0 : \exists T(x) : \sup_{x \in \mathbb{R}} |T(x) - f(x)| < \varepsilon$
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+\end{document}
+

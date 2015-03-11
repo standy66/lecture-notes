@@ -2,6 +2,62 @@
 
 \begin{document}
 
+\section{Ещё более жаркая}
+
+\begin{definition}
+	Пусть $A_1, \dots, A_n$ -- события на некотором вероятностном пространстве.
+	Ориентированный граф $G = (\{A_1, \dots, A_n\}, E)$ является орграфом этих зависимостей, если $\forall i \in \{1, \dots, n\}: A_i$ не зависит от совокупности тех событий $A_j$ для которых $(A_i, A_j) \not \in E$
+
+\end{definition}
+
+\begin{example}
+	Полный граф является орграфом зависимостей. Но это не интересный пример. Возьмем события $A_1, A_2, A_3$ которые независимы попарно, но зависимы в совокупности. Тогда из любой вершины этого графа должно выходить хотя бы одно ребро, в противном случае этот граф не будет являтся орграфом зависимостей. Тогда понятно, что в минимальном орграфе зависимостей для этого набора должно быть хотя бы 3 ребра.
+\end{example}
+
+\begin{remark}
+	Если $A_i, A_j$ зависимы, то в графе зависимостей обязаны быть ребра $(A_i, A_j), (A_j, A_i)$
+\end{remark}
+
+\begin{theorem}[Локальная лемма Ловаса]
+	Пусть $A_1, \dots, A_n$ -- события на каком-то вероятностном пространстве. $G = (V, E)$ -- такой орграф зависимостей, что $$\exists x_1, \dots, x_n \in [0, 1): \forall i: P(A_i) \leq x_i \prod_{j: (A_i, A_j) \in E} (1 - x_j)$$ Тогда $$P(\cap_{i = 1}^n \overline A_i) \geq \prod_{j = 1}^n (1 - x_j) > 0$$
+\end{theorem}
+
+\begin{corollary}[симметричная локальная лемма Ловаса]
+	Пусть $A_1, \ldots, A_n$ -- события. Путь дополнительно $\exists p : \forall i : P(A_i) \leq p$. Дополнительно предположим, что $\forall i : A_i$ не зависит от совокупности всех остальных событий, кроме не более чем $d$ штук. Пусть также $ep(d+1) \leq 1$. Тогда $P(\cap_{i=1}^n \overline A_i^c) > 0$
+\end{corollary}
+
+\begin{proof}[доказательство следствия]
+	Рассмотрим $G = (V, E)$, у которого $A_i$ соедина ровно с теми ``паразитами'' которые мешают независимости.
+
+	Рассмотрим сначала дурацкий случай: $d = 0$. В этом случае они независимы в совокупности. Тогда $P(\cap_{i=1}^n \overline A_i) = \prod_{i = 1}^n(1 - P(A_i)) \geq (1-p)^n \geq (1-\frac{1}{e})^n > 0$.
+
+	Пусть теперь d > 0. Рассмотрим $x_1 = \cdots = x_n = \frac{1}{d+1}$. Мы знаем, что $P(A_i) \leq p \leq \frac{1}{(d+1)e}$. Хочется доказать, что $P(A_i) \leq \frac{1}{d+1} \prod_{k : (A_i, A_k) \in E}(1 - \frac{1}{d+1})$. Понятно, что $(1 - \frac{1}{d+1})^d \geq \frac{1}{e}$. Но тогда симметричный случай доказан.
+\end{proof}
+
+\begin{proof}[доказательство леммы Ловаса]
+	\begin{multline*}
+		P(\cap_{i = 1}^n \overline A_i) = P(\overline A_1) \cdot P(\overline A_2 | \overline A_1) \cdot \ldots \cdot P(\overline A_n | \overline A_1 \cap \cdots \cap \overline A_n) \\ = (1 - P(A_1))(1 - P(A_1 | \overline A_2)) \cdots (1 - P(A_n | \overline A_1 \cap \cdots \cap \overline A_n))
+	\end{multline*}
+
+	Лемма: $\forall i: \forall J \subset \{1, 2, \cdots, n\} \setminus \{i\}: P(A_i | \cap_{j \in J} \overline A_j) \leq x_i$
+
+	База: $|J| = 0, P(A_i | \cap_{j \in \emptyset} \overline A_j) = P(A_i) \leq x_i$
+
+	Переход: рассмотрим произвольное множество $J: |J| = k+1$. Представим $J = J_1 \cup J_2$. Положим $J_1 = \{j \in J : (A_i, A_j) \in E\}$, $J_2 = J \setminus J_1$.
+
+	Рассмотрим случай, когда $J_1 = \emptyset$. Тогда $P(A_i | \cap_{j \in J} \overline A_j) = P(A_i | \cap_{j \in J_2} \overline A_j) = P(A_i) \leq x_i$
+
+	Рассмотрим второй случай: $J_1 = \{j_1, \dots, j_r\}, r \geq 1$. Тогда \begin{multline*}
+		P(A_i | \cap_{j \in J} \overline A_j) = P(A_i | \cap_{j \in J_1} \overline A_j \cap \cap_{j \in J_2} \overline A_j) =
+		\frac{P(A_i \cap \cap_{j \in J_1} \overline A_j | \cap_{j \in J_2} \overline A_j)}{P(\cap_{j \in J_1} \overline A_j | \cap_{j \in J_2} \overline A_j}
+		\\ \leq \frac{P(A_i | \cap_{j \in J_2} \overline A_j)}{P(\cap_{j \in J_1} \overline A_j | \cap_{j \in J_2} \overline A_j} =
+		\frac{P(A_i)}{P(\cap_{j \in J_1} \overline A_j | \cap_{j \in J_2} \overline A_j} = \frac{P(A_i)}{P(A_{j_1}| \cap
+        \cdots) \cdot P(A_{j_2}| \cap \cdots) \cdots} = \\
+		asasd
+	\end{multline*}
+\end{proof}
+
+Полезность несимметричного случая: $R(3, t) > n$. Берем случайную раскраску.
 
 \end{document}
 

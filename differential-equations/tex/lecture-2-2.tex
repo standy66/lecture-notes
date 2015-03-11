@@ -85,7 +85,16 @@
 	действующий из пространства функций на шаре в себя, такой что:
 	$$\Phi (y) (x) = y_0 + \int_{x_0}^x f(\tau, y(\tau)) d\tau$$
 	Докажем, что этот оператор опять сжимает. Пусть y и z -- две различные вектор функции.
-	$$||\Phi(y) - \Phi(z)|| = \max \sup_{[x_0 - \delta_{r'}, x_0 + \delta_{r'}]} | \int_{x_0}^x (f_i(\tau, y(\tau) - f_i(\tau, z(\tau)))d\tau|$$
-	$$\leq \sup \int_{x_0}^x ||f(\tau, y) - f(\tau, z)||d\tau \leq \sup \int_{x_0}^x c ||y-z||d\tau \leq \delta c||y-z||$$
+	\begin{multline*}
+		||\Phi(y) - \Phi(z)|| = \max \sup_{[x_0 - \delta_{r'}, x_0 + \delta_{r'}]} | \int_{x_0}^x (f_i(\tau, y(\tau) - f_i(\tau, z(\tau)))d\tau| \\
+		\leq \sup \int_{x_0}^x ||f(\tau, y) - f(\tau, z)||d\tau \leq \sup \int_{x_0}^x c ||y-z||d\tau \leq \delta c||y-z||
+	\end{multline*}
+	Причем $\delta c < 1$. Также:
+	\begin{multline*}
+		\|\Phi(y_0) - y_0\| = \max_{i} \sup_{x \in U_{\delta}(x_0)} \left| \int_{x_0}^{x}f(\tau, y_0)d \tau \right| \leq \\
+		\sup_{x \in U_{\delta}(x_0)} \left| \int_{x_0}^{x}\|f(\tau, y_0)\| d \tau \right| \leq \delta_r M = \frac{Mr}{M+Kr} = r(1 - \frac{Kr}{M+Kr}) = r(1-q)
+	\end{multline*}
+	Оператор $\Phi$ имеет неподвижную точку, дающее решение задачи Коши.
+	
 \end{proof}
 \end{document}

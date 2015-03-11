@@ -1,7 +1,6 @@
 \documentclass[document.tex]{subfiles}
 
 \begin{document}
-nograhol@gmail.com
 
 Курс состоит из 3 частей:
 \begin{enumerate}
@@ -13,36 +12,21 @@ nograhol@gmail.com
 \section{Базовые определения.}
 
 \begin{definition}
-Кольцо - это тройка $(K, +, \cdot)$. Причем:
+Кольцо - это тройка $(K, +, \cdot)$. Причем $(K, +)$ -- абелева группа, и:
+\begin{align*}
+	\forall a, b, c \in K: &(a + b) \cdot c = a \cdot c + b \cdot c &	\\
+			     		&c \cdot (a + b) = c \cdot a + c \cdot b
+\end{align*}
+\end{definition}
+
+\begin{definition}
+Говорят, что кольцо $K$ обладает 
+
 \begin{enumerate}
-\item $(K, +)$ -- абелева группа
-\item $\forall a, b, c \in K: (a + b) \cdot c = a \cdot c + b \cdot c$
-\item $\forall a, b, c \in K: c \cdot (a + b) = c \cdot a + c \cdot b$
+	\item Ассоциативностью, если выполнено $\forall a, b, c \in K: (ab)c = a(bc)$
+	\item Нейтральным элементом, если выполнено $\exists 1 \in K: \forall a \in K: a \cdot 1 = 1 \cdot a = a$
+	\item Коммутативностью, если выполнено $\forall a, b \in K: ab = ba$
 \end{enumerate}
-\end{definition}
-
-\begin{definition}
-Свойство $\forall a, b, c: (ab)c = a(bc)$ называют ассоциативностью.
-\end{definition}
-
-\begin{definition}
-Свойство $\exists 1 : \forall a : a \cdot 1 = 1 \cdot a = a$ называют существованием нейтрального элемента
-\end{definition}
-
-\begin{definition}
-Свойство $\forall a, b: ab = ba$ называют коммутативностью.
-\end{definition}
-
-\begin{definition}
-Свойство $\forall a \neq 0 : \exists b : ab = ba = 1$ называют существованием обратного элемента.
-\end{definition}
-
-\begin{definition}
-Ассоциативное кольцо -- это такое кольцо, что для умножения выполнена ассоциативность.
-\end{definition}
-
-\begin{definition}
-Кольцо с единицей -- это такое кольцо, где есть нейтральный элемент относительно умножения.
 \end{definition}
 
 \begin{definition}
@@ -50,12 +34,8 @@ nograhol@gmail.com
 \end{definition}
 
 \begin{remark}
-Буквой $K$ будем обозначать коммутативное кольцо (т.е. коммутативное с единицей и ассоциативностью).
+В дальнейшем буквой $K$ будем обозначать коммутативное кольцо (т.е. коммутативное с единицей и ассоциативностью).
 \end{remark}
-
-\begin{definition}
-Кольцо с обратными -- это такое кольцо, что умножения обратимо.
-\end{definition}
 
 \begin{example}
 ~\begin{enumerate}
@@ -85,16 +65,20 @@ $\exists b \neq 0 : ab = 0$.
 Коммутативное кольцо без делителей нуля называется областью целостности.
 \end{definition}
 
-\begin{exercise}
+\begin{statement}
 $a \cdot 0 = 0$
-\end{exercise}
+\end{statement}
+
+\begin{proof}
+	$a \cdot 0 = a \cdot (0 + 0) = a \cdot 0 + a \cdot 0$. Прибавляя обратный по сложению для $a \cdot 0$, получаем, что $a \cdot 0 = 0$
+\end{proof}
 
 \begin{definition}
 $F$ -- поле, если:
 \begin{enumerate}
 \item $F$ -- ассоциативное коммутативное кольцо с единицей
 \item $1 \neq 0$
-\item Любой элемент обратим относительно сложения.
+\item Любой элемент обратим относительно умножения.
 \end{enumerate}
 \end{definition}
 
@@ -113,21 +97,29 @@ $F$ -- поле, если:
 Гауссовы числа -- это область целостности
 \end{statement}
 \begin{proof}
-Замкнутость относительно операций проверяется тривиальным образом. Коммутативность, дистрибутивность и ассоциативность следует из соответствующих свойств для $\mathbb{C}$. $0 + 0i$ -- нейтральный элемент относительно сложения, а $1 + 0i$ -- нейтральный элемент относительно умножения, проверяется тривиальным образом. А делителей нуля в гауссовых числах нет, потому что их нет в комплексных числах ($\mathbb{C}$ -- это поле).
+Замкнутость относительно операций проверяется тривиальным образом. Коммутативность, дистрибутивность и ассоциативность следует из соответствующих свойств для $\mathbb{C}$. $0 + 0i$ -- нейтральный элемент относительно сложения, а $1 + 0i$ -- нейтральный элемент относительно умножения, проверяется тривиальным образом. А делителей нуля в гауссовых числах нет, поскольку что их нет в комплексных числах ($\mathbb{C}$ -- это поле).
 \end{proof}
 
 \begin{definition}
-Говорят, что $a|b$ ($a$ делит $b$), если $\exists c : ac = b$.
+В области целостности $K$ говорят, что $a|b$ ($a$ делит $b$), если $\exists c \neq 0 : ac = b$.
 \end{definition}
 
 \begin{statement}
-Свойства делимости:
+Свойства делимости: для любых ненулевых $a, b, c$:
 \begin{enumerate}
 \item $a|b, b|c \Leftarrow a|c$
-\item $a|b, a|c \Leftarrow a|(b+c)$
-\item $a|1 \Leftrightarrow \exists b: ab = 1 \Leftrightarrow a \text{ -- обратимый элемент }$
+\item Если $b + c \neq 0$, то $a|b, a|c \Leftarrow a|(b+c)$
+\item $a|1 \Leftrightarrow a \text{ -- обратимый элемент }$
 \end{enumerate}
 \end{statement}
+
+\begin{proof}
+	~\begin{enumerate}
+		\item $a|b, b|c$ эквивалентно $\exists q_1, q_2 \neq 0 : aq_1 = b, bq_2 = c$. Следовательно, $a q_1 q_2 = c$, причем $q_1 q_2$ -- не ноль.
+		\item $a|b, a|c$ эквивалентно $\exists q_1, q_2 \neq 0 : aq_1 = b, aq_2 = c$. Следовательно, $a q_1 + a q_2 = a (q_1 + q_2) = b + c$. Причем $q_1 + q_2$ -- не ноль, в противном случае $b+c = 0$
+		\item $a|1$ эквивалентно $\exists b \neq 0: ab = 1$ эквивалентно тому, что $a$ -- обратимый
+	\end{enumerate}
+\end{proof}
 
 \begin{remark}
 В случае, когда $a|1$, любой элемент поля делится на $a$:
@@ -136,37 +128,28 @@ $x = 1 \cdot x = a \cdot a^{-1} \cdot x$
 \end{remark}
 
 \begin{definition}
-$K^*$ (множество обратимых элементов K) -- мультипликативная группа кольца.
+$K^*$ (множество обратимых элементов ассоциативного кольцо с единицей K) называют мультипликативной группой кольца.
 \end{definition}
 
+\begin{proof}
+	Поскольку кольцо было ассоциативное и с единицей, то ассоциативность операции группы и существование единицы выполнены.
+	Поскольку в $K^*$ только обратимые элементы, то операция в группе также обратимы. Отсалось проверить замкнутость, то есть $\forall a, b \in K^*: ab \in K^*$
+	Это действительно так, обратный к $ab$ -- это $b^{-1}a^{-1}$ 
+\end{proof}
+
 \begin{definition}
-Будем называть два элемента $a$ и $b$ ассоциированными, если $a = rb, r \in K^*$.
+Будем называть два элемента $a$ и $b$ ассоциированными (обозначение: $a \sim b$), если $a = rb, r \in K^*$.
 \end{definition}
 
 \begin{exercise}
-Ассоциированность -- это отношение эквивалентности.
+$~$ -- это отношение эквивалентности.
 \end{exercise}
 
-\begin{remark}
-План доказательства ОТА:
-\begin{enumerate}
-\item Докажем, что любое число раскладывается на произведение простых.
-\item Докажем лемму Евклида.
-\item Докажем единственность разложения на простые с помощью леммы Евклида.
-\end{enumerate}
-\end{remark}
-
-\begin{definition}
-Элемент $x \neq 0$ кольца $K$ называется неприводимым или неразложимым, если:
-\begin{enumerate}
-\item $x \not \in K^*$
-\item $x = ab \Rightarrow \exists a^{-1} \vee \exists b^{-1}$
-\end{enumerate}
-\end{definition}
-
-\begin{definition}
-Элемент $0 \neq x \not \in K^*$ кольца $K$ называется простым, если:
-$x|ab \Rightarrow x|a \vee x|b$
-\end{definition}
-
+\begin{proof}
+	~\begin{enumerate}
+		\item $a = rb \rightarrow r^{-1}a = b$
+		\item $a = rb, b = sc \rightarrow a = rsc$
+		\item $a = 1 \cdot a$
+	\end{enumerate}
+\end{proof}
 \end{document}

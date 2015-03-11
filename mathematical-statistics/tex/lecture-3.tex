@@ -1,0 +1,134 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+\section{Оценки и их свойства}
+\begin{definition}
+    $\overline{X^k}$ -- -- выборочный $k$-тый момент.
+\end{definition}
+
+\begin{definition}
+    $S^2 = \overline{X^2} - \overline X^2$ -- выборочная дисперсия.
+
+    Выборочный $k$-тый центральный момент $\frac{1}{n}\sum_{i = 1}^n (X_i - \overline X)^k$.
+
+    $X_(k)$ -- выборочная $k$-тая порядковая статистика.
+\end{definition}
+
+\begin{definition}
+    Квантиль $z_p$ уровня $p \in (0, 1)$ функции распределения $F$ -- $\min \{x : F(x) > p\}$
+\end{definition}
+
+\begin{definition}
+    Выборочная квантиль $\hat z_p$ -- это квантиль эмпирической функции распределения.
+\end{definition}
+
+\begin{definition}
+    Медиана распределения $\mu$ -- это квантиль уровня $1/2$
+\end{definition}
+
+\begin{definition}
+    Выборочная медиана $\overline \mu$ -- это
+    \[
+        \begin{cases}
+            X_{(n/2)} \text{, если $n$ -- четно} \\
+            \frac{X_{(\lfloor n/2 \rfloor)} + X_{( \lceil n/2 \rceil)}}{2} \text{, иначе }
+        \end{cases}
+    \]
+\end{definition}
+
+
+\subsection{Свойства оценок}
+
+\begin{definition}
+    Оценка $\hat \theta$ называется несмещенной, если $\forall \theta \in \Theta: E_{\theta} \hat \theta = \theta$
+\end{definition}
+
+\begin{definition}
+    Оценка $\hat \theta_n = \theta_n(X_1, \cdots, X_n)$ называется состоятельной, если $\forall \theta \in \Theta:
+    \hat \theta_n \cp \theta$
+\end{definition}
+
+\begin{definition}
+    Оценка $\hat \theta_n = \theta_n(X_1, \cdots, X_n)$ называется сильно состоятельной, если $\forall \theta \in \Theta:
+    \hat \theta_n \cae \theta$
+\end{definition}
+
+\begin{definition}
+    Оценка $\hat \theta_n = \theta_n(X_1, \cdots, X_n)$ называется асимптотически нормальной оценкой параметра $\theta$,
+    если $\forall \theta \in \Theta: \sqrt{n}(\hat \theta_n - \theta) \cd \mathcal{N}(0, \sigma^2)$
+\end{definition}
+
+\begin{example}
+    ~\begin{enumerate}
+        \item $\overline X$ -- несмещенная оценка параметра $\theta$ семейства распределений $\mathcal{N}(\theta, \sigma^2)$
+        \item Более того, по УЗБЧ $\overline X$ -- сильно состоятельная оценка $\theta$
+    \end{enumerate}
+\end{example}
+
+\subsection{Методя нахождения оценок}
+
+\subsubsection{Метод подстановки}
+    $\theta = F(P_{\theta})$
+    Например, если $\{P_{\theta}\} = \{U[0, \theta], \theta > 0\}$, тогда $P_{\theta}([0, 1]) = \frac{1}{\theta}$ и
+    $\theta = \frac{1}{P_{\theta}([0, 1])}$
+    Тогда используя метод подстановки (подставляя эмпирическое распределение, вместо неизвестного распределения
+    $P_{\theta}$) получаем оценку $\hat \theta = \frac{1}{P^*(\theta)}$
+
+
+\subsubsection{Метод моментов}
+
+
+
+\begin{statement}
+    Если $m^{-1}$ непрерывна -- то $\hat \theta_n$ -- сильно состоятельная оценка
+\end{statement}
+
+\begin{proof}
+    По УЗБЧ $\overline g_i(X) \cae m_i(\theta)$. Так как $m^{-1}$ непрерывная, то по теореме о наследовании $\hat
+    \theta_n = m^{-1}(\overline {g_1(X)}, \cdots, \overline {g_k(X)})$
+\end{proof}
+
+\begin{statement}
+    Аналогично, $\hat \theta_n$ является асимптотически нормальной оценкой.
+\end{statement}
+
+
+\begin{example}
+    $X_1, \cdots, X_n \sim \Gamma(\alpha, \lambda)$
+\end{example}
+
+\begin{remark}
+    Метод моментов -- это частный случай метода подстановки.
+\end{remark}
+
+
+\begin{theorem}[теорема об асимптотической нормальности выборочной квантили]
+    Пусть $X_1, \cdots, X_n \sim P$ с плотностью $f(x)$, пусть также $f(x)$ -- непрерывно дифференцируема в некоторой
+    окрестности $z_p$, где $z_p$ -- это квантиль уровня $p$ распределения $P$. Пусть $f(x) > 0$ для всех $x \in
+    \mathbb{R}$. Тогда $\sqrt{n}(\hat z_p - z_p) \cd \mathcal{N}(0, \frac{p(1-p)}{(f(z_p))^2})$
+\end{theorem}
+
+\begin{example}
+    По теореме о асимптотической нормальности выборочной медианы $\hat \mu$ -- а.н. оценка параметра $\theta$
+    распределения c плотностью $f(x) = \frac{1}{\pi(1 + (x - \theta)^2)}$ с выборочной диспресией $\frac{\pi^2}{4}$.
+
+\end{example}
+
+\begin{theorem}
+    Если $\tau$ -- непрерывная функция на $\Theta$, $\hat \theta_n$ -- (сильно) состоятельная оценка параметра
+    $\theta$, то $\tau(\hat \theta_n)$ -- сильно состоятельная оценка параметра $\tau(\theta)$
+\end{theorem}
+
+\begin{theorem}
+    Если $\hat \theta_n$ -- асимптотически нормальная оценка параметра $\theta$, $\tau$ -- дифференцируема на $\Theta$,
+    то $\tau(\hat \theta_n)$ -- асимптотически нормальная оценка параметра $\tau(\theta)$ с асимптотической дисперсией
+    $\sigma^2(\theta)[\tau'(\theta)]^2$, где $\sigma^2(\theta)$ -- асимптотическая дисперсия $\hat \theta_n$
+\end{theorem}
+
+\begin{proof}
+    Используем теорему из первой лекции
+    $h=\tau, b_n=frac{1}{\sqrt{n}},a=\theta,\xi$
+\end{proof}
+
+\end{document}
+

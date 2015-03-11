@@ -1,0 +1,174 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+
+\section{Сравнение оценок}
+\begin{definition}
+    Пусть $X$ -- наблюдение с неизвестным распределением $P \in \{P_{\theta}: \theta \in \Theta\}$. $\rho(x, y)$ --
+    функция потерь. Тогда функцией риска оценкаи $\hat \theta(X)$ неизвестного параметра $\theta$ называется:
+    $R(\hat \theta(X), \theta) = E_{\theta} \rho(\hat \theta(X), \theta)$
+\end{definition}
+
+\subsection{Равномерный подход}
+
+\begin{definition}
+    Оценка $\hat \theta(X)$ называется лучшей оценки $\theta^*(X)$ в равномерном подходе, если $\forall \theta \in
+    \Theta: R(\hat \theta(X), \theta) \leq R(\theta^*(X), \theta)$ и для некоторого $\theta \in \Theta$ неравенство
+    строгое.
+\end{definition}
+
+\begin{definition}
+    Если оценка $\hat \theta(X)$ лучше любой другой оценки в каком-либо классе оценок, то она называется наилучшей в
+    этом классе
+\end{definition}
+
+\begin{remark}
+    Равномерный подход с квадративной функцией потерь называется среднеквадратическим подходом. Не для любого класса
+    можно отыскать наилучшую оценку.
+\end{remark}
+
+\begin{definition}
+    $K$ -- несмещенные оценки $\tau(\theta)$. В таком классе $K$ со среднеквадратичной функцией потерь:
+    \[
+        R(\hat \theta(X), \theta) = E_{\theta} (\hat \theta(X) - \theta)^2 = E_{\theta} (\hat \theta(X) - \tau(Theta))^2
+        + (\tau(\theta) - \theta)^2 = D_{\theta} \hat \theta(X)
+    \]
+\end{definition}
+
+\begin{definition}
+    Оценка называется допустимой, если для неё не существует лучшей оценки в равномерном подходе.
+\end{definition}
+
+\subsection{Байесовский подход}
+
+Пусть $R(\hat \theta, \theta)$ -- функция риска для оценки $\hat \theta$, и задано $Q$ -- нек. распределение
+вероятностей на $\Theta$. Тогда можно определить $R(\hat \theta) = \int_{\Theta} R(\hat \theta, t) Q(dt)$. Если $Q$
+имеет плотность $q(t)$, то $R(\hat \theta) = \int_{\Theta} R(\hat \theta, t) q(t) dt$
+
+\begin{definition}
+    Если $R(\hat \theta) = \min_{\theta^* \in K} R(\theta^*)$, то $\hat \theta$ называется наилучшей в байесовском
+    подходе в классе $K$.
+\end{definition}
+
+Байесовские оценки являются допустимыми.
+
+\subsection{Минимаксный подход}
+
+Если $\hat R(\hat \theta) = \min_{\theta^* \in K} \sup_{\theta \in \Theta} R(\theta^*, \theta)$, то $\hat \theta$
+называется наилучшей в минимаксном подходе в классе $K$.
+
+\subsection{Асимптотический подход}
+$X = (X_1, \cdots, X_n)$ -- выборка растущего размера.
+
+Пусть $\hat \theta_1$, $\hat \theta_2$ -- две асимптотические оценки $\theta \in \Theta \subset \mathbb{R}$. Пусть
+$\sigma_1^2(\theta)$, $\sigma_2^2(\theta)$ -- их асимптотические оценки. Мы будем говорить, что $\hat \theta_1$ лучше
+$\hat \theta_2$, если $\forall \theta \in \Theta: \sigma_1^2(\theta) \leq \sigma_2^2(\theta)$ и для некоторого $\theta
+\in \Theta$ неравенство строое.
+
+Оценка называется наилучшей в асимптотическом подходе в каком-то классе, если она лучше любой другой оценки в каком-то
+классе. 
+
+\begin{example}
+    $X = (X_1, \cdots, X_n)$ -- выборка из номального распределения с параметрами $(\theta, 1)$. Нужно сравинить в
+    асимптотическом подходе оценки $\overline X$ и $\hat \mu$.
+
+    $\sqrt{n}(\overline X - \theta) \sim N(0, 1)$ по ЦПТ.
+
+    По теореме об асимптотической нормальности выборочного квантиля:
+
+    $\sqrt{n}(\hat \mu - \theta) \sim N(0, \frac{1}{1/4 \cdot p(\theta)^2} = N(0, \frac{\pi}{2})$.
+
+    Получили, что $\overline X$ лучше $\hat \mu$
+\end{example}
+
+\subsection{Понятие плотности дискретного распределения}
+
+Функция $p(x) \geq 0$ называется плотностью вероятностной меры $P$ на $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$, если
+$\forall B \in \mathcal{B}(\mathbb{R}): P(B) = \in_{B}p(x)dx$. В этом случае $P$ называется абсолютно непрерывной
+вероятностной мерой, $p(x)$ -- плотность по мере Лебега.
+
+\begin{definition}
+    Функция $\mu: \mathcal{B}(\mathbb{R}) \mapsto \mathbb{Z} \cup \{\infty\}$ определенная по правилу: 
+    \[
+        \mu(B) = \sum_{k \in \mathbb{Z}} I\{k \in B\} 
+    \] называется считающей мерой на $\mathbb{Z}$.
+\end{definition}
+
+\begin{definition}
+    Интегралом от функции $f(x)$ по считающей мере $\mu$ называется $\int_{\mathbb{R}} f(x) \mu(dx) := \sum_{k \in
+        \mathbb{Z}}f(k)$
+\end{definition}
+Для такого интеграла выполнены все основные свойства: линейность, сохранение отношения порядка, теоремы о сходимости и
+так далее. Аналогично можно определить считающую меру в $\mathbb{Z}^n$ и интеграл по ней.
+
+\begin{definition}
+    Пусть $\xi$ -- случайная величина со значениями в $\mathbb{Z}$. Тогда её плотность по считающей мере $\mu$
+    называется $p(x) = P(\xi = x)$ 
+\end{definition}
+
+\begin{corollary}
+    Для любой функции $g(x)$ выполнено $Eg(\xi) = \int_{\mathbb{R}} g(x) p(x) \mu(dx)$
+\end{corollary}
+
+\begin{definition}
+    Пусть $X$ -- некоторое наблюдение с неизвестным распределением $P \in \{P_{\theta} : \theta \in \Theta\}$. Если
+    $\forall \theta \in \Theta: P_{\theta}$ имеет плотность $p_{\theta}$ по одной и той же мере (либо мере Лебега, либо
+    по считающей мере), то в этом случае $\{P_{\theta}: \theta \in \Theta\}$ называется доминируемым семейством.
+\end{definition}
+
+\begin{remark}
+    Для меры всегда будем использовать единое обозначение $\mu$
+\end{remark}
+
+\subsection{Неравенство Рао-Крамера и эффективные оценки}
+Пусть $X$ -- наблюдение с неизвестным распределением $P \in \{P_{\theta} : \theta \in \Theta\}$ -- доминируемое
+семейство с плотностью $p_{\theta}$. Предположим, что выполнены следующие условия регулярности:
+
+~\begin{enumerate}
+    \item $A = \{x : p_{\theta}(x) > 0\}$ не зависит от параметра $\theta$
+
+    \item $\Theta$ -- открытый интервал на $\mathbb{R}$ (может быть бесконечный)
+
+    \item $\forall S(x): E_{\theta} (S(X))^2 < \infty$ выполнено $\frac{\partial}{\partial \theta} E_{\theta}S(X) =
+        E_{\theta}(S(X) \frac{\partial}{\partial \theta} \ln p_{\theta}(X))^2$
+
+    \item Интеграл $I_X(\theta) = E_{\theta} (\frac{\partial}{\partial \theta}\ln p_{\theta}(x))^2$ положителен и
+        конечен $\forall \theta \in \Theta$
+\end{enumerate}
+
+\begin{definition}
+    Случайная величина $U_{\theta}(X) = \frac{\partial}{\partial \theta}\ln p_{\theta}(X)$ называется вкладом в
+    наблюдение $X$. $I_X(\theta) = E_{\theta}(U_{\theta}(X))^2$ называется количеством информации (по Фишеру),
+    содержащейся в наюлюдении $X$
+\end{definition}
+
+\begin{theorem}[Неравенство Рао-Крамера]
+    В условиях регулярности, если $\hat \theta(X)$ -- несмещенная оценка $\tau(\theta)$, причем $E_{\theta}(\hat
+    \theta(X))^2$ конечен $\forall \theta$. Тогда выполнено следующее неравенство:
+    $D_{\theta}\hat \theta(X) \geq \frac{(\tau'(\theta))^2}{I_{X}(\theta)}$
+\end{theorem}
+
+\begin{proof}
+    Положим $S(x) \equiv 1$. В условии 3 получим $0 = E_{\theta}U_{\theta}(X)$. Возьмем теперь $S(x) = \hat \theta(X)$ в
+    условии 3: $\frac{\partial}{\partial \theta} \hat \theta(X) = \tau(\theta) = E_{\theta}\hat \theta(X)
+    U_{\theta}(X)$. То есть имеем: $\tau'(\theta) = E_{\theta}\hat \theta(X) U_{\theta}(X)$. Умножим первое равенство на
+    $\tau(\theta)$ и вычтем из второго. Получим:
+
+    $\tau'(\theta) - 0 = E_{\theta}(\hat \theta - \tau(\theta))U_{\theta}(X)$ Применяем КБШ. Получаем, что 
+    $\tau'(\theta)^2 \leq D_{\theta}\hat \theta \cdot I_X(\theta)$
+\end{proof}
+
+\begin{corollary}
+    Если $\tau(\theta) = \theta$, то $D_{\hat \theta} \geq \frac{1}{I_X(\theta)}$
+\end{corollary}
+
+Если $X = (X_1, \cdots, X_n)$ -- выборка, то $I_X(\theta) = n \cdot i(\theta)$, где $i(\theta)$ -- информация одного
+наблюдения. В этом случае $D_{\theta}\hat \theta = \Omega(\frac{1}{n})$
+
+\begin{definition}
+    Оценки, в которых в неравенстве Рао-Крамера достигается равенство, называются эффективными.
+\end{definition}
+
+
+\end{document}
+
