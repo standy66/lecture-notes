@@ -1,7 +1,26 @@
 \documentclass[document.tex]{subfiles}
 
 \begin{document}
-\section{Сходимость ряда Фурье.}
+\section{Сходимость ряда Фурье. Условие Гёльдера}
+\begin{definition}
+	Пусть $x_0$ -- точка разрыва первого рода. Определим
+	$$f'_+(x_0) = \lim_{x \rightarrow x_0+0} \frac{f(x) - f(x_0+0)}{x-x_0}$$
+	$$f'_-(x_0) = \lim_{x \rightarrow x_0-0} \frac{f(x) - f(x_0-0)}{x-x_0}$$
+\end{definition}
+
+\begin{definition}
+	Точка $x_0$ называется почти регулярной точкой функции $f$, если $\exists f(x_0+0), f(x_0-0), f'_+(x_0), f'_-(x_0)$
+\end{definition}
+
+\begin{definition}
+	Точка $x_0$ называется регулярной, если она является почти регулярной, и дополнительно $$f(x_0) = \frac{f(x_0+0) + f(x_0 -0)}{2}$$
+\end{definition}
+
+\begin{theorem}
+	Пусть $f$ -- абсолютно иниегрируемая на $[-\pi, \pi]$, $2\pi$ периодическая функция. $x_0$ её почти регулярная точка. Тогда
+	$S_n(f)(x) \rightarrow \frac{f(x_0+0)+f(x_0-0)}{2}$
+\end{theorem}
+
 \begin{theorem}
 	Если $f$ -- $2 \pi$ периодическая и абсолютно интегрируемая на $[-\pi, \pi]$. Пусть $x_0$ -- почти регулярная точка. Тогда
 	$$S_n(x_0) \rightarrow \frac{f(x_0 - 0) + f(x_0 + 0}{2}$$
@@ -11,7 +30,8 @@
 	Пусть $\delta \in (0, \pi)$. Посчитаем разноcть
 	\begin{multline*}
 		S_n(t) - \frac{f(x_0 - 0) + f(x_0 + 0)}{2} = \frac{1}{\pi}\int_{0}^{\pi}D_n(t)(f(x_0 - t) + f(x_0 + t)) dt -\\
-		\frac{1}{\pi} \int_{0}^{\pi}D_n(t) (f(x_0 - 0) - f(x_0 + 0)) = \frac{1}{\pi} \int_{0}^{\pi} (f(x_0 - t) - f(x_0 - 0) + f(x_0 + t) + f(x_0 + 0))\\
+		\frac{1}{\pi} \int_{0}^{\pi}D_n(t) (f(x_0 - 0) + f(x_0 + 0)) dt = \frac{1}{\pi} \int_{0}^{\pi} (f(x_0 - t) -
+        f(x_0 - 0) + f(x_0 + t) - f(x_0 + 0))\\
 		\frac{\sin (n + 1/2)t}{\sin t/2} dt = \frac{1}{\pi} \left( \int_{0}^{\delta} + \int_{\delta}^{\pi} \right)  \frac{f(x_0 - t) + f(x_0 - 0)}{t} + \\
 		\frac{f(x_0 + t) + f(x_0 + 0)}{t} \frac{t}{2 \sin(t/2)} \sin (n + 1/2) t dt
 	\end{multline*}
@@ -48,20 +68,6 @@
 
 	Причем, $|\int_{0}^{\delta} |$
     TO BE CONTINUED\ldots
-\end{proof}
-
-\begin{definition}
-	Функция
-	$$T_n(x) = \frac{a_0}{2} + \sum_{k = 1}^n a_k \cos kx + b_k \sin kx$$
-	называется тригонометррическим многочленом порядка $n$
-\end{definition}
-
-\begin{theorem}
-	Пусть $f$ -- непрерывная $2 \pi$ периодическая функцияю. Тогда $\forall \varepsilon > 0 : \exists T(x) : \sup_{x \in \mathbb{R}} |T(x) - f(x)| < \varepsilon$
-\end{theorem}
-
-\begin{proof}
-
 \end{proof}
 
 \end{document}
