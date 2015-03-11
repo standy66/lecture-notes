@@ -1,10 +1,11 @@
 DIRECTORIES = $(sort $(dir $(wildcard */)))
 PDFS = $(patsubst %,%pdf/document.pdf,$(DIRECTORIES))
+PDFS2 = $(foreach name,$(DIRECTORIES),$(name)/pdf/$(name).pdf)
 
-all: $(PDFS) clean_interm
+all: $(PDFS)
 
-%pdf/document.pdf: %
-	cd $<tex; latexmk -pdf document.tex -outdir=../pdf
+%pdf/document.pdf: .EMPTY
+	cd $(shell dirname $@)/../tex; latexmk -pdf document.tex -outdir=../pdf
 
 clean_interm:
 	-rm */pdf/*.aux
@@ -21,3 +22,5 @@ clean: clean_interm
 echoer:
 	echo -n $(DIRECTORIES)
 	echo -n $(PDFS)
+
+.EMPTY:
