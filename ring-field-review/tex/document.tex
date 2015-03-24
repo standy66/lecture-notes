@@ -329,4 +329,115 @@
     обратимы, следовательно, $z \sim x$
 \end{proof}
 
+\begin{statement}
+    Если $z$ -- неразложимый в $\mathbb{Z}[i]$, то $\exists p$ -- простое, $N(z) = p \vee N(z) = p^2$
+\end{statement}
+
+\begin{proof}
+    Будет пользоваться тем фактом, что $\mathbb{Z}[i]]$ -- факториальное кольцо. Тогда $z$ -- простой. $N(z) = z
+    \overline z$, причем $N(z) \in \mathbb{Z}$. Разложим $N(z)$ на простые. $z \overline z = p_1^{k_1} p_2^{k_2} \cdots
+    p_s^{k_s}$. То есть $z | p_1^{k_1} \cdots p_s^{k_s}$. но $z$ -- простое, поэтому $\exists i: z | p_i$. То есть $z x
+    = p_i$. Обозначим $p = p_i$, оно простое. $N(z) N(x) = p^2$. Есть 3 варианта:
+    \begin{enumerate}
+        \item $N(x) = 1$. Тогда $N(z) = p^2$
+        \item $N(x) = p$. Тогда $N(z) = p$.
+        \item $N(x) = p^2$. Тогда $N(z) = 1$, и $z$ обратим, а значит, не является неразложимым. Противоречие.
+    \end{enumerate}
+\end{proof}
+
+\begin{statement}
+    Если $z$ -- неразложимый в $\mathbb{Z}[\omega]$, то $\exists p$ -- простое, $N(z) = p \vee N(z) = p^2$ 
+\end{statement}
+
+\begin{proof}
+    Доказательство повторяет предыдущее.
+    Будет пользоваться тем фактом, что $\mathbb{Z}[\omega]$ -- факториальное кольцо. Тогда $z$ -- простой. $N(z) = z
+    \overline z$, причем $N(z) \in \mathbb{Z}$. Разложим $N(z)$ на простые. $z \overline z = p_1^{k_1} p_2^{k_2} \cdots
+    p_s^{k_s}$. То есть $z | p_1^{k_1} \cdots p_s^{k_s}$. но $z$ -- простое, поэтому $\exists i: z | p_i$. То есть $z x
+    = p_i$. Обозначим $p = p_i$, оно простое. $N(z) N(x) = p^2$. Есть 3 варианта:
+    \begin{enumerate}
+        \item $N(x) = 1$. Тогда $N(z) = p^2$
+        \item $N(x) = p$. Тогда $N(z) = p$.
+        \item $N(x) = p^2$. Тогда $N(z) = 1$, и $z$ обратим, а значит, не является неразложимым. Противоречие.
+    \end{enumerate}
+\end{proof}
+
+\begin{statement}
+    Если $x$ -- неразложимый элемент $\mathbb{Z}[i]$ и $N(z) = p^2$, то $z \sim p$
+\end{statement}
+
+\begin{proof}
+    В рамках предыдущего доказательства мы показали, что $\exists x: zx = p$. Тогда $N(z) N(x) = p^2$, но также $N(z) =
+    p^2$, а значит, $N(x) = 1$. Значит, $x$ -- обратим и $z \sim p$
+\end{proof}
+
+
+\begin{statement}
+    Если $x$ -- неразложимый элемент $\mathbb{Z}[\omega]$ и $N(z) = p^2$, то $z \sim p$
+\end{statement}
+
+\begin{proof}
+    Аналогично.
+\end{proof}
+
+\begin{statement}
+    Если для $z \in \mathbb{Z}[i]$ выполнено, что $N(z) = p$, где $p$ -- простое, то $z$ неразложим.
+\end{statement}
+
+\begin{proof}
+    Пусть $z$ разложим, тогда $z = z_1 z_2$, причем $z_1, z_2 \not \in \mathbb{Z}[i]^*$. Тогда $p = N(z) = N(z_1)
+    N(z_2)$. Так как $p$ простое, то либо $N(z_1) = 1$, либо $N(z_2) = 1$. Но тогда либо $z_1$, либо $z_2$ обратим.
+    Противоречие.
+\end{proof}
+
+\begin{statement}
+    Если для $z \in \mathbb{Z}[\omega]$ выполнено, что $N(z) = p$, где $p$ -- простое, то $z$ неразложим.
+\end{statement}
+
+\begin{proof}
+    Аналогично.
+\end{proof}
+
+\begin{statement}
+    Множество делителей нуля кольца $K$ вместе с нулём не всегда образуют идеал.
+\end{statement}
+
+\begin{proof}
+    Рассмотрим $K = \mathbb{Z}_6$. Его множество делителей нуля (вместе с нулем) -- это $\{0, 2, 3\}$. Это множество не
+    образует даже подкольцо, так как $2 + 3 = 5 \not \in \{0, 2, 3\}$
+\end{proof}
+
+\begin{statement}
+    3 -- разложимый элемент $\mathbb{Z}[\omega]$
+\end{statement}
+
+\begin{proof}
+    $(1 - \omega)(1 - \omega^2) = 1 - \omega - \omega^2 + \omega^3 = 2 - \omega - \omega^2 = 2 - \omega - (-1 -
+    \omega) = 3$
+\end{proof}
+
+\begin{statement}
+    Если идеал $I \subset K$ содержит обратимый элемент, то $I = K$
+\end{statement}
+
+\begin{proof}
+    Пусть $a \in I$ -- обратимый элемент. Тогда $\exists a^{-1} \in K: a a^{-1} = 1$. Из опеределения идеала $\forall x
+    \in I: \forall y \in K: xy \in I$. Значит, $1 = a a^{-1} \in I$. Раз $1 \in I$, то и $\forall y \in K: 1 \cdot y \in
+    I$. Значит, $K \subset I$. Но тогда $K = i$.
+\end{proof}
+
+\begin{statement}
+    $I = (a_1, \cdots, a_k) = \{x_1 a_1 + \cdots + x_k a_k : \forall i : x_i \in K \}$ -- это минимальный по включению
+    идеал, содержащий элементы $a_1, \cdots, a_k$.
+\end{statement}
+
+\begin{proof}
+    Во-первых, $I$ -- это идеал. Действительно, пусть $x \in I, y \in K$. Тогда $x = x_1 a_1 + \cdots x_k a_k$. $yx = y
+    x_1 a_1 + \cdots + y x_k a_k \in I$. Кроме того, это подгруппа по сложению.
+
+    Пусть $J$ -- другой идеал, содержащий $a_1, \cdots, a_k$. Тогда $\forall i: \forall x \in K: x a_i \in J$. Тогда
+    $\forall x_1, \cdots, x_k: x_1 a_1 + \cdots + x_k a_k \in J$. Но тогда $I \subset J$. Но это и означает, что $I$ --
+    минмальный по включению идеал, содержащий элементы $a_1, \cdots, a_k$.
+\end{proof}
+
 \end{document}
