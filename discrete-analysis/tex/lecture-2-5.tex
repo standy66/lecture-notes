@@ -1,0 +1,68 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+\section{Гиперграфовые числа Рамсея}
+\begin{definition}
+    $R_k(l_1, \cdots, l_r)$ -- минимальное такое $n$, что при любой раскраске рёбер полного $k$-однородного гиперграфа
+    на $n$ вершинах в $r$ цветов найдется такое $i$ и найдется такое $l_i$-элементное подмножество множества вершин,
+    такое что все рёбра которые целиком содержатся в этом подмножетсве покрешены в $i$-цвет.
+\end{definition}
+
+Несложно доказать, что $R_k(l_1, \cdots, l_r) \leq R_{k - 1}(R_k(l_1 - 1, \cdots, l_r), \cdots, R_k(l_1, \cdots, l_r -
+1)$.
+
+\begin{theorem}
+    $R_3(s, t) \leq 4^{4^{4^{4^4}}}$ $s+t$ раз
+\end{theorem}
+\begin{proof}
+    Доказываем по индукции: $R_3(s, t) \leq R_2(R_3(s - 1, t), R_3(s, t - 1)) \leq R_2(4^{4^{4^4}}, 4^{4^{4^4}}) \leq
+    (1 + o(1)) 4^{4^{4^{4^4}}}$
+\end{proof}
+Если использовать вероятностный метод, то: $\binom{n}{3} \cdot (\frac{1}{2})^{\binom{s}{3}} \cdot 2 \geq 2^{s^2/6}(1 +
+o(1))$
+Короче, все плохо.
+
+\section{Система представителей}
+
+\begin{definition}
+    Рассмотрим $k$-однородный гиперграф $H = (\mathcal{R}_n, \mathcal{M})$, где $\mathcal{R}_n = \{1, \cdots, n\}$.
+    Обозначим $|\mathcal{M}| = s$
+    Назовём системой общих представителей (СОП) для $\mathcal{M}$ произвольное подмножество $S \subset \mathcal{R}_n$: $\forall M \in
+    \mathcal{M}: M \cap S \neq \emptyset$
+
+    $\tau(\mathcal{M}) = \min \{|S|: S \text{ -- СОП для $\mathcal{M}$}\}$
+\end{definition}
+
+\begin{statement}
+    $\forall n, k, s: \forall \mathcal{M}: \tau(\mathcal{M}) \leq \min \{s, n - k + 1\}$
+\end{statement}
+
+\begin{statement}
+    $\forall n, k, s: \exists \mathcal{M}: \tau(\mathcal{M}) \geq \min \{s, \lceil \frac{n}{k} \rceil\}$
+\end{statement}
+
+\begin{theorem}[Эрдеш]
+    $\forall n, k, s: \forall \mathcal{M}: \tau(\mathcal{M}) \leq \max \{\frac{n}{k}, \frac{n}{n} \ln \frac{sk}{n}\} +
+    \frac{n}{k} + 1$
+\end{theorem}
+
+\begin{proof}
+    Пусть $s >> \frac{n}{k}$. В противном случае если, скажем $s leq \frac{n}{k}$, то $\tau(\mathcal{M}) = s \leq
+    \frac{n}{k}$. Другой плохой случай -- это когда $\frac{n}{k} \ln \frac{sk}{n} \leq n$. Тогда $\tau(n) \leq n \leq
+    \frac{n}{k} \ln \frac{sk}{n}$ 
+
+    Теперь у нас $s > \frac{n}{k}$ и кроме того $\frac{n}{k} \ln \frac{sk}{n} < n$. Теперь зафиксируем
+    $\mathcal{M} = \{M_1, \cdots, M_s\}$. Пусть $\nu_1$ -- вершина, содержащаяся в самом большом количестве $M_i$. Пусть
+    $\rho_i = \{j : \nu_i \in M_j\}$. Тогда $|\rho_1| \geq \frac{sk}{n}$. Удалим элемент $\nu_1$ из рассмотрения (выкенем
+    его из $\mathcal{R}_n$, также выкинем из $\mathcal{M}$ все $\rho_1$). Пусть $s_1 = |\mathcal{M} \setminus
+    \rho_1|$, тогда $|\rho_2| \geq \frac{s_1k}{n - 1} \leq \frac{s_1 k}{n}$. Сделаем $N$ шагов, чтобы $N = \rceil
+    \frac{n}{k} \ln \frac{sk}{n} \rceil + 1$. Осталось $s_N$ ребер, причем $s_N = s_{N - 1} - \rho_N \leq
+    S_{N - 1} - \frac{S_{N - 1}k}{n} = S_{N - 1}(1 - \frac{k}{n}) \leq \cdots \leq s(1 - \frac{k}{n})^N \leq s (1 -
+    \frac{k}{n})^{\frac{n}{k} \ln \frac{sk}{n}} \leq s e^{-\frac{k}{n} \cdot \frac{n}{k} \ln \frac{sk}{n}} = s \cdot
+    \frac{n}{sk} = \frac{n}{k}$
+
+    Получили, что $\tau(\mathcal{M}) \leq N + \frac{n}{k} \leq \frac{n}{k} \ln \frac{sk}{n} + 1 + \frac{n}{k}$
+\end{proof}
+
+\end{document}
+

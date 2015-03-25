@@ -1,0 +1,107 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+
+\begin{theorem}
+    Если $\{e_i\}$ -- ортогональная система в гильбертовом пространстве $H$, то $\forall x \in H:$ его ряд фурье 
+    $\sum_{i = 1}^{\infty} \alpha_i e_i = x_0$, тогда $(x - x_0, e_i) = 0$
+\end{theorem}
+
+\begin{definition}
+    Система $\{e_i\}_{i = 1}^{\infty}$ называется замкнутой в гильбертовом пространстве $H$, если $(\forall i \in
+    \mathbb{N} (e_i, x) = 0) \Leftrightarrow x = 0$
+\end{definition}
+
+\begin{theorem}
+    В гильбертовом пространстве $H$ ортогональная система $\{e_i\}$ полна тогда и только тогда, когда она замкнута.
+\end{theorem}
+
+\begin{proof}
+    $\Leftarrow$ из предыдущей теоремы: если $\{e_i\}_{i = 1}^{\infty}$ ортогональная, то $\forall x \in H:
+    \sum_{i = 1}^{\infty}\alpha_i e_i = x_0: \forall i \in \mathbb{N}: (x - x_0, e_i) = 0$. Так как $e_i$ замкнута, то
+    $x - x_0 = 0 \Leftrightarrow x = x_0$.
+
+    $\Rightarrow$ если $\{e_i\}$ полна, то $\forall x \in H: x = \sum_{i = 1}^{\infty} \alpha_i e_i$, то $\alpha_i =
+    \frac{(x, e_i)}{(e_i, e_i)}$. Если $\forall i \in \mathbb{N}: (e_i, x) = 0$, то $\alpha_i = 0, x = 0$
+\end{proof}
+
+\begin{theorem}
+    Система $\{\frac{1}{2}, \cos x, \sin x, \cos 2x, \sin 2x, \cdots \}$ полна в пространстве $C_{per} = \{f
+        \in C: f(x + 2\pi) = f(x), \|f\| = \max_{x \in [-\pi, \pi]} |f(x)|\}$
+\end{theorem}
+
+\begin{proof}
+    Первая теорема Вейрештрасса.
+\end{proof}<++>
+
+\begin{theorem}
+    Система $\{1, x, x^2, \cdots\}$ полна в $C([a, b])$
+\end{theorem}
+
+\begin{proof}
+    Вторая теорема Вейерштрасса.
+\end{proof}
+
+\begin{theorem}
+    Система $\{\frac{1}{2}, \cos x, \sin x, \cos 2x, \sin 2x, \cdots \}$ ортогональная и полна в пространстве
+    $RL_2([-\pi, \pi])$, при этом справедливо равенство Парсеваля: $\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)^2 dx =
+    \frac{a_0^2}{2} +
+    \sum_{k = 1}^{\infty} a_k^2 + b_k^2$
+\end{theorem}
+
+\begin{proof}
+    Ортогональность мы уже доказывали. $(f, g) = \frac{1}{\pi}\int_{\pi}^{\pi}f(x)g(x)dx$
+    $(\frac{1}{2}, \frac{1}{2}) = \frac{1}{2}$
+
+    $(\cos kx, \cos kx) = \frac{1}{\pi}\int_{-\pi}^{\pi}\cos^2 kx dx = 1$
+
+    $(\sin kx, \sin kx) = 1$.
+    Первый шаг: попробуем любую функцию из $RL_2$ приблизить неприрывной. План такой: 
+    \begin{enumerate}
+        \item Пусть $f \in RL_2[-\pi, \pi]$. Она и её квадрат абсолютно интегрируем. $\forall \varepsilon > 0: \exists
+            f_1: \|f - f_1\| < \varepsilon$, причем $f_1$ -- ограничена. Чтобы её получить мы просто зануляем функцию в
+            некоторых окресностях её особенностей.
+
+        \item $f_1$ абсолютно интегрируема, приближаем $f_1$ ступенчатой функцией $f_2$ в $RL_1$. 
+        \item Пусть $M = \max \{\sup |f_1|, \sup |f_2|\}$. Тогда $\int_{-\pi}^{\pi}(f_1 - f_2)^2dx \leq 2M
+            \int_{-\pi}^{\pi}|f_1 - f_2|dx \leq 2M \varepsilon$. Значит $f_2$ приближает $f_1$ в $RL_2$
+        \item Приближаем ступенчатую $f_2$ непрерывной $f_3$ (отступает немного от каждой ступеньки и соединяем концы ступенек
+            нулем)
+    \end{enumerate}
+
+    Теперь, любую непрервыную функцию мы можем в $C$ приблизить рядом. Но из сходимости в $C$ следует сходимость в
+    $RL_2$.
+
+    Значит тригонометрическая система полна в $RL_2$. Теперь докажем равенство Парсеваля.
+
+    Пусть $x \in RL_2$. Так как система ортогональна, то $\|x\| = \sum_{i = 1}^{\infty} \alpha_k^2 \|e_k\|^2$.
+    Раскрываем норму и получаем равенство Парвсеваля.
+\end{proof}
+
+\begin{definition}
+    \[
+        P_n(x) = \frac{1}{2^{n}n!} \cdot \frac{d^n (x^2 - 1)^n}{dx^n}
+    \] называеется многочленом Лежандра на $[-1, 1]$
+\end{definition}
+
+\begin{statement}
+    $(P_n(x), P_k(x)) = 0$ при $n \neq k$
+\end{statement}
+
+\begin{proof}
+    Для этого докажем, что $\int_{-1}^{1}P_n(x) Q_{n - 1}(x)dx = 0$ для произвольного многочлена $Q(x)$ степени $\leq n
+    - 1$. $n$ раз берём по частям. Подинтегральный член на каждом шаге интегрирования по частям будет равен нулю,
+    конечный интеграл будет тоже равен нулю.
+\end{proof}
+
+\begin{statement}
+    $\|P_n\| = 1$
+\end{statement}
+
+\begin{proof}
+    $2^{n}n!P_n(x) = \frac{(2n)!}{n!}x^n + Q_{n - 1}(x)$. Тогда $P_n(x) = \frac{(2n - 1)!!}{n!}x^n + Q_{n - 1}(x)$. 
+    Поэтому $\int_{-1}^{1}P_n(x) P_n(x)dx = \frac{(2n - 1)!!}{n!}\int_{-1}^{1}x^nP_n(x)dx$. Опять берём по частям $n$
+    раз. В конце останется $(-1)^n \frac{(2n - 1)!!}{(2n)!!}\int_{-1}^{1}(x^2 - 1)^n dx = \frac{2}{2n + 1}$
+\end{proof}
+
+\end{document}

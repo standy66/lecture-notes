@@ -1,0 +1,222 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+
+\subsection{Метод нахождения эффективных оценок}
+
+\begin{lemma}
+    В неравенстве Рао-Крамера равенство достигается тогда и только тогда, когда
+    $\hat \theta(X) - \tau(\theta) = c(\theta) U_{\theta}(X)$, где $c(\theta) = \frac{\tau'(\theta)}{I_X(\theta)}$
+\end{lemma}
+
+\begin{proof}
+    Равенство в неравенстве Коши-Буняковского достигается тогда и только тогда, когда случайные величины линейно
+    зависимы почти наверное. Значит, $\hat \theta(X) - \tau(\theta) = c(\theta) U_{\theta}(X) + a(\theta)$. Чему равны
+    эти $a(\theta)$ и $c(\theta)$? Берем математическое ожидание от обоих частей.
+    Получаем, что $a(\theta) = 0$.
+
+    Теперь умножим обе части на вклад и возьмем математическое ожидание:
+    $\tau'(\theta) = E_{\theta}(\hat \theta(X) - \tau(\theta))U_{\theta}(X) = c(\theta) E_{\theta}(U_{\theta}(X))^2 =
+    I_{X}(\theta)$
+\end{proof}
+\begin{example}
+    Пусть $(X_1, \cdots, X_n) \sim Bin(1, \theta)$. $\theta \in (0, 1)$. Для каких $\tau(\theta)$ существуют эффективные
+    оценки? Вычислить информацию Фишера одного наблюдения.
+
+    Рассмотрим плотность $p_{\theta}(x_1, \cdots, x_n) = \prod_{i = 1}^n \theta^{x_i} \cdot (1 - \theta)^{1 - x_i} =
+    \theta^{n \overline X} \cdot (1 - \theta)^{n - n \overline X}$. Что такое вклад?
+    $U_{\theta}(X) = \frac{\partial}{\partial \theta} \ln p_{\theta} = \frac{n \overline X}{\theta} -
+    \frac{n - n \overline X}{1 - \theta}$.
+    Преобразуем последнее выражение:
+    $\overline X - \theta = \frac{\theta (1 - \theta)}{n}U_{\theta}(X)$. Получается, что мы нашли эффективную оценку
+    $\overline X$ -- это оценка параметра $\theta$. Информация Фишера одного наблюдения $i(\theta) = \tau'(\theta)
+    I_X(\theta) / n = \frac{1}{\theta (1 - \theta)}$.
+
+    Кроме $\tau(\theta)$ можно эффективно оценить линейную функцию от $\tau(\theta)$
+\end{example}
+
+\begin{remark}
+Понятно, что эффективная оценка очень хороша -- это видно из неравенства Рао-Крамера. Она является наилучшей оценкой
+$\tau(\theta)$ в реднеквадратическом подхоже в классе несмещённых оценок $\tau(\theta)$
+\end{remark}
+
+\subsection{Метод максимального правдоподобия}
+\begin{definition}
+    Пусть $(X_1, \cdots, X_n)$ -- наблюдение из неизвестного распределения $P \in \{P_{\theta}: \theta \in \Theta\}$,
+    где $\{P_{\theta}\}$ -- доминируемое семейство с плотностью $p_{\theta}(X)$. Тогда функцией правдоподобия называется
+    плотность, с подставленными туда результатми наблюдения:\
+    $f_{\theta}(X) = f_{\theta}(X_1, \cdots, X_n) = p_{\theta}(X)$.
+    Если $X = (X_1, \cdots, X_n)$ -- выборка из распределения с плотностью $p_{\theta}$ (то есть теперь $p_{\theta}$ --
+    это неизвестная плотность $X_i$), то:
+    $f_{\theta}(X) = f_{\theta}(X_1, \cdots, X_n) = \prod_{i = 1}^n p_{\theta}(X_i)$
+\end{definition}
+
+\begin{definition}
+    Оценка максимального правдоподобия (MLE, Maximum Likelihood Estimation) -- это $\hat \theta = argmax_{\theta \in
+    \Theta} f_{\theta}(X)$. Смысл этой оценки в том, мы живём в наиболее вероятном мире. То есть когда случайное событие
+    происходит, то всегда выбирается то, у которого наибольшая вероятность.
+\end{definition}
+
+\begin{example}
+    $X = (X_1, \cdots, X_n)$ -- выборка из равномерного распределения $U(0, \theta)$.
+
+    $f_{\theta}(X_1, \cdots, X_n) = \prod_{i = 1}^n \frac{1}{\theta} \cdot I\{0 \leq X_i \leq \theta\} =
+    \frac{1}{\theta^n}I\{0 \leq X_{(1)}, X_{(n)} \leq \theta\}$
+
+    Посмотрим на эту функцию, на отрезке $(0, +\infty)$ она возрастает в сторону нуля. Значит, логично взять минимально
+    возможно значение $\theta$, не нарушающее индикаторы. Это значение -- $\hat \theta = X_{(n)}$
+\end{example}
+
+\begin{example}
+    Пусть $X = (X_1, \cdots, X_n)$ -- выборка из $\mathcal{N}(a, \sigma^2)$, причем оба параметра неизвестны.
+
+    $f_{\theta}(X) = \prod_{i = 1}^n \frac{1}{\sqrt{2 \pi \sigma^2}} \cdot e^{- \frac{(x_i - a)^2}{2 \sigma^2}}$
+    Это гладкая функция, значит оценка по методу максимального правдоподобия, это решение системы:
+    \[
+        \begin{cases}
+            \frac{\partial}{\partial a}f_{\theta}(X_1, \cdots, X_n) = 0, \\
+            \frac{\partial}{\partial \sigma^2} f_{\theta}(X_1, \cdots, X_n) = 0
+        \end{cases}
+    \]
+    Очень часто бывает выгодно сначала взять логарифм. $L_{\theta}(X) = \ln f_{\theta}(X)$ -- логарифмическая функция
+    правдоподобия.
+\end{example}
+
+\begin{definition}
+    Условия регулярности для MLE:
+    \begin{enumerate}
+        \item $X = (X_1, \cdots, X_n)$ -- выборка растущего размера из неизветсного распределения $P \in \{P_{\theta}:
+            \theta \in \Theta\}$
+        \item $\{P_{\theta}\}$ -- доминируемое семейство с плотностью $p_{\theta}(X)$
+        \item $\forall \theta_1 \neq \theta_2: P_{\theta_1} \neq P_{\theta_2}$
+        \item $A = \{x : p_{\theta}(x) > 0\}$ не зависит от $\theta$.
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}[экстремальное свойство правдоподобия]
+    В условиях регулярности для MLE, если $f_{\theta}(X_1, \cdots, X_n)$ -- функция правдоподобия. Тогда $\forall \theta
+    \neq \theta_0: P_{\theta_0}(f_{\theta_0}(X_1, \cdots, X_n) > f_{\theta}(X_1, \cdots, X_n)) \rightarrow 1$
+\end{theorem}
+
+\begin{proof}
+    $f_{\theta_0}(X) > f_{\theta}(X) \Leftrightarrow \frac{f_{\theta_0}(X)}{f_{\theta (X)}} < 1 \Leftrightarrow \ln
+    \frac{f_{\theta}}{f_{\theta_0}} < 0$ Умножим все на $\frac{1}{n}$.
+
+    $\frac{1}{n}\ln \frac{f_{\theta}}{f_{\theta_0}} = \frac{1}{n}\ln \prod_{i =
+    1}^n\frac{p_{\theta}(X_i)}{p_{\theta_0}(X_i)} = \frac{1}{n}\sum_{i = 1}^n \ln
+    \frac{p_{\theta}(X_i)}{p_{\theta_0}(X_i)} \cae E_{\theta_0}\ln \frac{p_{\theta}(X_1)}{p_{\theta_0}(X_1)}$
+
+    Покажем, что $E_{\theta_0}\ln \frac{p_{\theta}(X_1)}{p_{\theta_0}(X_1} < 0$.
+
+    $E_{\theta_0}\ln \frac{p_{\theta}(X_1}{p_{\theta_0}(X_1)} = \int_{A}\ln
+    \frac{p_{\theta}(x)}{p_{\theta_0}(x)}p_{\theta_0}(x) \mu(dx) = \int_{A}^{}\ln (1 +
+    \frac{p_{\theta}(x)}{p_{\theta_0}(x)} - 1) p_{\theta_0}(x) \mu(dx) \leq
+    \int_{A}^{}(\frac{p_{\theta}(x)}{p_{\theta_0}(x)} - 1) p_{\theta_0}(x) \mu(dx) = 1 - 1 = 0$
+    Когда достигается равенство? Когда $P_{\theta_0}(\{x : p_{\theta}(x) = p_{\theta_0}(x)\}) = 1$. Но это не так.
+    Поэтому неравенство строгое. Что и требовалось доказать.
+\end{proof}
+
+\begin{corollary}
+    Если $\Theta$ конечно, то ОМП состоятельна.
+\end{corollary}
+
+\begin{proof}
+    Из теоремы следует, что с вероятностью стремящейся к единице, ОМП будет равна истинному значению параметра. Тогда
+    она состоятельна.
+\end{proof}
+
+\begin{definition}
+    Дополнительные условия регулярности:
+    \begin{enumerate}
+        \item $\Theta$ -- открытый одномерный интервал
+        \item Пусть $p_{\theta}(x)$ дифференцируема по $\theta$ для всех $x \in A$
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}[состоятельность решения уравнения правдоподобия]
+    В расширенных условиях регулярности уравнение, называемое уравнением правдоподобия
+    $\frac{\partial}{\partial \theta}\ln f_{\theta}(X_1, \cdots, X_n) = 0$ имеет решение, которое сходится по
+    веротяности к истинному значению параметра.
+\end{theorem}
+
+\begin{proof}
+    Пусть $\theta_0$ -- истинное значение параметра. Выберем такое $a > 0$, такое что $[\theta_0 - a, \theta_0 + a]
+    \subset \Theta$. Тогда, по предыдущей теореме $P_{\theta_0}(f_{\theta_0 - a}(X_1, \cdots, X_n) < f_{\theta_0}(X_1,
+    \cdots, X_n) > f_{\theta_0 + a}(X_1, \cdots, X_n)) \rightarrow 1$. Значит, с большой вероятностью внутри интервала
+    $[\theta_0 - a, \theta_0 + a]$ найдется решение уравнения правдоподобия. Возьмем решение, ближайшее к истинному
+    значению. $\hat \theta$ -- оно самое. Тогда $\forall \varepsilon > 0$ в силу построения $P_{\theta_0}(|\hat \theta -
+    \theta_0| < \varepsilon) \rightarrow 1$. Доказано.
+\end{proof}
+
+Вопросы:
+\begin{enumerate}
+    \item $\hat \theta$ зависит от $\theta_0$ (мы же выбрали ближайшее), которое мы хотим найти.
+    \item Как из множества корней отобрать ближайшее (при неизвестном $\theta_0$).
+    \item Почему $\hat \theta$ -- именно максимум, а не минимум.
+\end{enumerate}
+
+\begin{corollary}
+    Если в условиях теоремы $\forall X_1, \cdots, X_n$ существует ровно одно решение уравнения правдоподобия, то оно и
+    является состоятельной оценкой параметра $\theta$ и с вероятностью стремящейся к единице это и есть оценка
+    максимального правдоподобия.
+\end{corollary}
+
+\begin{proof}
+    Состоятельность очевидна (следует из теоремы). Согласно доказательству теоремы $\forall \varepsilon > 0$ внутри
+    отрезка $[\theta_0 - \varepsilon, \theta_0 + \varepsilon]$ есть локальный максимум функции $f_{\theta}$.
+    Предположим, что есть другой глобальный максимум (или он не достигается), например вне этого отрезка. Но тогда между
+    ними должен быть локальный минимум. Но локальный минмум тоже удовлетворяет уравнению правдоподобия, т.к функция
+    дифференицируема. Но тогда решение у уравнения правдоподобия не единственно. Противоречие.
+\end{proof}
+
+\begin{definition}
+    Ещё одни дополнительные условия регулярности:
+    \begin{enumerate}
+        \item Считаем, что плотность трижди непрерывно дифференцируема по $\theta$ $\forall x \in A$
+        \item $i(\theta) = E_{\theta}(\frac{\partial}{\partial \theta}\ln p_{\theta}(x))^2$ положительно и конечно для
+            любого $\theta$
+        \item $\forall \theta_0 \in \Theta: \exists c > 0: \exists M(x) : \forall \theta \in (\theta_0 - c, \theta_0 +
+            c): \lvert \frac{\partial^3}{\partial \theta^3} \ln p_{\theta}(x) \rvert \leq M(x)$, причем
+            $E_{\theta}M(X_i) < \infty$
+        \item Интеграл $\int_{A}^{} p_{\theta}(x) \mu(dx)$ дважды дифференируем по $\theta$ под знаком интеграла
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}[асимптотическая нормальность состоятельного решения уравнения правдоподобия]
+    В условиях регулярности $\forall$ состоятельное решение $\hat \theta$ является асимптотически нормальным и
+    \[
+        \sqrt{n}(\hat \theta - \theta_0) \cd \mathcal{N}(0, \frac{1}{i(\theta)})
+    \]
+\end{theorem}
+
+\begin{proof}
+    Пусть $\theta_0$ -- истинное значение $\hat \theta_n \cp \theta_0$. Разложим $\frac{\partial}{\partial \theta}L_{\theta}(x)
+    = \frac{\partial}{\partial \theta}\ln f_{\theta}(x)$ в ряд тейлора в точке $\theta_0$:
+
+    \[
+        L'_{\theta}(X) = L'_{\theta_0}(X) + (\hat \theta - \theta_0) L''_{\theta_0}(X) + \frac{1}{2}(\hat \theta -
+        \theta_0)^2 L'''_{\theta}(X) (\overline \theta)
+    \], где $\overline \theta$ -- какая-то промежуточная точка. По условию $L'_{\hat \theta_n}(x) = 0$. Перепишем это в
+    таком виде:
+    \[
+        \sqrt{n}(\hat \theta - \theta_0) = \frac{-L'_{\theta_0}(X) \frac{1}{\sqrt{n}}}{\frac{1}{n}(L''_{\theta_0}(X) +
+        \frac{1}{2}(\hat \theta - \theta_0)L'''_{\overline \theta}(X)}
+    \]
+
+    Числитель по ЦПТ сходится к 0 с асимптотической дисперсией $i(\theta)$
+
+    Также, по УЗБЧ $\frac{1}{n}L''_{\theta_0}(X) = \frac{1}{n}\sum_{k = 1}^n\frac{\partial^2}{\partial \theta^2}(-\ln
+    p_{\theta}(X_k))$ стремится по вероятности к $E\frac{\partial^2}{\partial \theta^2}-\ln p_{\theta}(X_k) = i(\theta)$ (проверятется
+    ручками).
+
+    Осталось оценить $|\frac{1}{2n}(\hat \theta_n - \theta_0) L_{\overline \theta}'''(X)| = |(\hat \theta - \theta_0)
+    \frac{1}{2}\frac{1}{n}\sum_{k = 1}^n
+    \frac{\partial^3}{\partial \theta^3}-\ln p_{\theta}(X_k)| \leq |\frac{1}{n}\sum_{k = 1}^n M(X_k)
+    \frac{1}{2}(\hat \theta_n - \theta_0|$ сходится к нулю.
+
+    По лемме слуцкого, $\sqrt{n}(\hat \theta_n - \theta_0) \cd \frac{N(0, i(\theta))}{i(\theta)} = N(0,
+        \frac{1}{i(\theta)})$
+\end{proof}
+
+\end{document}
+
