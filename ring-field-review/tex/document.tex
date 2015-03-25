@@ -539,5 +539,38 @@
     $\mathbb{Z}[\sqrt{3}i]$ нет.
 \end{proof}
 
+\begin{statement}
+    Если $N(ab) = N(a)$, и $a, b \neq 0$, то $b$ -- обратим
+\end{statement}
+
+\begin{proof}
+    Разделим $a$ на $ab$ с остатком. Тогда $\exists q, r: a = abq + r$. Пусть $r \neq 0$. Тогда $N(r) < N(ab) = N(a)$.
+    Но $r = a - abq = a (1 - bq)$, следовательно $a | r$. Тогда $r = xa$. $N(r) = N(xa) \geq N(a)$. Но мы получили
+    противоречие, ведь $N(a) \leq N(xa) = N(r) < N(ab) = N(a)$. Значит $r = 0$. Но тогда $b$ -- обратимый
+\end{proof}
+
+\begin{statement}
+    Если $b$ -- обратим, то $N(ab) = N(a)$
+\end{statement}
+
+\begin{proof}
+    Из свойства нормы: $N(ab) \geq N(a)$. Докажем, что $N(a) \geq N(ab)$. Так как $b$ -- обратимый, то $a = a b
+    b^{-1}$. Тогда Из свойства нормы $N(a) = N(abb^{-1}) \geq N(ab)$. Конец.
+\end{proof}
+
+\begin{statement}
+    Если $p$ -- простое целое число, причем $p = 4k + 3$, то $p$ -- неразложимый элемент в $\mathbb{Z}[i]$
+\end{statement}
+
+\begin{proof}
+    Пусть не так. Тогда $\exists z_1, z_2 \not \in \mathbb{Z}[i]^*: p = z_1 z_2$. Посмотрим на норму $p$: $p^2 = N(z_1)
+    N(z_2)$. Понятно, что без ограничения общности есть два варианта:
+    \begin{enumerate}
+        \item $N(z_1) = N(z_2) = p$. Но такого быть не может, т.к. $N(z_1) = a^2 + b^2 \not \equiv 3 \mod 4$
+        \item $N(z_1) = 1, N(z_2) = p^2$. Но тогда $z_1$ обратимый, и мы опять пришли к противоречию.
+    \end{enumerate}
+    Значит, $p$ неразложимый.
+\end{proof}
+
 
 \end{document}
