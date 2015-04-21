@@ -1,0 +1,101 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+\section{Условное распределение}
+\begin{definition}
+    Пусть $A \in \mathcal{F}$, $\mathcal{G} \subset \mathcal{F}$ -- под-сигма-алгебра. Определим $P(A|G) := E(I_A|G)$
+\end{definition}
+
+\begin{definition}
+    Пусть $\eta$ -- случайная величина, $\mathcal{F}_{\eta}$ -- сигма-алгебра, порожденная случайной величиной $\eta$.
+    Тогда $E(\xi|\eta) := E(\xi|\mathcal{F}_{\eta})$
+\end{definition}
+
+\begin{definition}
+    Пусть $\xi, \eta$ -- случайные величины. Тогда $E(\xi | \eta = y)$ -- это такая борелевская $\varphi(y)$, что 
+    $\forall B \in \mathcal{B}(\mathbb{R}): E(\xi I \{\eta \in B\}) = \int_B \varphi(y) P_{\eta}(dy)$, где $P_{\eta}$ --
+    это распределение случайной величины $\eta$
+\end{definition}
+
+\begin{lemma}
+    Пусть $E|\xi| < \infty$, тогда $E(\xi|\eta = y)$ существует и единственно почти наврное.
+\end{lemma}
+
+\begin{proof}
+    Следует из теоремы Радона-Никодима.
+\end{proof}
+
+\begin{statement}
+    $E(\xi | \eta = y) = \varphi(y) \Leftrightarrow E(\xi | \eta) = \varphi(\eta)$
+\end{statement}
+
+\begin{proof}
+    Докажем сначала слева направо. Ясно, что $\varphi(\eta)$ является $\eta$-измеримой. Проверим интегральное свойство.
+    Мы значем, что $E(\xi I\{\eta\in B\}) = \int_B \varphi(y) P_{\eta}(dy)$. Пусть $A \in \mathcal{F}_{\eta}$. Тогда $A
+    = \{\eta \in B\}$ для некоторого $B \in \mathcal{B}(\mathbb{R})$. Тогда $E\xi I_A = E\xi I\{\eta \in B\} = \int_B
+    \varphi(y) P_{\eta}(dy) = \int_{\mathbb{R}} \varphi(y) I_{B} P_{\eta}(dy) = E \varphi(\eta) I\{\eta \in B\}$.
+    Последнее равенство выполнено в силу теоремы о замене переменной под интегралом Лебега.
+    В обратную сторону утверждение доказывается аналогично (только теперь нам извество, что $\varphi(\eta)$ -- это
+    условное матожидание).
+\end{proof}
+
+\begin{corollary}
+    $\xi$ является $\eta$ измеримой $\Leftrightarrow \xi = \varphi(\eta)$ для некоторой борелевской $\varphi$.
+\end{corollary}
+
+\begin{definition}
+    Условным распределением случайной величины $\xi$ при условии $\eta = y$ называется $P(\xi \in B | \eta = y)$
+    рассматриваемая как функция от $B$.
+\end{definition}
+
+\begin{statement}
+    При фиксированном $y$ величина $P(\xi \in B | \eta = y)$ является вероятностной мерой $P_{\eta}$ почти наверное на $(\mathbb{R},
+    \mathcal{B}(\mathbb{R}))$
+\end{statement}
+
+\begin{definition}
+    Если условное распределение предствимо в виде $P(\xi \in B | \eta = y) = \int_B f_{\xi | \eta}(x | y) dx$, где
+    функция $f_{\xi | \eta}(x | y)$ -- это обычная неотрицательная функция двух переменных, то говорят, что
+    $f_{\xi | \eta}$ является плотностью условного распределения.
+\end{definition}
+
+\begin{theorem}
+    Пусть $g(x)$ -- борелевская функция, такая что $E|g(\xi)| < \infty$. Тогда при условии существования условной
+    плотности $f_{\xi | \eta}$ можно записать следующее:
+    \[
+        E(g(\xi) | \eta = y) = \int_{\mathbb{R}} g(x) f_{\xi | \eta}(x | y) dx
+    \]
+\end{theorem}
+
+\begin{proof}
+    Coming soon
+\end{proof}
+
+\begin{proof}
+    Нетрудно проверить, что $\int_A \varphi(x, y) dx$ является условным распределением $P(\xi \in A | \eta = y)$. Тогда
+    $\forall B \in \mathcal{B}(\mathbb{R}): E(I\{f \in A\} I\{\eta \in B\}) = P(\xi \in A, \eta \in B) = \int_{A \times
+    B} f_{\xi, \eta}(x, y) dx dy  = \int_B \left( \int_A f_{\xi, \eta}(x, y) f_{\eta}^{-1}(y) dx \right) f_{\eta}(y)
+    dy = \int_B \left( \int_A \varphi(x, y) dx \right) P_{\eta}(dy) = \int_B P(\xi \in A | \eta = y) P_{\eta}(dy)$.
+    Значит, $\varphi(x, y)$ -- действительно условная плотность.
+\end{proof}
+
+Как искать условное математическое ожидание:
+
+\begin{enumerate}
+    \item Находим совметсную плотность $f_{(\xi, \eta)} (x, y)$.
+    \item Находим плотность условия $f_{\eta}(y) = \int_{\mathbb{R}}f_{(\xi, \eta)}(x, y) dx$
+    \item Находим условную плотность $f_{\xi | \eta}(x|y) = \frac{f_{(\xi, \eta)}(x, y)}{f_{\eta}(y)}$
+    \item $\varphi(y) = E(g(\xi) | \eta = y) = \int_{\mathbb{R}} g(x) f_{\xi | \eta}(x|y) dx$
+    \item $E(g(\xi) | \eta) = \varphi(\eta)$
+\end{enumerate}
+
+\begin{statement}
+    В дискретном случае $E(g(\xi) | \eta = y) = \sum_{x \in Im \xi} g(x) P (\xi = x | \eta = y)$
+\end{statement}
+
+\begin{proof}
+    Упражнение.
+\end{proof}
+
+\end{document}
+

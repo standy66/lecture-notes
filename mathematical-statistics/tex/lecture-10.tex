@@ -1,0 +1,39 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+\section{Доверительные интвервалы}
+\begin{definition}
+    Доверительным интервалом уровня доверия $\gamma$ называется такая пара статистик $(T_1(X), T_2(X)$, что $\forall
+    \theta \in \Theta: P(T_1(X) \leq \theta \leq T_2(x)) \geq \gamma$. Если последняя вероятность $= \gamma$, то
+    доверительный интервал называется точным. Также иногда бывает удобно рассматривать односторонние доверительные
+    интервалы.
+\end{definition}
+
+\begin{definition}
+    Область $S(X) \subset \Theta$ называется доверительной областью уровня доверия $\gamma$, если $P(\theta \in S(X))
+    \geq \gamma$.
+\end{definition}
+
+\subsection{Метод центральной статистики}
+Пусть $G(X, \theta)$ -- одномерная случайная величина, распределение которой не зависит от $\theta$. Такая $G(X,
+\theta)$ называется центральной статистикой. 
+
+Пусть распределение $G$ извество, $\gamma_1, \gamma_2 \in (0, 1)$, $\gamma_1 < \gamma_2$, $\gamma = \gamma_2 -
+\gamma_1$. Пусть $g_1, g_2$ -- $\gamma_1$-, $\gamma_2$-квантили $G(X, \theta)$. Тогда $\forall \theta \in \Theta:
+P(g_1 < G(X, \theta) < g_2) \geq \gamma$. Значит $S(X) = \{\theta \in \Theta: g_1 < G(X, \theta) < g_2\}$ является
+доверительной областью уровня доверия $\gamma$
+
+\begin{example}
+    Рассмотрим $N(\theta, 1)$. Построим доверительный интервал для $\theta$.
+
+    $X_i - \theta ~ N(0, 1)$. Тогда $\sum_{i = 1}^n (X_i - \theta) ~ N(0, n)$. Тогда $\frac{1}{\sqrt{n}}(\sum_{i = 1}^n
+    (X_i - \theta)) = \sqrt{n}(\overline X - \theta) ~ N(0, 1)$ -- центральная статистика.
+
+    Пусть $\gamma_2 - \gamma_1 = \gamma$. $u_p$ -- квантиль уровня $p$ распределения $N(0, 1)$. Тогда $P(u_{\gamma_1} <
+    \sqrt{n}(\overline X - \theta) < u_{\gamma_2}) = \gamma$. Тогда $(\overline X - u_{\gamma_1} / \sqrt{n}, \overline X
+    - u_{\gamma_2} / \sqrt{n})$ -- довирительный интервал для $\theta$, причем его длина стремится к нулю при $n$
+    стремяшемся к бесконечности.
+\end{example}
+
+\end{document}
+

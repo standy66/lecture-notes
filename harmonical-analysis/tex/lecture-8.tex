@@ -1,0 +1,126 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+
+\section{Интегралы, зависящие от параметра}
+
+\begin{definition}
+    Интегралы Римана вида
+    \[
+        I(y) = \int_{a}^{b}f(x, y)dx
+    \]
+    \[
+        J(y) = \int_{\varphi(y)}^{\psi(y)}f(x, y)dx
+    \]
+    называются интегралами, зависящими от параметра.
+\end{definition}
+
+\begin{theorem}
+    Если функция $f(x, y)$ непрерывна на $[a, b] \times [c, d]$, то интеграл $I(y) = \int_{a}^{b}f(x, y)dx$ непрерывен
+    на $[c, d]$ как функция от $y$
+\end{theorem}
+
+\begin{proof}
+    Пусть $y_1, y_2 \in [c, d]$. Обозначим $\Delta y = y_2 - y_1$. Тогда
+    \begin{multline*}
+        |I(y_1) - I(y_2)| = \left| \int_{a}^{b}(f(x, y_1) - f(x, y_2))dx \right| \leq \int_{a}^{b}|f(x, y_1) - f(x,
+        y_2)|dx \leq \\
+        (b - a) \max_{[a, b]} f(x, y_1) - f(x, y_2) \leq (b - a) \omega(|\Delta y|, f)
+    \end{multline*}
+    Поскольку $f$ непрерывна на компакте, а следовательно, и равномерно непрерывна на нём, то колебание $\omega(\delta,
+    f) \rightarrow 0$ при $\delta \rightarrow 0$.
+\end{proof}
+
+\begin{theorem}
+    Пусть $\varphi, \psi : [c, d] \mapsto \mathbb{R}$ -- непрерывные на $[c, d]$ функции, причем $\varphi \leq \psi$.
+    Пусть $f$ непрерывна на $\overline G := \{(x, y) \in \mathbb{R}^2 : \varphi(y) \leq x \leq \psi(y), c \leq y \leq d\}$.
+    Тогда интеграл $J(y) = \int_{\varphi(y)}^{\psi(y)}f(x, y)dx$ непрерывен на $[c, d]$
+\end{theorem}
+
+\begin{proof}
+    Осуществим замену переменных: $x = t \psi(y) + (1 - t) \varphi(y)$. Тогда $dx = (\psi(y) - \varphi(y))dt$. Тогда
+    $J(y) = \int_{0}^{1}f(t \psi(y) + (1 - t) \varphi(y), y)(\psi(y) - \varphi(y))dt$. Функция $g(t, y) = f(t \psi(y) +
+    (1 - t) \varphi(y), y) (\psi(y) - \varphi(y))$ является непрерывной на $[c, d]$ по теореме о композиции непрерывных
+    функций. Значит интеграл $J(y)$ непрерывен на $[c, d]$.
+\end{proof}
+
+\begin{theorem}
+    Пусть для интеграла $I(y) = \int_{a}^{b}f(x, y)dx$ выполнены условия:
+    \begin{enumerate}
+        \item $f(x, y)$ интегрируема на $[a, b] \times [c, d]$
+        \item $\forall y \in [c, d]$ существует интеграл $I(y)$
+        \item $\forall x \in [a, b]$ существует интеграл $\int_{c}^{d}f(x, y) dy$
+    \end{enumerate}
+    Тогда существуют оба повторных интеграла и выполнено равенство:
+    \[
+        \int_{a}^{b} \int_{c}^{d} f(x, y) dxdy = \int_{c}^{d} \int_{a}^{b} f(x, y) dx dy
+    \]
+\end{theorem}
+
+\begin{proof}
+    Следует из соответствующей теоремы о повторных интегралах.
+\end{proof}
+
+\begin{corollary}
+    Если $f$ непрерывна на $[a, b] \times [c, d]$, то вышесформулированная теорема также справедлива.
+\end{corollary}
+
+\begin{theorem}[правило Лейбница]
+    Пусть $f, \frac{\partial f}{\partial y}$ непрерывны на $[a, b] \times [c, d]$. Тогда интеграл
+    $I(y) = \int_{a}^{b}f(x, y)dx$ дифференцируем, причем
+    \[
+        \frac{dI(y)}{dy} = \int_{a}^{b}\frac{\partial f}{\partial y}(x, y) dx
+    \]
+\end{theorem}
+
+\begin{proof}
+    Рассмотрим $y, y + \Delta y \in [c, d]$. Воспользовавшись формулой конечных приращений Лагранжа для некоторого
+    $\theta \in (0, 1)$ выполнено:
+    \begin{multline*}
+        \left|\frac{I(y + \Delta y) - I(y)}{\Delta y} - \int_{a}^{b}\frac{\partial}{\partial y}f(x, y)dx \right| = \\
+        \left| \int_{a}^{b} \left[ \frac{f(x, y + \Delta y) - f(x, y)}{\Delta y} - \frac{\partial}{\partial y}f(x, y)
+        \right] dx\right| \leq \\
+        \int_{a}^{b} \left|\frac{\partial}{\partial y}f(x, y + \theta \Delta y) - \frac{\partial}{\partial y}f(x, y)
+        \right| dx \leq  (b - a) \omega(\Delta y, \frac{\partial f}{\partial y})
+    \end{multline*}
+    Поскольку $\frac{\partial f}{\partial y}$ непрерывно на $[a, b] \times [c, d]$, а следовательно, и равномерно
+    непрерывно, $\omega(\Delta y, \frac{\partial f}{\partial y}) \rightarrow 0$ при $\Delta y \rightarrow 0$
+\end{proof}
+
+\begin{theorem}
+    Пусть $f, f'_y$ непрерывны на
+    $\overline G := \{(x, y) \in \mathbb{R}^2 : \varphi(y) \leq x \leq \psi(y), c \leq y \leq d\}$.
+    Функции $\varphi, \psi$ непрерывно дифференцируемы на $[c, d]$. Тогда $J(y)$ также дифференцируем на $[c, d]$,
+    причем
+    \[
+        J'(y) = f(\psi(y), y)\psi'(y) - f(\varphi(y), y) \varphi'(y) + \int_{\varphi(y)}^{\psi(y)}f'_y(x, y)dx
+    \]
+
+\end{theorem}
+
+\begin{proof}
+    Рассмотрим $F(y, u, v) = \int_{u}^{v}f(x, y) dx$. Тогда $J(y) = F(y, \varphi(y), \psi(y))$. По правилу
+    дифференцирования сложной функции $J'_y = F'_y + F'_u \varphi'(y) + F'_v \psi'(y)$.
+    \[
+        F'_y = \int_{u}^{v}f'_y(x, y)dx
+    \] по правилу Лейбница. Применяя теорему о среднем для интеграла, находим, что $F'_v$  в точке $v_0$ это:
+    \[
+        \left( \int_{u}^{v}f(x, y)dx \right)'_v = \lim_{v \rightarrow v_0} \frac{\int_{v}^{v_0}f(x, y)dx}{v - v_0} =
+        \lim_{v \rightarrow v_0} f(\xi, y) = f(v_0, y)
+    \]
+    Поэтому
+    \[
+        F'_u = -f(u, y)
+    \]
+    \[
+        F'_v = f(v, y)
+    \] Заметим, что $F'_u$ и $F'_v$ непрерывны, так как $f$ непрерывна, а $F'_y$ также непрерывна. Чтобы доказать это,
+    достаточно сделать замену $x = t v + (1 - t)u$:
+    \[
+        F'_y = \int_{0}^{1}f(tv + (1 - t)u, y)(v - u) dt
+    \]
+    Подинтегральная функция непрерывна, поэтому и $F'_y$ непрерывна (доказывается так же, как и первая теорема в этом
+    разделе)
+\end{proof}
+
+\end{document}

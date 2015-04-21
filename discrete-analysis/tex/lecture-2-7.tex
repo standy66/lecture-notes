@@ -1,0 +1,21 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+$R_n = \{1, 2, \cdots, n\}$. Нужно построить совокупность $M$, которая будет состоять из $s$ $k$-элементных подмножеств, так,
+что $\tau(M) > l$. Допустим мы построили такую совокупность $M$: для любого множества $L_j$ в $R_n$ имеющего можность $n - l$.
+Найдется $M_i \in M$: $M_i \subset L_j$. Это очень похоже на СОП, только для множеств. Тогда конечно же, $\tau(M) > l$.
+Формализуем: пусть $L_1, \cdots, L_{\binom{n}{l}}$ -- все $(n - l)$-элементные подмножества $R_n$. Нам нужна такая $M$,
+что $\forall j : \exists i: M_i \subset L_j$. Пусть $K_1, \cdots, K_{\binom{n}{k}}$ -- все $k$-элементные подмножества
+$R_n$. Рассмотрим $R_{\binom{n}{k}} = \{1, \cdots, \binom{n}{l}\}$. Сопоcтавим $L_j \mapsto \Lambda_j = \{\nu:
+    K_{\nu} \subset L_j\}$. $LL = \{\Lambda_1, \cdots, \Lambda_n\}$. $\tau := \tau(LL)$. Рассмотрим любую минимальную
+    СОП $\sigma_1, \cdots, \sigma_{\tau}$ для $LL$. Рассмотрим $\overline M := \{K_{\sigma_1}, \cdots,
+    K_{\sigma_{\tau}}\}$. Утверждение $\forall j: \exists i: K_{\sigma_i} \subset L_j$. Если $\tau(LL) \leq s$, тогда
+    $\exists M: \tau(M) > l$
+
+\begin{theorem}
+    Пусть $\max \{ \frac{\binom{n}{k}}{\binom{n - l}{k}}, \frac{\binom{n}{k}}{\binom{n - l}{k}} \ln (\cdots) \} - \cdots
+    \leq s$. Тогда $\exists M: \tau(M) > l$.
+\end{theorem}
+
+\end{document}
+

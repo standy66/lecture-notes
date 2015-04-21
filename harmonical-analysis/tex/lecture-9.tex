@@ -1,0 +1,233 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+\section{Равномерная функциональная сходимость на множестве}
+\begin{definition}
+    Пусть $X, Y \subset \mathbb{R}$, $y_0 \in Y$ -- предельная точка $Y$. Пусть заданы функции $f : X \times Y \mapsto
+    \mathbb{R}, \varphi: X \mapsto \mathbb{R}$. Говорят, что функция $f$ равномерно на $X$ стемится к $\varphi$ при $y
+    \rightarrow y_0$ и пишут $f \rightrightarrows \varphi$ на $X$ при $y \rightarrow y_0$, если
+    \[
+        \sup_{x \in X}|f(x, y) - \varphi(x)| \rightarrow 0 \text{ при } y \rightarrow y_0
+    \]
+\end{definition}
+
+\begin{remark}
+    Понятие равномерной сходимости по множеству обобщает понятие равномерной сходимости функциональной
+    последовательности. Действительно, пусть $Y = \mathbb{N}$. $f_n(x) = f(x, n), y_0 = +\infty$. Тогда утверждение $f(x, n)
+    \rightrightarrows \varphi(x)$ на $X$ при $y \rightarrow +\infty$ совпадает с утверждением $f_n(x) \rightrightarrows
+    \varphi(x)$ при $n \rightarrow +\infty$
+\end{remark}
+
+\begin{theorem}[критерий Коши]
+    Для того, чтобы заданная на $X \times Y \subset \mathbb{R}^2$ функция $f$ равномерно по $X$ стремилась к какой-либо
+    функции при $y \rightarrow y_0$ необходимо и достаточно выполнения условия Коши:
+    \[
+        \forall \varepsilon > 0: \exists \delta: \forall y', y'' \in Y \cap \mathring{U}_{\delta}(y_0):
+        \sup_{X} |f(x, y') - f(x, y'')| < \varepsilon
+    \]
+\end{theorem}
+
+\begin{theorem}
+    Пусть при каждом фиксированном $y \in Y$ функция $f(x, y)$ непрерывна по $X$ в точке $x_0$ и $f \rightrightarrows
+    \varphi$ по $X$ при $y \rightarrow y_0$. Тогда $\varphi$ также непрерывна в точке $x_0$.
+\end{theorem}
+
+\begin{theorem}[о предельном переходе под знаком интеграла]
+    Пусть функция $f: [a, b] \times Y \mapsto \mathbb{R}$ непрерывна на $[a, b]$ при каждом фиксированном $y \in Y$.
+    Пусть также $f \rightrightarrows \varphi$ по $[a, b]$ при $y \rightarrow y_0$. Тогда
+    \[
+        \int_{a}^{b}f(x, y) dx \rightarrow \int_{a}^{b}\varphi(x)dx \text{ при } y \rightarrow y_0
+    \]
+\end{theorem}
+
+\begin{proof}
+    Доказательства этих теорем ничем не отличаются от аналогичных доказательств при $Y = \mathbb{N}, y_0 = +\infty$ (то
+    есть для случая функциональных последовательностей)
+\end{proof}
+
+\begin{definition}
+    Будем рассматривать несобственные интегралы $I(y) = \int_{a}^{b}f(x, y)dx$ с особенностью в точке $b$. То есть $f:
+    [a, b) \times Y \mapsto \mathbb{R}$, причем $f$ интегрируема по Риману для любого отрезка $[a, \eta] \subset [a,
+        b)$. Напомним, что символ $\int_{a}^{b}f(x, y)dx$ на самом деле означает $\lim_{\eta \rightarrow b}
+        \int_{a}^{\eta}f(x, y)dx$. Говорят, что при фиксированном $y$ $I(y)$ сходится, если последний предел существует
+        и конечен. Иначе $I(y)$ расходится.
+\end{definition}
+
+\begin{definition}
+    Пусть несобственный интеграл $I(y)$ сходится для любого $y \in Y$. Будем говорить, что интеграл сходится равномерно,
+    если
+    \[
+        \sup_{y \in Y} \left| \int_{\eta}^{b}f(x, y) dx \right| \rightarrow 0 \text{ при } \eta \rightarrow b - 0
+    \]
+\end{definition}
+
+\begin{theorem}[критерий Коши]
+    Для того, чтобы несобственный интеграл $I(y)$ сходился равномерно на $Y$ необходимо и достаточно выполнение условия
+    Коши:
+    \[
+        \forall \varepsilon > 0: \exists \eta \in [a, b): \forall \eta', \eta'' \in [\eta, b): \sup_{y \in Y} \left|
+        \int_{\eta'}^{\eta''}f(x, y)dx \right| < \varepsilon
+    \]
+\end{theorem}
+
+\begin{proof}
+    Докажем необходимость. Пусть $I(y)$ сходится равномерно. Тогда
+    \[
+        \sup_{y \in Y} \left| \int_{\eta}^{b}f(x, y)dx \right| \rightarrow 0 \text{ при } \eta \rightarrow b - 0
+    \]
+    То есть
+    \[
+        \forall \varepsilon > 0: \exists \eta \in [a, b): \forall \eta' \in (\eta, b): \sup_{y \in Y} \left| \int_{\eta'}^{b}f(x, y)dx
+        \right| < \varepsilon
+    \]
+    Но
+    \[
+        \int_{\eta'}^{\eta''}f(x, y)dx = \int_{\eta'}^{b}f(x, y)dx - \int_{\eta''}^{b}f(x, y)dx
+    \]
+    Также мы знаем, что оба правых интеграла по модулю меньше $\varepsilon$. Но тогда необходимость доказана.
+
+    Теперь докажем достаточность. При фиксированном $y$ выполнено:
+    \[
+        \left| \int_{\eta'}^{\eta''}f(x, y)dx \right| \leq \sup_{y \in Y} \left| \int_{\eta'}^{\eta''} f(x, y)dx \right|
+    \]
+    Но тогда выполнено
+    \[
+        \forall \varepsilon > 0: \exists \eta \in [a, b): \forall \eta', \eta'' \in [\eta, b): \left|
+        \int_{\eta'}^{\eta''}f(x, y)dx \right| < \varepsilon
+    \]
+    А это критерий Коши существование предела в точке $b - 0$. Значит при любом фиксированном $y$ предел $\lim_{\eta
+    \rightarrow b} \int_{a}^{b}f(x, y)dx$ существует. Теперь докажем, что интеграл сходится равномерно. При
+    фиксированном $\varepsilon > 0$ существует такая $\eta \in (a, b)$, что для любых $\eta', \eta'' \in [\eta, b):
+        \sup_{y \in Y} \left| \int_{\eta'}^{\eta''}f(x, y)dx \right| < \varepsilon$. Переходя к пределу в последнем неравенстве при
+        $\eta'' \rightarrow b - 0$ имеем:
+        \[
+            \sup_{y \in Y} \left| \lim_{\eta'' \rightarrow b - 0}
+            \int_{\eta'}^{\eta''}f(x, y)dx \right| < \varepsilon
+        \]. То есть $\sup_{y \in Y} \left| \int_{\eta'}^{b} f(x, y)dx
+        \right| < \varepsilon$. А это то, что требовалось доказать.
+\end{proof}
+
+\begin{theorem}[признак Вейерштрасса]
+    Пусть $f : [a, b) \times Y \mapsto \mathbb{R}$, $\varphi: [a, b) \mapsto \mathbb{R}$. Пусть также $\forall (x, y)
+    \in [a, b) \times Y: |f(x, y)| \leq \varphi(x)$ и $\int_{a}^{b}\varphi(x)dx$ сходится. Тогда
+     $\int_{a}^{b}f(x, y)dx$ сходится равномерно.
+\end{theorem}
+
+\begin{proof}
+    \[
+        \left| \int_{\eta'}^{\eta''}f(x, y)dx \right| \leq \int_{\eta'}^{\eta''}|f(x, y)|dx \leq \int_{\eta'}^{\eta'}
+        \varphi(x)dx
+    \]
+    Так как $\int_{a}^{b}\varphi(x)dx$ сходится, то из критерия Коши сходимости несобственного интеграла следует, что
+    \[
+        \forall \varepsilon > 0: \exists \eta \in [a, b): \forall \eta', \eta'' \in [\eta, b):
+        \left|\int_{\eta'}^{\eta''}\varphi(x)dx \right| < \varepsilon\
+    \]. Значит по предыдущей теореме интеграл $\int_{a}^{b}f(x, y)dx$ сходится равномерно.
+\end{proof}
+
+\begin{theorem}[признак сравнения]
+    Пусть для функций $f, g: [a, b) \times Y \mapsto \mathbb{R}$ и некоторого $M$ выполнено, что $\forall (x, y) \in [a,
+        b) \times Y: |f(x, y)| \leq Mg(x, y)$. Пусть также несобственный интеграл $\int_{a}^{b}g(x, y)dx$ сходится
+        равномерно. Тогда сходится равномерно и интеграл $\int_{a}^{b}f(x, y)dx$
+\end{theorem}
+
+\begin{proof}
+    Аналогично доказательству признака Вейерштрасса.
+\end{proof}
+
+\begin{theorem}
+    Пусть функция $f$ непрерывна на $[a, b) \times [c, d]$ и $I(y) = \int_{a}^{b}f(x, y)dx$ сходится равномерно. Тогда
+    $I(y)$ непрерывен на $[c, d]$
+\end{theorem}
+
+\begin{proof}
+    Пусть $\varepsilon > 0$. Тогда $\exists \eta \in [a, b)$:
+    \[
+        \sup_{y \in Y} \left| \int_{\eta}^{b}f(x, y)dx \right| < \varepsilon
+    \]
+    Пусть $y, y + \Delta y \in [c, d]$. Тогда
+    \begin{multline*}
+        |I(y + \Delta y) - I(y)| \leq \int_{a}^{\eta} \left[f(x, y + \Delta y) - f(x, y) \right]dx +
+        \left| \int_{\eta}^{b}f(x, y)dx \right| + \\
+        \left| \int_{\eta}^{b}f(x, y + \Delta y)dx \right|
+        \leq
+        2 \varepsilon + \omega(\Delta y, f, Y_{\varepsilon})
+    \end{multline*}
+    , где $Y_{\varepsilon} := [a, \eta] \times Y$. Но колебание $\omega(\Delta y, f, Y_{\varepsilon})$ стремится к нулю.
+    Значит, $I(y)$ непрерывен.
+\end{proof}
+
+\begin{theorem}[об интегрировании под знаком интеграла]
+    Пусть $f$ непрерывна на $[a, b) \times [c, d]$, $I(y)$ сходится равномерно.
+    Тогда $I(y)$ интегрируем на $[c, d]$, причем
+    \[
+        \int_{c}^{d}I(y)dy = \int_{a}^{b} \int_{c}^{d}f(x, y)dy dx
+    \]
+\end{theorem}
+
+\begin{proof}
+    Пусть $\eta \in (a, b)$. Поскольку $f$ непрерывна, то
+    \[
+        \int_{c}^{d} \int_{a}^{\eta}f(x, y)dxdy = \int_{a}^{\eta} \int_{c}^{d}f(x, y)dydx
+    \]
+    Перейдем к пределу при $\eta \rightarrow b - 0$. Тогда правая часть стремится к $\int_{c}^{d}I(y)dy$. Докажем это:
+    \[
+        \left| \int_{c}^{d} \int_{a}^{b} f(x, y)dxdy - \int_{c}^{d} \int_{a}^{\eta}f(x, y)dxdy \right| \leq (d - c)
+        \sup_{y \in Y} \left| \int_{\eta}^{b}f(x, y)dx \right|
+    \]
+    Последнее выражение стремится к нулю при $\eta \rightarrow b - 0$. Значит
+    \[
+        \exists \lim_{\eta \rightarrow b - 0} \int_{a}^{\eta} \int_{c}^{d}f(x, y)dydx = \int_{c}^{d}I(y)dy
+    \]
+\end{proof}
+
+\begin{theorem}[о дифференцировании под знаком интеграла]
+    Пусть $f, f'_y$ непрерывны на $[a, b) \times [c, d]$. Пусть для некоторого $y_0 \in [c, d]$ сходится интеграл
+    $I(y_0) = \int_{a}^{b}f(x, y_0)dx$, а интеграл $\int_{a}^{b}f'_y(x, y)dx$ сходится равномерно на $[c, d]$. Тогда
+    $I(y)$ дифференцируема, причем
+    \[
+        I'(y) = \int_{a}^{b}f'_y(x, y)dx
+    \]
+\end{theorem}
+
+\begin{proof}
+    В силу предыдущей теоремы:
+    \begin{multline*}
+        \int_{y_0}^{y} \int_{a}^{b} f'_y(x, y)dxdy = \int_{a}^{b} \int_{y_0}^{y} f'_y(x, y)dydx = \\
+        \int_{a}^{b} \left[ f(x, y) - f(x, y_0) \right] dx = \int_{a}^{b}f(x, y)dx - \int_{a}^{b}f(x, y_0)dx
+    \end{multline*}
+    Дифференцируя полученное тождество, имеем:
+    \[
+        \int_{a}^{b}f'_y(x, y)dx = \frac{d}{dy} \int_{a}^{b}f(x, y)dx
+    \]
+\end{proof}
+
+\begin{theorem}[признак Дирихле]
+    Пусть функции $f, g: [a, +\infty) \times Y \mapsto \mathbb{R}$ таковы, что при любом фиксированном $y \in Y$ функции 
+    $f, g'_x$ непрерывны, а $g$ монотонно убывает, причём:
+    \begin{enumerate}
+        \item $\exists M: \forall y \in Y: \forall b > a: \left| \int_{a}^{b}f(x, y)dx \right| \leq M$, то есть
+            интегралы $\int_{a}^{b}f(x, y)dx$ равномерно ограничены на $Y$
+        \item $g(x, y) \rightrightarrows 0$ по $Y$ при $x \rightarrow +\infty$, то есть $\forall \varepsilon > 0: \exists 
+            b > a: \forall x > b: \forall y: |g(x, y)| < \varepsilon$
+    \end{enumerate}
+    Тогда интеграл
+    \[
+        \int_{a}^{+\infty}f(x, y)g(x, y)dx
+    \] сходится равномерно.
+\end{theorem}
+
+\begin{proof}
+    Обозначим $F(x, y) = \int_{a}^{x}f(t, y)dt$. Тогда при $a < b < c:$
+    \begin{multline*}
+        \left| \int_{b}^{c} f(x, y) g(x, y)dx \right| = \left| \int_{b}^{c}g(x, y) dF(x, y) \right| = \\ \left| F(x,
+        y) g(x, y) \Big|_b^c - \int_{b}^{c}F(x, y) g'_x(x, y)dx \right| \leq \\ 2M|g(b, y)| + \left|
+        \int_{b}^{c}F(x, y) g'_x(x, y)dx \right| \leq 2M|g(b, y)| + \\ \int_{b}^{c}|F(x, y)||g'_x(x, y)|dx \leq
+        2M|g(b, y)| + \int_{b}^{c}M|g'(x, y)|dx = 2M|g(b, y)| + \\ M \int_{b}^{c}|g'_x(x, y)|dx = 2M|g(b, y)| + M
+        \left|\int_{b}^{c}g'_x(x, y)dx \right| = 2M|g(b, y)| + \\ M \left| g(c, y) - g(b, y) \right| \leq 4M |g(b, y)| <
+        4M \varepsilon
+    \end{multline*}
+    Значит по критерию Коши интеграл сходится равномерно.
+\end{proof}
+
+\end{document}

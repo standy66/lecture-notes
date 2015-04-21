@@ -1,0 +1,55 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+\section{Нижняя оценка для СОП}
+\begin{theorem}
+    Пусть $n \geq 16$. Пусть $k \leq \frac{n}{16}$. Пусть $s: 4 \leq \ln \frac{sk}{n} \leq k$. Тогда $\exists M: \tau(M)
+    \geq \frac{n}{32k} \ln \frac{sk}{n}$
+\end{theorem} 
+\begin{proof}
+    Обозначим $m := \lceil \frac{1}{2} \ln \frac{sk}{n} \rceil$. Ясно, что $m \geq 2$. Пусть $N_1^1, \cdots
+    N_{\binom{2m}{m}^1}$ -- все $m$-элементные подможества $\{1, \cdots, 2m\}$. $\tau(\{N_1, \cdots \}) = m+1$. Пусть $q
+    := \lceil \frac{2k}{m} \rceil$. Пусть теперь $N_1^2, \cdots, N_{\binom{2m}{m}}^2$ -- все $m$-элементные подмножества
+    $\{2m+1, \cdots, 4m\}$. Аналогично определим $N^3, \cdots, N^q$. Пусть $M_1 = N_1^1 \cup N_1^2 \cup \cdots \cup
+    N_1^q$. Аналогично определим $M_2, \cdots, M_{\binom{2m}{m}}$. Пусть $\mathcal{M}_1 = \{M_1, \cdots,
+    M_{\binom{2m}{m}}\}$. Тогда $|M_i| = qm$. Заметим, что $\frac{2k}{m} \geq \frac{4k}{\frac{1}{2}\ln
+    \frac{sk}{n}} \geq 4$. Кроме того, $q \geq \frac{k}{m}$. Тогда $qm \geq k$. $\tau(\mathcal{M}_1) = m+1 > m \geq
+    \frac{1}{4}\ln \frac{sk}{n}$. Пусть $t := \lceil \frac{n}{2qm} \rceil$. Прододжжим эту конструкцию $t$ раз.
+    Получим множества $\mathcal{M}_1, \cdots, \mathcal{M}_t$. Теперь рассмотрим $\overline{\mathcal{M}} =
+    \mathcal{M}_1 \cup \mathcal{M}_2 \cup \cdots \cup \mathcal{M}_t$. Тогда $\tau(\overline{\mathcal{M}}) = t
+    \tau(\mathcal{M}_1) \geq \frac{1}{4}t\ln \frac{sk}{n} \geq \frac{1}{4}\frac{n}{4qm}\ln \frac{sk}{n} \geq
+    \frac{1}{16}\frac{n}{2k}\ln \frac{sk}{n} = \frac{1}{32}\frac{n}{k}\ln \frac{sk}{n}$. Посчитаем
+    $|\overline{\mathcal{M}}| = t\binom{2m}{m} \leq t 2^{2m} \leq t \cdot 2^{2 \frac{1}{2}\ln \frac{sk}{n}} \leq t
+    \frac{sk}{n} \leq \frac{n}{2qm} \frac{sk}{n} = \frac{sk}{2qm} \leq \frac{sk}{2k} = \frac{s}{2}$. Каждое
+    множество $M \in \overline{\mathcal{M}}$ при необходимости обрежем. К полученной совокупности добавим любые
+    $k$-элементные множества так, чтобы итоговая совокупность $\mathcal{M}$, состояла ровно из $s$ множеств.
+    Понятно, что $\tau(\mathcal{M}) \geq \tau(\overline{\mathcal{M}})$. Конец.
+\end{proof}
+
+\begin{theorem}
+    Пусть $n, k, s, l$ таковы, что $\binom{n}{l} \cdot \binom{\binom{n}{k} - \binom{n - l}{k}}{s}
+    \frac{1}{\binom{\binom{n}{k}}{s}}$ < 1. Тогда $\exists M: \tau(M) > l$
+\end{theorem}
+
+\begin{proof}
+    Возьмём случайную $M$ совокупность мощности $s$ состоящую из $k$-элементных подмножеств $\{1, \cdots, n\}$. 
+    Всего таких совокупностей $\binom{\binom{n}{k}}{s}$. Рассмотрим $L_1, \cdots, L_{\binom{n}{l}} \subset \{1, \cdots,
+    n\}$, причем $|L_i| = l$. Для каждого $i = \{1, \cdots, \binom{n}{l}\}$ определим события $A_1, \cdots, A_i$,
+    заключающиеся в том, что $L_i$ является СОП для $M$. Тогда $P(A_i) = \frac{\binom{\binom{n}{k} - \binom{n -
+    l}{k}}{s}}{\binom{\binom{n}{k}}{s}}$. Тогда $P(\cup A_i) \leq \binom{n}{l} P(A_1) \leq 1$. Тогда существует такая
+    совокупномть $M$, у которой можность СОП $> l$.
+\end{proof}
+
+\begin{corollary}
+    Пусть при $n \rightarrow \infty$, $k = k(n) \rightarrow \infty, s = s(n) \rightarrow \infty, \frac{sk}{n}
+    \rightarrow \infty$. Пусть $k^2 = o(n), \ln \ln k = o(\ln \frac{sk}{n}), \ln^2 \frac{sk}{n} = o(k)$. Тогда $\exists
+    n_0: \forall n \geq n_0: \exists M: \tau(M) \geq \frac{n}{k}\ln \frac{sk}{n} - \frac{n}{k}\ln \ln
+    \frac{sk}{n} - \frac{n}{k}\ln \ln k - \frac{n}{k} = (1 + o(1)) \frac{n}{k}\ln \frac{sk}{n}$
+\end{corollary}
+
+\begin{proof}
+    Проведем неформальное доказательство. $\binom{\binom{n}{k} - \binom{n - l}{k}}{s}$
+\end{proof}<++>
+
+\end{document}
+

@@ -1,0 +1,58 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+\section{Баесовские оценки}
+В баесовском подходе мы хотим минимизировать
+$\int_{\Theta} R(\hat \theta(X), t) Q(dt)$, где $Q$ -- распределение вероятностей на $\Theta$. Будем сичтать, что $X$
+имеет неизветсное распределение $P \in \{P_{\theta} : \theta \in \Theta\}$ -- доминируемое семейтсво с плотностью
+$p_{\theta}(x)$. Будем считать, что $Q$ имеет плотность $q(t)$ по мере $\nu$.
+
+\begin{definition}
+    Плотность $q(t)$ называется априорной плотностью $q$. 
+\end{definition}
+
+\begin{definition}
+    Величина $q(t | X) = \frac{q(t) p_t(X)}{\int_{\Theta} q(t) p_t(X) \nu(dt)}$ называется апостериорной плотностью $Q$.
+\end{definition}
+
+\begin{definition}
+    Оценка $\hat \theta = E(\theta | X) = \int_{\Theta} t (t | X) \nu(dt)$ назывется байсовской оценкой.
+\end{definition}
+
+\begin{theorem}[о байесовской оценке]
+    Байесовская оценка является наилучшей оценкой $\theta$ в байесовском подходе с квадратичной функцией потерь.
+\end{theorem}
+
+\begin{proof}
+    Пусть $\Theta \subset \mathbb{R}$. Рассмотрим вероятностное пространство $(\Theta, B_{\Theta}, Q)$, а $\theta(t) =
+    t$. Тогда $\theta$ -- это случайная величина на этом веротяностном пространстве с распределением $Q$.
+
+    Рассмотрим произведение вероятностных пространств $(\Theta \times \mathfrak{X}, \mathcal{B}_{\Theta} \times
+    \mathcal{B}_{\mathfrak{X}}, \overline P)$, где $\overline P$ имеет плотность $f(t, x) = q(t) p_t(x)$. Почему это
+    плотность?
+
+    $\int_{\Theta \times \mathfrak{X}} f(t, x) \nu(dt) \mu(dx) = \int_{\Theta} q(t) \nu(dt) \int_{\mathfrak{X}} p_t(x)
+    \mu(dx) = \int_{\Theta} q(t) \nu(dt) = 1$
+
+    Теперь введем $X : \Theta \times \mathfrak{X} \mapsto \mathfrak{X}$, где $X(t, x) = x$. Тогда $X$ -- случайная
+    величина на этом вероятностном пространстве, а $U = (\theta X)^T$ -- случайный вектор. $U(t, x) = (t, x)$, значит
+    $f$ -- плотность $U$. Тогда $q(t)$ -- плотность $\theta$, $\int_{\Theta} q(t) p_t(x) \nu(dt)$ -- плотность $X$,
+    $p_t(x)$ -- условная плотность $X$ относительно $\theta$, $q(t|x)$ -- услованя плотность $\theta$ относительно $X$.
+    Тогда Байесовская оценка -- это условное матожидание $E(\theta | X)$.
+
+    Нам нужно минимизировать \begin{multline*}
+        \int_{\Theta} R(\hat \theta(X), t)Q(dt) = \int_{\Theta} E_t(\hat \theta - t)^2 q(t) \nu(dt) = \\
+        \int_{\Theta} \int_{\mathfrak{X}} (\hat \theta(X) - t)^2 p_t(x) \mu(dx) q(t) \nu(dt) = \\ \int_{\Theta \times
+            \mathfrak{X}} (\hat \theta(X) - t)^2 f(t, x) \nu(dt) \mu(dx) = E(\hat \theta(X) - \theta)^2
+    \end{multline*}
+
+    То есть нам нужно минимизировать среднеквадратическое уклонение $\theta$ относительно функции $\hat \theta(X)$, то
+    есть относительно $X$-измеримой функции. По теореме о наилучшем среднеквадратическом прогнозе минимум достигается
+    при $\hat \theta(X) = E(\theta|X)$
+\end{proof}
+
+\section{Достаточные статистики и оптимальные оценки}
+Coming soon\ldots
+
+\end{document}
+

@@ -1,0 +1,93 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+\section{Условное матожидание}
+\begin{definition}
+    Пусть $(\Omega, \mathcal{F}, P)$ -- вероятностной пространство. Пусть $\xi$ -- случайная величина, а
+    $\mathcal{G}$ -- это сигма алгебра. $\zeta$ называется условным матожиданием $\xi$ по алгебре $\mathcal{G}$
+    (обозначается $E(\xi | \mathcal{G})$), если:
+    \begin{enumerate}
+        \item $\zeta$ -- является $\mathcal{G}$-измеримой случайной величиной ($\forall B \in
+            \mathcal{B}(\mathbb{R}): \zeta^{-1}(B) \in \mathcal{G}$)
+        \item $\forall G \in \mathcal{G}: E \xi I_G = E \zeta I_G$
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    $\nu$ -- называется зарядом (или мерой со знаком), если:
+    \begin{enumerate}
+        \item $\nu: \mathcal{F} \mapsto \mathbb{R}$
+        \item $\forall A_1, A_2, \cdots \in \mathcal{F}$ -- непересекающихся, $\nu(\cup A_i) = \sum \nu(A_i)$
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}[Радон, Никодим]
+    Пусть $\nu$ -- заряд на $\mathcal{G}$. Тогда $\exists \zeta$ -- случайная величина, такая что $\forall G \in
+    \mathcal{G}$: $\int_{G}^{}\zeta P(d \omega) = \nu(A)$, причем $\zeta$ является $\mathcal{G}$-измеримой.
+\end{theorem}
+
+\begin{theorem}[существование условного матожидания]
+    Пусть $\xi: E\xi < \infty$. Тогда $\exists \zeta = E(\xi | \mathcal{G})$
+\end{theorem}
+
+\begin{proof}
+    Возьмем в качестве $\nu(A) = E \xi I_{A}$. Нетрудно убедится, что из теоремы Лебега о мажорируемой сходимости
+    следует, что это действительно заряд.
+    $|\xi \sum_{i = 1}^k I_{A_i}| < \xi$. Но $\xi \sum_{i = 1}^k I_{A_i} \cae \xi \sum_{i = 1}^{\infty}$. По теореме
+    Радона Никодима $\exists \zeta: E \zeta I_A = \nu(A)$
+\end{proof}
+
+\begin{example}
+    Берём $\mathcal{G}$ -- разбиение на $G_1, G_2, \cdots$. Тогда $E(\xi|\mathcal{G}) = \sum_{i = 1}^{\infty} c_i
+    I_{G_i}$ из первого свойства, а из второго свойства $c_i = \frac{E\xi I_{G_i}}{P(G_i)}$
+\end{example}
+
+Свойства:
+\begin{enumerate}
+    \item Условное матожидание единственно почти наверное. Действительно, пусть $\zeta_1, \zeta_2$ -- два матожидания.
+        $0 \leq E(\zeta_1 - \zeta_2)I_A \leq 0$. Значит, $\zeta_1 \leq \zeta_2$ почти наверное, $\zeta_1 \geq \zeta_2$
+        почти наверное.
+    \item Если $\xi$ -- $\mathcal{G}$-измерима, то $E(\xi|\mathcal{G}) = \xi$
+    \item $E(E(\xi|\mathcal{G})) = E\xi$
+    \item Если $\xi$ не зависит от $\mathcal{G}$, то $E(\xi|\mathcal{G}) = E\xi$. Действительно, рассмотрим $\zeta =
+        E\xi$. Оно удовлетворяет обоим свойствам условного матожидания.
+    \item $E(\alpha \xi_1 + \beta \xi_2 | \mathcal{G}) = \alpha E(\xi_1 | \mathcal{G}) + \beta E(\xi_2 |
+        \mathcal{G})$. Доказывается аналогично предыдущему пункту.
+    \item Если $\xi \leq \eta$, то $E(\xi|G) \leq E(\eta|G)$.
+        \begin{proof}
+            Раз $\xi \leq \eta$, то $E(\xi I_A) \leq E(\eta I_A)$. Тогда из определения УМО $E(E(\xi|G)I_A) \leq
+            E(E(\eta|G)I_A)$. Рассмотрим $\delta = E(\eta|G) - E(\xi|G)$. $\delta$ является $G$-измеримой. Кроме того
+            $E(\delta I_A) \geq 0$. Тогда $\delta \geq 0$ почти наверное.
+        \end{proof}
+    \item $|E(\xi|G)| \leq E(|\xi||G|)$
+    \item Пусть $G_1 \subset G_2$. Тогда $E(E(\xi|G_1)|G_2) = E(\xi|G_1), E(E(\xi|G_2)|G_1) = E(\xi|G_1)$
+        \begin{proof}
+            $E(\xi|G_1)$ является $G_2$ измеримой. Тогда $E(E(\xi|G_1)|G_2) = E(\xi|G_1)$. Для доказательства второго
+            факта проверяем свойство 2 УМО.
+        \end{proof}
+    \item Пусть $\xi_n \cae \xi$, $\forall n: |\xi_n| < \eta, E\eta < \infty$. Тогда $E(\xi_n|G) \cae E(\xi|G)$
+    \item Пусть $E\xi, E\xi\eta$ конечны, $\eta$ является $G$-измеримой случайной величиной. Тогда $E(\xi\eta|G) =
+        \eta E(\xi|G)$
+        \begin{proof}
+            Рассмотрим сначала $\eta = I_B, B \in G$. Тогда $E(\xi\eta I_A) = E(\xi I_{A \cap B}) = E(E(\xi|G)
+            I_{A \cap B}) = E(\xi|G) \eta I_A)$. В силу линейности аналогичное верно и для $\eta = \sum_{i =
+            1}^{k}c_iI_{A_i}$. Произвольную $\eta$ аппроксимируем простыми $G$-измеримыми случайными велиичнами и
+            воспользуемся теоремой Лебега (предыдущим свйоством)
+        \end{proof}
+\end{enumerate}
+
+\begin{theorem}[о наилучшем квадратичном прогнозе]
+    Пусть $G$ -- сигма алгебра в $\mathcal{F}$. $\pi_G$ -- множество всех $G$-измеримых случайных величин с конечным
+    вторым моментом. Если $E\xi^2 < \infty$, то $\min_{\eta \in \pi_G} E(\xi - \eta)^2 = E(\xi - E(\xi|G))^2$
+\end{theorem}
+
+\begin{proof}
+    Пусть $\eta \in \pi_G$. Тогда $E(\xi - \eta)^2 = E(\xi - E(\xi|G) - (\eta - E(\xi|G)))^2 = E(\xi - E(\xi|G))^2 +
+    E(\eta - E(\xi|G))^2 - 2E(\xi - E(\xi|G))(\eta - E(\xi|G))$. Покажем, что последнее слагаемое равно нулю.
+    Действительно, $E(\xi - E(\xi|G))(\eta - E(\xi|G)) = E(E( (\xi - E(\xi|G))(\eta - E(\xi|G)) |G)) = E( (\eta -
+    E(\xi|G)) E(\xi - E(\xi|G)|G)) = E( (\eta - E(\xi|G)) (E(\xi|G) - E(\xi|G))) = E0 = 0$.
+    Тогда $E(\xi - \eta)^2 \geq E(\xi - E(\xi|G))^2$
+\end{proof}
+
+\end{document}
+

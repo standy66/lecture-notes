@@ -1,0 +1,101 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+\section{Размерность Вапника-Червоненкиса}
+\begin{example}
+    Задача. Пусть $S \subset \mathbb{R}^2$ -- конечное множество, $|S| = n$. Будем пересекать множество со всевозможными
+    треугольниками. $\mathcal{M}_S := \{M \subset S: \exists \Delta \subset \mathbb{R}^2: \Delta \cap S = M\}$. Возьмём
+    $\varepsilon \in (0, 1)$. Определим $\mathcal{M}_{S, \varepsilon} := \{ M \subset S: \varepsilon \Delta \subset
+        \mathbb{R}^2: \Delta \cap S = M, |M| \geq \varepsilon n\}$
+    Имеет место следующая теорема: $\forall n: \forall S: \forall \varepsilon: \subset \mathbb{R}^2, |S| = n:
+    \tau(\mathcal{M}_S) \leq \frac{500}{\varepsilon} \log_2 \frac{500}{\varepsilon}$.
+\end{example}
+
+Рассмотрим обобщение.
+Рассмотрим пару $(X, R)$, где $X$ -- какое-то множество, а $R$ -- совокупность каких-то подмножеств.
+
+\begin{example}
+    $(X, R) = (\mathbb{R}^n, H)$, где $H$ -- все открытые полупространства $\mathbb{R}^n$. В ML это часто называют
+    ранжированным пространством.
+\end{example}
+
+Пусть $A \subset X$. Введем обозначение $Pr_A R := \{r \cap A: r \in R\}$ -- проекция $R$ на $A$. $(A, Pr_A R)$ --
+ранжированное подпространство. Скажем, что $A$ дробится областями из $R$, если $Pr_A R = 2^A$. $VC(X, R) := \max \{m :
+\exists A \subset X: |A| = m, A \text{ дробится областями из } R\}$ -- размерность Вапника-Червоненкиса.
+$VC(\mathbb{R}^n, H) = n + 1$. Для начала $n = 1$. Понятно, что любые $3$ точки не дробятся. А 2 различные дробятся.
+Рассмотрим $n = 2$. Любой невырожденный треугольник дробится. И треугольник с точкой внутри тоже дробится. В более
+общём случае множество не будет дробится, если существует два его подмножества, у которых линейные оболочки
+пересекаются.
+
+\begin{theorem}[Радона]
+    Пусть $S \subset \mathbb{R}^n$: $|S| \geq n + 2$. Тогда $\exists S_1 \cap S_2 = \emptyset: S = S_1 \cup S_2:
+    conv(S_1) \cap conv(S_2) \neq \emptyset$
+\end{theorem}
+
+\begin{lemma}
+    Пусть $S = (X, R)$ -- ранжированное пространство, причем $|X| = n \in \mathbb{N}$. $VC(X, R) = d$. Тогда $R \leq
+    g(n, d) := \sum_{i = 0}^{d} \binom{n}{i}$
+\end{lemma}
+
+\begin{proof}
+    Докажем по индукции по $(n, d)$. База: $n = 0$. Тогда $d = 0$. $|R| \leq 1 = g(0, 0)$. Пусть $d = 0$. Тогда $n$ --
+    любое, а $|R| \leq 1 = g(n, 0)$. Шаг индукции. $S = (X, R), VC(X, R) = d$. Рассмотрим в $S$ два подпространства.
+    Возьмем $x \in X$. $S_1 := (X \setminus \{x\}, R_1), S_2 := (X \setminus \{x\}, R_2)$, где $R_1 := \{r \setminus \{x
+    \}, r \in R\}$, $R_2 := \{r \in R: x \not \in r, r \cup \{x\} \in R\}$. Тогда $|R| = |R_1| + |R_2|$. Ясно, что
+    $|R_1| \leq g(n
+    - 1, d)$. Докажем, что $|R_2| \leq g(n - 1, d - 1)$. Предположим, что
+    $\exists A \subset X \setminus \{x\}, |A| = d, A$ дробится
+    $R_2$. Если мы возьмём $A \cup \{x\}$, то его мощность -- это $d+1$, причем $A$ дробится $R$. Завершаем
+    доказательство применением формулы господина Паскаля.
+\end{proof}
+
+\begin{corollary}
+    Скажем, что $S = (X, R)$. $VC(S) = d$. $A \subset X: |A| = n$. Тогда $|Pr_A R| \leq g(n, d)$.
+\end{corollary}
+
+\begin{proof}
+    $VC(A, Pr_A R) \leq VC(X, R) \leq d$. Применяем предыдущую лемму.
+\end{proof}
+
+\begin{definition}
+    Возьмём $h \geq 2$, $(X, R)$ -- ранжированное пространство. $h$-измельчением системы $R$ назовём $R_h := \{r:
+    \exists r_1, \cdots, r_h \in  R: r = r_1 \cap r_2 \cap \cdots \cap r_h\}$. Например, $H_3$ содержит в себе все
+    треугольники.
+\end{definition}
+
+\begin{lemma}
+    Пусть $VC(X, R) = d \geq 2$. $h \geq 2$. Тогда $VC(X, R_h) \leq 2dh \log_2 (dh)$
+\end{lemma}
+
+\begin{proof}
+    Пусть $A \subset X$, $|A| = n$, $A$ дробится c помощью $R_h$.
+    Тогда $|Pr_A R| = 2^n$. С другой стороны, $|Pr_A R| \leq g(n, d) \leq
+    n^d$. Но $|Pr_A R_h| \leq n^{dh}$. То есть $2^n \leq n^{dh}$. То есть если $n^{dh} < 2^n$, то $A$ не может дробится.
+    Но есть в качестве $n$ взять $2dh \log_2 (dh)$, то это неравенство будем выполнено, а значит $VC(X, R_h) \leq 2dh
+    \log_2 (dh)$
+\end{proof}
+
+\begin{example}
+    $VC(\mathbb{R}^2, H) = 3$. Тогда $VC(\mathbb{R}^2, T_3) \leq VC(\mathbb{R}^2, H_3) \leq 18 \log_2 9 \leq 60$. То
+    есть в нашем первом примере размерность Вапника-Червоненкиса $\leq 60$.
+\end{example}
+
+\begin{definition}
+    Пусть $(X, R)$ -- ранжированное пространство. $S \subset X$, $\varepsilon \in (0, 1)$. Положим $M_{S, \varepsilon} :=
+    \{M \subset S: \exists r \in R: r \cap S = M, |M| \geq \varepsilon |S|\}$.
+\end{definition}
+
+\begin{theorem}
+    Пусть $VC(X, R) = d$. Тогда $\forall n: \forall S \subset X, |S| = n: \forall \varepsilon \in (0, 1): \tau(M_{S,
+    \varepsilon}) \leq \frac{8d}{\varepsilon}\log_2 (\frac{8d}{\varepsilon})$
+\end{theorem}
+
+\begin{remark}
+    Если $VC(X, R) = \infty$, то $\forall m: \exists S \subset X, |S| = m: S$ дробится, то $\tau(\mathcal{M}_{S,
+    \varepsilon}) \sim m(1 -
+    \varepsilon)$
+\end{remark}
+
+
+\end{document}
+

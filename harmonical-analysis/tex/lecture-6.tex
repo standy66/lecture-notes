@@ -1,187 +1,139 @@
 \documentclass[document.tex]{subfiles}
 
 \begin{document}
-\section{Метрические и нормированные пространства. Банаховы пространства. Евклидовы пространства. Неравенство
-треугольника и Коши-Буняковского для Евклидовых пространств.}
-
-\subsection{Метрические и нормированные пространства}
+\section{Гильбертовы пространства}
 \begin{definition}
-    Множество $M$ называется метрическим пространством, если на нём введена функция $\rho(x, y)$, называемая метрикой,
-    которая удовлетворяет следующим свойствам:
-    ~\begin{enumerate}
-        \item $\forall x \in M: \rho(x, x) = 0$
-        \item $\forall x, y \in M: \rho(x, y) = \rho(y, x) \geq 0$
-        \item $\forall x, y, z \in M: \rho(x, z) \leq \rho(x, y) + \rho(y, z)$
-    \end{enumerate}
+    Бесконечномерное евклидово пространство называется предгильбертовым
 \end{definition}
 
-\begin{example}
-    В $\mathbb{R}^n$ метрика $\rho(x, y) = \sqrt{\sum_{i = 1}^n (x_i - y_i)^2}$. В пространстве непрерывных функций на
-    $[a, b]$ можно взять метрику $\rho(f, g) = \max_{x \in [a, b]} \|f(x) - g(x)\|$
-\end{example}
-
 \begin{definition}
-    Множество $L$ с операцией сложения и умножения на элемент из $\mathbb{R}$ называется линейным пространством, если
-    $\forall x, y, z \in L: \forall \alpha, \beta, \lambda \in \mathbb{R}$: 
+    Полное предгильбертово пространство называется гильбертовым.
+\end{definition}
+
+\begin{statement}
+    В предгильбертовых пространствах c нормой $\|x\| = \sqrt{(x, x)}$ скалярное произведение $(x, y)$ непрерывно по $x$ и $y$
+\end{statement}
+
+\begin{proof}
+    При $\|\Delta x\| + \| \Delta y\| = o(1)$ (а это эквивалентно тому, что $\|\Delta x\| = o(1), \|\Delta
+    y\| = o(1)$, ведь $0 \leq \|\Delta x\| \leq \|\Delta x \| + \| \Delta y\| = o(1)$) верно, что
+    \begin{multline*}
+        0 \leq |(x + \Delta x, y + \Delta y) - (x, y)| = |(x, y) + (x, \Delta y) + (\Delta x, y) + (\Delta x, \Delta y) - (x,
+        y)| = \\
+        |(x, \Delta y) + (\Delta x, y) + (\Delta x, \Delta y)| \leq |(x, \Delta y)| + |(\Delta x, y)| + |(\Delta x,
+        \Delta y)| \leq \\
+        \| x \| \|\Delta y\| + \|\Delta x\| \|y\| + \|\Delta x\| \|\Delta y\| = o(1)
+    \end{multline*}
+\end{proof}
+
+\begin{corollary}
+    Так как $(x, y)$ непрерывно, то верно следующее:
     \begin{enumerate}
-        \item $\lambda x \in L$
-        \item $x + y \in L$
-        \item $x + y = y + x$
-        \item $x + (y + z) = (x + y) + z$
-        \item $\exists 0 \in L : \forall u \in L: u + 0 = 0 + u = u$
-        \item $\exists (-x) \in L : x + (-x) = 0$
-        \item $\alpha(\beta x) = (\alpha \beta)x$
-        \item $\alpha(x + y) = \alpha x + \alpha y$
-        \item $1 \cdot x = x$
-        \item $(\alpha + \beta)x = \alpha x + \beta x$
+        \item Если $x_k \rightarrow x$, то $(x_k, a) \rightarrow (x, a)$
+        \item Если $\sum_{i = 1}^{\infty} x_k = x$, то $\sum_{i = 1}^{\infty} (x_k, a) = (x, a)$
     \end{enumerate}
+\end{corollary}
+
+\subsection{Ортогональные системы}
+\begin{definition}
+    Элементы $a, b$ называются ортогональными, если $(a, b) = 0$
 \end{definition}
 
 \begin{definition}
-    Линейное пространство $X$ называется нормированным, если на нём определена функция $\| \cdot \|$, такая, что
-    $\forall x, y \in X, \lambda \in \mathbb{R}$
-    \begin{enumerate}
-        \item $\|x\| = 0 \Leftrightarrow x = 0$
-        \item $\|\lambda x\| = |\lambda| \|x\|$
-        \item $\|x + y\| \leq \|x\| + \|y\|$
-    \end{enumerate}
+    Система из ненулевых элементов $\{e_i\}_{i = 1}^{\infty}$ называется ортогональной, если её элементы попарно ортогональны.
 \end{definition}
+
+\begin{statement}
+    Любая нетривиальная конечная линейная комбинация элементов ортогональной системы не равна нулю
+\end{statement}
+
+\begin{proof}
+    Пусть $\exists N : \exists (\lambda_1, \cdots, \lambda_N) \neq 0: \sum_{i = 1}^{N} \lambda_i e_i = 0$
+
+    Выберем $s \in \{1, \cdots, N\}$. Тогда умножив линейную комбинацию скалярно на $e_s$ получим:
+    $\sum_{i = 1}^{N} \lambda_i (e_i, e_s) = 0$. Значит, $\lambda_s (e_s, e_s) = 0$. Но $(e_s, e_s) \neq 0$. А значит,
+    $\lambda_s = 0$. И так для любого $s$. Противоречие.
+\end{proof}
+
+\begin{theorem}
+    Пусть $x = \sum_{i = 1}^{\infty} \alpha_i e_i$, где $\{e_i\}_{i = 1}^{\infty}$ -- ортогональная система.
+    Тогда $\alpha_i = \frac{(x, e_i)}{(e_i, e_i)}$ ($\alpha_i$ называются коэффициентами Фурье по системе $\{e_i\}_{i =
+    1}^{\infty}$)
+\end{theorem}
+
+\begin{theorem}
+    $(x, e_s) = \sum_{i = 1}^{\infty} \alpha_i (e_i, e_s) = \alpha_s (e_s, e_s)$. Значит, $\alpha_s =
+    \frac{(x, e_s)}{(e_s, e_s)}$
+\end{theorem}
 
 \begin{remark}
-    Нормированное пространство является метрическим, $\rho(x, y) = \|x - y\|$
+    Обозначение $x \sim \sum_{i = 1}^{\infty} \alpha_i e_i$ означает, что $\alpha_i$ -- коэффициенты Фурье элемента $x$
+    по системе $e_i$
 \end{remark}
 
-\begin{remark}
-    Вместо $\mathbb{R}$ можно написать $\mathbb{C}$ или вообще произвольное поле $F$.
-\end{remark}
-
-
-\begin{definition}
-    $\varepsilon$ окрестностью точки $x_0$ из нормированного пространства $X$ называется
-    \[
-        U_{\varepsilon}(x_0) = \{x \in X : \|x - x_0\| < \varepsilon\}
-    \]
-\end{definition}
-
-\begin{definition}
-    Последовательность $\{x_n\}_{n = 1}^{\infty}$ из нормированного пространства $X$ сходится к точке $x_0 \in X$, если
-    $\lim_{n \rightarrow \infty} \|x_n - x_0\| = 0$
-\end{definition}
-
-\begin{remark}
-    Поскольку у нас теперь есть предел, то все определения из $\mathbb{R}^n$ переносятся сюда, а именно: открытые
-    множества, замкнутые множества, граница, и т.д.
-\end{remark}
-
-\begin{example}
-    ~\begin{enumerate}
-        \item $C([a, b])$ -- пространство непрерывных на $[a, b]$ функций с нормой $\|f\| = \max_{x \in [a, b]} |f(x)|$ 
-        \item $CL_{1} ([a, b])$ -- пространство непрерывных на $[a, b]$ функций с нормной $\|f\| = \int_{a}^{b} |f(x)| dx$
-        \item $CL_{2} ([a, b])$ -- пространство непрерывных на $[a, b]$ функций с нормой $\|f\| = \sqrt{\int_{a}^{b}
-            |f(x)|^2 dx}$
-
-        \item $RL_{p} ([a, b])$ -- пространство интегрируеммых по Риману на $[a, b]$ функций, с нормой из $CL_{p}$
-    \end{enumerate}
-\end{example}
-
-\begin{remark}
-    Проблема в том, что в $RL_{p}$ есть не тождественно равные нулю функции, у которых интеграл от модуля равен нулю.
-    Например, тождественно равная нулю функция, измененная в конечном числе точек. Есть два варианта решения проблемы.
-\end{remark}
-Первый:
-\begin{definition}
-    Пространство называется полунормированным, если в нём выполнены все свойства нормированного пространства, кроме
-    первого.
-\end{definition}
-Второй:
-\begin{remark}
-    Профакторизуем $RL_{p}$ по отношению $f \sim g \Leftrightarrow \left( \int_{a}^{b} (f(x) - g(x))^p dx \right)^{1/p} = 0$. $\hat {RL_{p}} =
-    RL_{p}/\sim$
-\end{remark}
-
-\subsection{Банаховы пространства}
-
-\begin{definition}
-    Пусть $X$ -- метрическое пространство. Последовательность $\{x_n\}_{n = 1}^{\infty}$ называется фундаментальной,
-    если $\forall \varepsilon > 0: \exists N \in \mathbb{N}: \forall m, n \geq N: \rho(x_n, x_m) < \varepsilon$
-\end{definition}
-
-\begin{definition}
-    Метрическое пространство называется полным, если в нём любая фундаментальная последовательность является
-    сходящейся.
-\end{definition}
-
-\begin{definition}
-    Нормированное пространство называется Банаховым, если оно полно по метрике, порожденной нормой.
-\end{definition}
-
-\begin{example}
-    $C([a, b])$ -- Банахово. Используем теорему Коши для равномерной сходимости функциональных последовательностей
-    , а также тот факт, что ряд непрерывных функций, если сходится равномерно, то обязательно к непрерывной функции.
-\end{example}
-
-\begin{example}
-    $CL_{1} ([a, b]), CL_{2} ([a, b])$ -- не Банаховы. Возьмем последовательность функций 
-    \[
-        f_n = 
-        \begin{cases}
-            1, -1 \leq x \leq 0 \\
-            1 - xn, 0 \leq x \leq 1/n \\
-            0, x > 1/n
-        \end{cases}
-    \]
-    Очевидно, что это последовательность является фундаментальной, ведь $\|f_n - f_m\| \leq \frac{1}{\min \{n, m\}}$.
-    Пусть эта последовательнсоть сходится в $CL_1$ к $\varphi(x)$. Тогда $\int_{-1}^{1}|f_n(x) - \varphi(x)|dx \geq
-    \int_{-1}^{0}|f_n(x) - \varphi(x)|dx$. Но левый интеграл стемится к нулю, а правый не зависит от $n$. Значит, правый
-    интеграл равен нулю. А так как $\varphi$ должна быть непрерывна, $\varphi \equiv 1$ на $[-1, 1]$. Аналогично,
-    $\forall 0 < \delta < 1: \int_{-1}^{1}|f_n(x) - \varphi(x)|dx \geq \int_{\delta}^{1}|f_n(x) - \varphi(x)|dx$.
-    Аналогично получаем, что $\varphi \equiv 0$ на $[\delta, 1]$. Но это верно для любого $\delta$. Получаем, что
-    $\varphi$ разрывна.
-\end{example}
-
-\subsection{Евклидовы пространства}
-
-\begin{definition}
-    Линейное пространство $R$ называется Евклидовым, если на нём определено скалярное произведение $(\cdot, \cdot)$,
-    удовлетворяющее следующим свойствам:
-    \begin{enumerate}
-        \item $(x, x) \geq 0$
-        \item $(x, x) = 0 \Leftrightarrow x = 0$
-        \item $(x, y) = (y, x)$
-        \item $(\lambda x, y) = \lambda (x, y)$
-        \item $(x + y, z) = (x, z) + (y, z)$
-    \end{enumerate}
-\end{definition}
-
-\begin{remark}
-    В Евклидовом пространстве можно ввести норму как $\|x\| = \sqrt{(x, x)}$. Все свойства, кроме неравенства
-    треугольника, очевидны. Для неравенства треугольника докажем КБШ.
-\end{remark}
-
-\subsection{Неравенство Коши-Буняковского и треугольника для Евклидовых пространств}
-
-\begin{theorem}[Неравенство Коши-Буняковского]
-    $(x, y) \leq \sqrt{(x, x) (y, y)}$
+\begin{theorem}[Минимальное свойство коэффициентов Фурье]
+    Пусть $\{e_i\}_{i = 1}^{\infty}$ -- ортогональная система в предгильбертовом пространстве $H$. $x \in H$, $\alpha_i$
+    -- коэффициенты Фурье элемента $x$ по системе $\{e_i\}_{i = 1}^{\infty}$. Пусть $n \in \mathbb{N}$. Тогда $\forall
+    c_1, \cdots, c_n: \|x - \sum_{i = 1}^n c_i e_i\| \geq \|x - \sum_{i = 1}^n \alpha_i e_i\|$
 \end{theorem}
 
 \begin{proof}
-    \[
-        0 \leq (x + ty, x + ty) = (x, x) + 2t(x, y) + t^2(y, y)
-    \]
-    При фиксированных $x, y$ справа написано квадратное уравнение. Значит дискриминант должен быть неположительный.
-    $\frac{D}{4} = (x, y)^2 - (x, x)(y, y) \leq 0$
+    Зафиксируем $c_1, \cdots, c_n$. Заметим, что $(x, e_i) = \alpha_i \|e_i\|^2$.
+    Рассмотрим цепочку эквивалентных преобразований:
+    \begin{multline*}\\
+        \|x - \sum_{i = 1}^n c_i e_i\| \geq \|x - \sum_{i = 1}^n \alpha_i e_i\| \\
+        (x - \sum_{i = 1}^n c_i e_i, x - \sum_{i = 1}^n c_i e_i) \geq (x - \sum_{i = 1}^n \alpha_i e_i, x - \sum_{i =
+        1}^n \alpha_i e_i) \\
+        (x, x) - 2 \sum_{i = 1}^n c_i (x, e_i) + \sum_{i = 1}^n c_i^2 \|e_i\|^2 \geq (x, x) - 2 \sum_{i = 1}^n \alpha_i
+        (x, e_i) + \sum_{i = 1}^n \alpha_i^2 \|e_i\|^2 \\
+        \sum_{i = 1}^n c_i^2 \|e_i\|^2 - 2 \sum_{i = 1}^n c_i \alpha_i \|e_i\|^2 \geq \sum_{i = 1}^n \alpha_i^2
+        \|e_i\|^2 - 2 \sum_{i = 1}^n \alpha_i^2 \|e_i\|^2 \\
+        \sum_{i = 1}^n \left( c_i^2 \|e_i\|^2 - 2 c_i \alpha_i \|e_i\|^2 + \alpha_i^2 \|e_i\|^2 \right) \geq 0\\
+        \sum_{i = 1}^n \|e_i\|^2 (c_i - \alpha_i)^2 \geq 0\\
+    \end{multline*}
 \end{proof}
 
-\begin{corollary}[Неравенство треугольника]
-    $(x + y, x + y) = (x, x) + 2(x, y) + (y, y) \leq (x, x) + 2\sqrt{(x, x)(y, y)} + (y, y) = (\sqrt{(x, x)} +
-    \sqrt{(y, y)})^2$
-\end{corollary}
+\begin{theorem}
+    Пусть $c = a + b$ и $a$ ортогонально с $b$. Тогда $\|c\|^2 = \|a\|^2 + \|b\|^2$
+\end{theorem}
 
-\begin{example}
-    Рассмотрим пространство $CL_{2}$. В нем можно ввести скалярное произведение как $(f, g) = \int_{a}^{b}f(x)g(x)dx$.
-    Оно действительно является скалярным произведением, это легко проверить. Тогда норма $\|f\| = \left(
-    \int_{a}^{b}|f(x)|^2dx \right)^{1/2}$ действительно является нормой
-\end{example}
+\begin{proof}
+    $\|c\|^2 = (c, c) = (a + b, a + b) = (a, a) + 2 (a, b) + (b, b) = (a, a) + (b, b) = \|a\|^2 + \|b\|^2$
+\end{proof}
+
+\begin{statement}
+    Пусть $x \sim \sum_{i = 1}^{\infty} \alpha_i e_i$. Обозначим $S_n = \sum_{i = 1}^{n} \alpha_i e_i$. Тогда $\forall k
+    > n: (S_n, e_k) = 0$
+\end{statement}
+
+\begin{lemma}[об ортогональном разложении]
+    Любой элемент $x$ может быть представлен как сумма двух ортогональных слагаемых:
+    \[
+        x = S_n + (x - S_n)
+    \], причем $(S_n, x - S_n) = 0$. В частности, $\|x\|^2 = \|S_n\|^2 + \|x - S_n\|^2$
+\end{lemma}
+
+\begin{proof}
+    \[
+        (S_n, x - S_n) = (S_n, x) - (S_n, S_n) = \sum_{i = 1}^n \alpha_i (x, e_i) - \sum_{i = 1}^n \alpha_i^2 \|e_i\|^2 =
+        0
+    \]
+\end{proof}
+
+\begin{theorem}[неравенство Бесселя]
+    Пусть $\{e_i\}_{i = 1}^{\infty}$ -- ортогональная система, $x \sim \sum_{i = 1}^{\infty} \alpha_i e_i$. Тогда
+    $\|x\|^2 \geq \sum_{i = 1}^{\infty} \alpha_i^2 \|e_i\|^2$
+\end{theorem}
+
+\begin{proof}
+    $\|x\|^2 = \|S_n\|^2 + \|x - S_n\|^2 \geq \|S_n\|^2 = \sum_{i = 1}^n \alpha_i^2 \|e_i\|^2$. Заметим, что это
+    выполено для любого $n$. Тогда переходя к пределу $n \rightarrow \infty$ получаем, что $\|x\|^2 \geq \sum_{i =
+    1}^{\infty} \alpha_i^2 \|e_i\|^2$
+\end{proof}
+
+\begin{theorem}
+
+\end{theorem}
 
 \end{document}
 
