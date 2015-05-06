@@ -1,0 +1,60 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+\begin{theorem}
+    Пусть $(X, R)$ -- ранжированное пространство, $VC(X, R) = d$. Тогда $\forall \varepsilon > 0: \forall n: \forall A
+    \subset X, |A| = n: \tau(M_{A, \varepsilon}) \leq \frac{8d}{\varepsilon} \log_2 \frac{8d}{\varepsilon}$
+\end{theorem}
+
+\begin{proof}
+    Пусть $m = \lceil \frac{8d}{\varepsilon} \log_2 \frac{8d}{\varepsilon} \rceil$. Зафиксируем $n \in \mathbb{N}$,
+$A \subset X, |A| = n$. Рассмотрим $M_{A, \varepsilon}$. Нужно доказать, что существет $\varepsilon$-сеть $N$: $|N|
+\leq m$. Рассмотрим вероятностной пространство случайных множеств мощности $m$ из $A$ (схема выбора с возвращением). 
+$N = \{x_1, \cdots, x_m\}$ (тогда $N$ -- это мультимножество). Рассмотрим событие $E_1$ заключающееся в том случайно
+извлеченное $N$ не является $\varepsilon$-сетью.
+$E_1 := \{N : \exists r \in R: |r \cap A| \geq \varepsilon n, r \cap N = \emptyset \}$. Наша цель -- доказать,что
+$P(E_1) < 1$
+Усложним себе жизнь: сперва извлечём $N$ из $A$ по той же самой схеме. А затем, независимо извлечём ещё одно такое же
+мультимножество $T$ из $A$.
+$E_2 := \{(N, T): \exists r \in R: |r \cap A| \geq \varepsilon n, r \cap N = \emptyset, |r \cap T| \geq
+    \frac{\varepsilon m}{2} \}$
+Считаем, что $E_1$ живет в том же вероятностном пространстве.
+Понятно, что $P(E_2) \leq P(E_1)$
+\begin{lemma}
+    $P(E_2) \geq \frac{1}{2}P(E_1)$
+\end{lemma}
+\begin{proof}
+    $P(E_2|E_1) = \frac{P(E_2 \cap E_1)}{P(E_1)} =\frac{P(E_2)}{P(E_1)}$. Докажем, что $P(E_2|E_1) \geq
+    \frac{1}{2}$. 
+    $P(E_2 | E_1) \geq P(\xi \geq \frac{\varepsilon m}{2})$, где $\xi \sim Binom(m, \varepsilon), E\xi = m \varepsilon$.
+
+    $P(\xi \geq \frac{me}{2}) = 1 - P(\xi < \frac{me}{2}) = 1 - P(\xi - E\xi < -\frac{me}{2}) \geq 1 -
+    \frac{4D \xi}{(em)^2} \geq 1 - \frac{4me}{m^2e^2} \geq 1 - \frac{4}{me} \geq 1 - \frac{4}{4d \log_2
+        \frac{8d}{\varepsilon}} \geq 1 - \frac{4}{4 \cdot 3} = \frac{2}{3} > \frac{1}{2}$
+\end{proof}
+$g(n, d) := \sum_{k = 0}^{d} \binom{n}{k}$
+\begin{lemma}
+    $P(E_2) < g(2m, d) 2^{-\frac{em}{2}}$
+\end{lemma}
+
+\begin{proof}
+    Переопределим вероятностное пространство. Сперва выберем мультимножество $U = \{z_1, \cdots, z_{2m}\}$, а затем, по
+    классической вероятностной схеме извлечём из $U$ случайные $m$ элементов. Назовём его $N$, а всё остальное -- $T$.
+    Вероятности при этом не изменятся (это надо проверить). Достаточно теперь доказать, что $\forall U = \{z_1, \cdots,
+    z_{2m} \}$ $P(E_2 | U) \leq g(2m, d) 2^{-\frac{em}{2}}$. Считаем, что $U$ зафиксировано. Тогда
+    $p = P(E_2|U) = P(\cup_{r \in R, |r \cap A| \geq \varepsilon n} E_{2, r} | U)$, где $E_{2, r} = \{(N, T): r \cap N =
+        \emptyset, |r \cap T| \geq \frac{\varepsilon m}{2} \}$. Пусть $r_1, r_2 \in R: |r_i \cap A) \geq \varepsilon n,
+        r_1 \cap U = r_2 \cap U$. Тогда $E_{2, r_1} = E_{2, r_2}$. Реальное количество различных событий в объединении
+        не превосходит $|Pr_U R| \leq g(2m, d)$. Тогда $p \leq g(2m, d) \cdot \max_{r \in R, |r \cap A| \geq \varepsilon
+        n} P(E_{2, r}| U)$. Если $E_{2, r}|U$, то $|r \cap U| \geq \frac{em}{2}$. $S := r \cap U$. Тогда $P(E_{2, r}|U)
+        \leq P(N \cap S = \emptyset|U) \leq \frac{\binom{2m - p}{m}}{\binom{2m}{m}} = \frac{(2m - p)!}{m! (m - p)!}
+        \cdot \frac{m! m!}{(2m)!} = \frac{m (m - 1) \cdots (m - p + 1)}{2m (2m - 1) (2m - p + 1)} \leq
+        2^{\frac{-em}{2}}$. То есть $p \leq g(2m, d) \cdot 2^{-\frac{em}{2}}$
+\end{proof}
+
+Остается понять, почему $g(2m, d) \cdot 2^{-\frac{em}{2}} < \frac{1}{2}$. Мы знаем, что $g(2m, d) \leq (2m)^{d}$.
+Достаточно доказать, что $(2m)^{d} 2^{-\frac{em}{2}} < \frac{1}{2}$. Если в качестве $m$ взять $\lceil
+\frac{8d}{\varepsilon} \log_2 \frac{8d}{\varepsilon} \rceil$, то все получится.
+\end{proof}
+\end{document}
+

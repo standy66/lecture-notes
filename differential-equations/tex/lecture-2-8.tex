@@ -1,0 +1,103 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+\section{Автономные системы линейных дифференциальных уравнений}
+\begin{definition}
+    Нормальной автономной системой дифференциальных уравнений порядка $n$ наызвается система уравнений
+    \begin{equation}
+        \label{norm-eq}
+        \dot x = f(x)
+    \end{equation}
+    где $f: \Omega \mapsto \mathbb{R}^n, \Omega \subset \mathbb{R}^n$ -- действительная вектор функция с компонентами $f_1(x), \cdots, f_n(x)$. Будем считать, что для функции $f$ выполнено условие Липшица, а $\Omega$ -- это область.
+
+    При добавлении начального условия $x(t_0) = x_0$ получим задачу Коши:
+    \begin{equation}
+        \label{cauchy-eq}
+        \begin{cases}
+            \dot x = f(x), \\
+            x(t_0) = x_0
+        \end{cases}
+    \end{equation}
+\end{definition}
+
+\begin{remark}
+    Пусть есть система $\dot x = f(x, t)$. Тогда добавлением $n+1$ координаты $x_{n + 1} = t$ мы переходим к нормальной
+    автономной системе.
+\end{remark}
+
+\begin{definition}
+    Переменные $x_1, \cdots, x_n$ называются фазовыми переменными, $\Omega$ -- фазовое пространство. Решение автономной
+    системы $x = \varphi(t)$ называется фазовой траекторие.
+\end{definition}
+
+
+\begin{statement}
+    \label{time_shift}
+    Если $x = \varphi(t)$ -- решение нормальной автономной системы, то $\varphi(t + t_0)$ -- тоже решение
+\end{statement}
+
+\begin{proof}
+    Пусть $x = \varphi(t), t \in (\alpha, \beta)$. Тогда $\varphi'(t) = f(\varphi(t))$. Сделаем замену $\tau = t - t_0$.
+    Тогда $\varphi'(\tau + t_0) = f(\varphi(\tau + t_0)), \tau \in (\alpha - t_0, \beta - t_0)$
+\end{proof}
+
+\begin{statement}
+    \label{periodic}
+    Если $x = \varphi(t), x = \psi(t)$ -- две фазовые траектории уравнения \ref{norm-eq}, причем $\varphi(t_1) = x_0 =
+    \psi(t_2)$. Тогда $\varphi(t + t_1 - t_2) = \psi(t)$
+\end{statement}
+
+\begin{proof}
+    Положим $\varphi_1(t) = \varphi(t + t_1 - t_2)$. Поставим задачу Коши:
+    \[
+        \begin{cases}
+            \dot x = f(x), \\
+            x(t_2) = x_0
+        \end{cases}
+    \] Тогда $\psi$ является решением этой задачи Коши по условию, а $\varphi_1$ является решением этой задачи Коши по
+    утверждению \ref{time_shift}. Тогда по теореме о единственности $\varphi_1 \equiv \psi$
+\end{proof}
+
+\begin{definition}
+    Всякое константное решение уравнения \ref{norm-eq} называется точкой равновесия (Equilibrium point)
+\end{definition}
+
+\begin{statement}
+    $x_0$ -- точка равновесия тогда и только тогда, когда $f(x_0) = 0$
+\end{statement}
+
+\begin{proof}
+    Пусть $x_0$ -- точка равновесия. Тогда $\exists \varphi(t) \equiv x_0$ -- решение. Тогда 
+    $0 = \varphi'(t) = f(\varphi(t)) = f(x_0)$
+
+    Пусть $x_0$ таково, что $f(x_0) = 0$. Тогда $\varphi(t) \equiv x_0$ является решением сисетемы, значит $x_0$ --
+    точка равновесия.
+\end{proof}
+
+\begin{remark}
+    Если решение $\varphi(t) : \mathbb{R} \mapsto \mathbb{R}^n$ является $T$-периодичным, то фазовая траектория такого
+    решения -- замкнутая кривая (цикл)
+\end{remark}
+
+\begin{theorem}[о фазовых траекториях автономной системы]
+    Всякая фазовая траектория автономной системы \ref{norm-eq} принадлежит к одному из следующих типов:
+    \begin{enumerate}
+        \item Точка равновесия
+        \item Цикл
+        \item Кривая без самопересечений
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Пусть $x = \varphi(t)$ -- не константное решение. Пусть $\exists t_1 < t_2: \varphi(t_1) = \varphi(t_2)$ (то есть
+    есть точка самопересечения). Положим $T := t_2 - t_1$. Тогда по утверждению \ref{periodic} $\varphi(t + T) \equiv
+    \varphi(t)$. Значит, $\varphi$ является $T$-периодичной кривой.
+\end{proof}
+
+\subsection{Устойчивость по Ляпунову}
+\begin{definition}
+    Положения равновесия $x_0 = 0$ системы \ref{norm-eq} называется устойчивым по Ляпунову, если $\forall \varepsilon > 0:
+    \exists \delta > 0: \forall |x_0| < \delta: |x(t, x_0)| < \varepsilon$ для всех $t \geq 0$
+\end{definition}
+
+\end{document}

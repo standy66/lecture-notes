@@ -1,0 +1,137 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+\section{Преобразование Фурье}
+\begin{lemma}
+    Пусть $f$ -- абсолютно интегрируемая на $(a, b)$. $\varphi(x, y)$ -- непрерывна и ограничена на $(a, b) \times [c,
+    d]$. Рассмотрим интеграл
+    \[
+        J(y) = \int_{a}^{b} f(x) \varphi(x, y)dx
+    \] Тогда:
+    \begin{enumerate}
+        \item $J(y)$ -- непрерывен на $[c, d]$.
+        \item $\int_{c}^{d} \int_{a}^{b}f(x) \varphi(x, y) dx dy= \int_{a}^{b} \int_{c}^{d} f(x) \varphi(x, y)dydx$
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    Пусть $(a, b)$ -- конечный.
+    Докажем непрерывность. Пусть $y, y_0 \in [c, d]$. Рассмотрим разнось $|J(y) - J(y_0)|$. Поскольку $f$ -- абсолютно
+    интегрируема, то при фиксированном $\varepsilon > 0, \exists \delta > 0: \int_{a}^{a + \delta}|f(x)|dx <
+    \varepsilon, \int_{b - \varepsilon}^{\varepsilon}|f(x)|dx < \varepsilon$. Понятно, что $\exists M: \forall (x, y)
+    \in (a, b) \times [c, d]: |\varphi(x, y)| \leq M$. $\varphi(x, y)$ ранвомерно непрерывна на $[a + \delta, b -
+    \delta]$. Тогда
+    \begin{multline*}
+        |J(y) - J(y_0)| = \left| \int_{a}^{b}f(x) (\varphi(x, y) - \varphi(x, y_0))dx \right| \leq 2M\varepsilon + \\
+        \int_{a + \delta}^{b - \delta} |f(x)| |\varphi(x, y) - \varphi(x, y_0)|dx + 2M \varepsilon \leq  4M\varepsilon + 
+        \varepsilon I
+    \end{multline*} при всех $y$ достаточно близких к $y_0$. То есть $J$ неперывна на $[c, d]$. Для бесконечного $(a,
+    b)$ доказывается аналогично.
+
+    Докажем пункт 2. $\forall \varepsilon > 0: \exists f_{\varepsilon}$ -- непрерывная финитная на $(a, b)$ функция,
+    такая что
+    \[
+        \int_{a}^{b}|f(x) - f_{\varepsilon}(x)|dx < \varepsilon
+    \]
+    Докажем, что
+    \[
+        \int_{c}^{d} \int_{a}^{b}f_{\varepsilon}\varphi(x, y) dx dy = \int_{a}^{b} \int_{c}^{d}f_{\varepsilon}(x)
+        \varphi(x, y) dy dx
+    \]
+    Поскольку $f_{\varepsilon}$ -- финитная, то она равна нулю вне некоторого отрезка $[\alpha, \beta]$. Теперь мы
+    интегрируем на прямогольнике непрерывную функцию. А для неё интеграл не зависит от порядка интегрирования.
+    Для финитных доказали, теперь докажем для произвольных.
+
+    Рассмотрим разность 
+    \begin{multline*}
+        \left|\int_{c}^{d} \int_{a}^{b}f(x) \varphi(x, y)dx - \int_{c}^{d} \int_{a}^{b} f_{\varepsilon}(x) \varphi(x, y) dx dy
+        \right| \leq \\ \int_{c}^{d} \int_{a}^{b} |f_{\varepsilon}(x) - f(x)| |\varphi(x, y)|dxdy \leq (d - c) \varepsilon
+        M \rightarrow 0
+    \end{multline*}
+    Аналогично для интеграла справа.
+\end{proof}
+
+\begin{definition}
+    Пусть $f$ -- абсолютно интегрируема на $\mathbb{R}$. Введём $a(y) = \frac{1}{\pi} \int_{-\infty}^{+\infty}f(x) \cos
+    xy dx, b(y) = \frac{1}{\pi} \int_{-\infty}^{+\infty} f(x) \sin xy dx$. Рассмотрим $S(f) = \int_{0}^{\infty}a(y) \cos
+    xy + b(y) \sin xy dy$ -- интеграл Фурье функции $f$.
+\end{definition}
+
+\begin{lemma}
+    ~\begin{enumerate}
+        \item $a(y), b(y)$ -- непрерывны на $[0, + \infty)$
+        \item $a(y) \rightarrow 0, b(y) \rightarrow 0$ при $y \rightarrow +\infty$
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Из предыдущей леммы $a(y), b(y)$ непрерыны на любом отрезке $[0, y_0]$. Значит, $a(y), b(y)$ непрерыны на
+    $[0, +\infty)$. Второе -- это лемма Римана об осцилляции.
+\end{proof}
+
+\begin{statement}
+    $\int_{0}^{+\infty} \frac{\sin \alpha x}{x}dx = \frac{\pi}{2}$
+\end{statement}
+
+Подставим $a(y), b(y)$ в $S(f)$:
+\[
+    S(f) = \frac{1}{\pi}\int_{0}^{+\infty} \int_{-\infty}^{+\infty}f(t) \cos (x - t)y dt dy
+\]
+\begin{multline*}
+    S_M(f) = \frac{1}{\pi}\int_{0}^{M} \int_{-\infty}^{+ \infty}f(t) \cos (x - t)y dt dy = \\
+    \frac{1}{\pi} \int_{-\infty}^{+ \infty} f(t) \int_{0}^{M} \cos (x - t)y dy dt = \\
+    \frac{1}{\pi} \int_{-\infty}^{+\infty} f(t) \frac{\sin (x - t)M}{t - x} = \\
+    \frac{1}{\pi} \int_{-\infty}^{+\infty} f(x + \tau) \frac{\sin \tau M}{\tau}d\tau = \\
+    \frac{1}{\pi} \int_{0}^{+\infty} (f(x - \tau) + f(x + \tau)) \frac{\sin \tau M}{\tau}d\tau 
+\end{multline*}
+
+\begin{theorem}
+    Пусть $f$ -- абсолютно интегрируемая на $\mathbb{R}$. $x_0$ -- почти регулярная точка. Тогда $S(f, x_0) =
+    \frac{f(x_0 - 0) + f(x_0 + 0)}{2}$. Если $x_0$ -- регулярная, то $S(f, x_0) = f(x_0)$
+\end{theorem}
+
+\begin{proof}
+    Докажем первый пункт. Второй просто из него следует.
+
+    \begin{multline*}
+        |S_M(f, x_0) - \frac{f(x_0 + 0) + f(x_0 - 0)}{2}| = \\ \frac{1}{\pi} \left| \int_{0}^{+\infty} (f(x_0 + \tau) +
+        f(x_0 - \tau) - f(x_0 - 0) - f(x_0 + 0)) \sin \tau M \frac{d\tau}{\tau} \right| = \\
+        \frac{1}{\pi} \int_{0}^{+\infty} (f(x_0 + \tau) - f(x_0 + 0)) \frac{\sin \tau M}{\tau}d\tau + \cdots = 
+        J_+ + J_-
+    \end{multline*}
+
+    \begin{multline*}
+        J_+ = \int_{0}^{1} \frac{f(x_0 + \tau) - f(x_0 + 0)}{\tau} \sin M\tau d\tau + \\
+        \int_{1}^{+\infty}\frac{f(x_0 + \tau) - f(x_0 + 0)}{\tau} \sin M\tau d\tau \rightarrow \int_{1}^{+\infty}
+        \frac{f(x + \tau)}{\tau} \sin \tau M d\tau + \\ \int_{1}^{+\infty} \frac{f(x_0 + 0)}{\tau} \sin \tau M d\tau
+        \rightarrow  C \int_{M}^{+\infty} \frac{\sin z}{z} dz \rightarrow 0
+    \end{multline*}
+    
+    Под первым интегралом произведение абсолютно интегрируемой функции на $\sin \tau M$, значит, по лемме Римана об
+    осцилляции, первый интеграл стемится к нулю.
+    Второй интеграл аналогично. А потом делаем замену $z = \tau M$. И полученный интеграл также стремится к 0, так как
+    интеграл $\int_{0}^{+\infty} \frac{\sin z}{z} dz$ сходится.
+\end{proof}
+\begin{definition}
+    Пусть $f(x) = \varphi(x) + i \psi(x)$. Тогда $\int_{a}^{b} f(x)dx = \int_{a}^{b}\varphi(x)dx +
+    i\int_{a}^{b}\psi(x)dx$
+\end{definition}
+
+\[
+    S(f) = \frac{1}{2 \pi} \int_{-\infty}^{+\infty} \int_{-\infty}^{+\infty} f(t) \cos (x - t)y dt dy
+\]
+
+\begin{definition}
+    Если $f: \mathbb{R} \mapsto \mathbb{R}$. 
+    \[
+        v.p. \int_{-\infty}^{+\infty} f(x)dx = \lim_{M \rightarrow \infty} \int_{-M}^{M}f(x)dx
+    \] -- интеграл в смысле главного значения.
+\end{definition}
+
+\[
+    v.p. \frac{1}{2 \pi} \int_{-\infty}^{+\infty} \int_{-\infty}^{+ \infty} f(t) \sin (x - t)y dt dy = 0
+\]
+
+\[
+    S(f) = \frac{1}{2\pi} v.p. \int_{-\infty}^{+\infty} \int_{-\infty}^{+\infty} f(t) e^{(x - t)yi}dt dy
+\]
+\end{document}

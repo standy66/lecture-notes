@@ -1,0 +1,29 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+\begin{lemma}[обобщение основной леммы вариационного исчисления]
+    Если $f(x)$ -- непрерывна на $[a, b]$ и $\forall \eta(x) \in \mathring{C}^k[a, b]$, и
+    \[
+        \int_{a}^{b}f(x) \eta(x) dx = 0
+    \], то $f(x) \equiv 0$ на $[a, b]$
+\end{lemma}
+
+\begin{proof}
+    Аналогичное доказательство, функцию $\eta(x)$ только строить сложнее (нужен полином)
+\end{proof}
+
+Рассмотрим функционал вида:
+
+\begin{equation}
+    \label{kof}
+    J(y) = \int_{a}^{b}F[x, y, y', \cdots, y^{(k)}]dx
+\end{equation}, причем $F$ -- дважды непрерывно дифференцируема как функция от $x$ и как функция от $y, y', \cdots,
+y^{(k)}$. Слабый экстремум определяем аналогично. Если $y$ дает слабый экстремум $J(y)$, то $\forall x \in [a, b]$
+$y(x)$ удовлетворяет уравнению Эйлера-Пуассона:
+\[
+    \frac{\partial F}{\partial y} - \frac{d}{dx} \left( \frac{\partial F}{\partial y'} \right) + \cdots + (-1)^k
+    \frac{d^k}{dx^k} \left( \frac{\partial F}{y^{(k)}} \right) = 0
+\]
+
+
+\end{document}

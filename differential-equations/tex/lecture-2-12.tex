@@ -1,0 +1,74 @@
+\documentclass[document.tex]{subfiles}
+
+\begin{document}
+\begin{lemma}
+    Если $f(x)$ непрерывна на $[a, b]$ и для любой $\eta(x) \in \mathring{C}[a, b]$
+    \[
+        \int_{a}^{b}f(x)g(x)dx = 0
+    \]
+    Тогда $f(x) \equiv 0$
+\end{lemma}
+\begin{proof}
+    Допустим, что $f(x) \not \equiv 0$ на $[a, b]$. Это означает, что без ограничения общности
+    $\exists x_0 \in (a, b): f(x_0) > 0$. Тогда эта функция не равна нулю в некоторой окресности точки $x_0$ целиком
+    содержащейся в $(a, b)$. Тогда взяв соответствующую $\eta(x)$ мы получим, что
+    \[
+        \int_{a}^{b}f(x)\eta(x)dx \neq 0
+    \]
+\end{proof}
+
+\begin{definition}
+    Вариация функционала $F$ при фиксированном $y$ и $\eta \in \mathring{C}^{(1)}[a, b]$ это $J'_{\alpha}(y + \alpha
+    \eta)$ при $\alpha = 0$
+\end{definition}
+\[
+    J(y + \alpha \eta) = \int_{a}^{b} F[x, y(x) + \alpha \eta(x), y'(x) + \alpha \eta'(x)] dx
+\] -- интеграл, зависящий от параметра.
+\[
+    J'_{\alpha}(y + \alpha \eta) = \int_{a}^{b}\left[ F'_{2}(x, y + \alpha \eta, y' + \alpha \eta') \cdot \eta + F'_{3}(x, y +
+    \alpha \eta, y' + \alpha \eta') \cdot \eta' \right] dx
+\]
+\[
+    dJ = \int_{a}^{b} \left[ F'_{y}(x, y, y') \eta + F'_{p}(x, y, y') \eta' \right] dx
+\]
+
+\begin{definition}
+    Допутимым приращением (вариацией) функции $y(x) \in M$ называется любая функция $\eta(x) \in \mathring{C}^{(1)}[a,
+    b]$ а соответствующее выражение $J'_{\alpha}(y + \alpha \eta) \Big|_{\alpha = 0} =: \delta J(y, \eta)$
+\end{definition}
+
+\begin{theorem}
+    Если $\hat y(x) \in M$ и при этом является решением простейшей вариационной задачи. Тогда $\delta J(\hat y, \eta) =
+    0$ для всех $\eta \in \mathring{C}^{(1)}[a, b]$
+\end{theorem}
+
+\begin{proof}
+    Мы знаем, что $\exists \varepsilon > 0: \forall \eta, \|\eta\| < \varepsilon: J(\hat y + \eta) \geq J(\hat y)$.
+    Пусть $\alpha$ таково, что $\| \alpha \eta \| < \varepsilon$. Тогда $\forall |\alpha'| < |\alpha|: \|\alpha' \eta \|
+    < \varepsilon$. Тогда $\forall \alpha' < \alpha: J(y + \alpha \eta) \geq J(y)$. Значит функция $J(y + \alpha \eta)$
+    как функция от $\alpha$ имеет экстремум в точке $0$ для любого $\eta$
+\end{proof}
+
+\begin{theorem}
+    Пусть $F[x, y, p]$ дважды непрерывно-дифференцируема для любого $x \in [a, b]$ и для любой $(y, p) \in
+    \mathbb{R}^2$. Если дважды непрерывно дифференцируемая функция $\hat y$ является решением простейшей вариационной
+    задачи, то на $[a, b]$ функция $\hat y$ удовлетворяет уравнению Эйлера:
+    \[
+        \frac{\partial F}{\partial y} + \frac{d}{dx} \frac{\partial F}{\partial y'} = 0
+    \]
+\end{theorem}
+
+\begin{proof}
+    Если $\hat y$ -- решение простейшей вариационной задачи, то $\delta J(y, \eta) = 0$. Проинтегрируем по частям второе
+    слагаемое в $\delta J(y, \eta)$
+\end{proof}
+
+\begin{definition}
+    Любое решение уравнения Эйлера называют экстремалью функционала. Каждая экстремаль, являющаяся допустимой,
+    называется допустмой экстремалью функционала. 
+\end{definition}
+
+\subsection{Функционалы, зависящие от вектор-функций}
+Пусть $C_n^1[a, b]$ -- пространство вектор-функций $y(x)$ c $n$ компонентами, каждая из которых непрерывно
+дифференцируема на отрезке $[a, b]$. Введём расстояние в этом пространстве аналогично.
+\end{document}
